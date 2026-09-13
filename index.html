@@ -6,69 +6,545 @@
 <title>HV Novitas</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header class="header">
   <div class="header-inner">
-    <a class="logo" href="#top"><span class="mark">🧡</span><span><b>HV NOVITAS</b><small>Handbalclub Hulst</small></span></a>
+
+    <a class="logo" href="#top">
+      <span class="mark">🧡</span>
+      <span>
+        <b>HV NOVITAS</b>
+        <small>Handbalclub Hulst</small>
+      </span>
+    </a>
+
     <nav>
       <a href="#nieuws">Nieuws</a>
       <a href="#club">Onze club</a>
       <a href="#agenda">Agenda</a>
       <a href="#contact">Contact</a>
     </nav>
+
   </div>
 </header>
 
+
 <main id="top">
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="eyebrow">HANDBALCLUB HULST</div>
-      <h1>HV NOVITAS</h1>
-      <div class="slogan">NO STRESS, ENJOY!</div>
-      <p>Handbal, plezier en clubgevoel in Zeeuws-Vlaanderen.</p>
-    </div>
 
-    <div class="hero-announcement" aria-label="Aankondiging">
-      <img id="aankondigingsfoto" alt="Aankondiging" hidden>
-      <div class="announcement-placeholder">
-        <span>Aankondigingsfoto</span>
+  <!-- =========================
+       BANNER
+       ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          HANDBALCLUB HULST
+        </div>
+
+        <h1>
+          HV NOVITAS
+        </h1>
+
+        <div class="slogan">
+          NO STRESS, ENJOY!
+        </div>
+
+        <p>
+          Handbal, plezier en clubgevoel in Zeeuws-Vlaanderen.
+        </p>
+
       </div>
+
+
+      <!-- AANKONDIGINGSFOTO RECHTS -->
+
+      <div class="hero-announcement" aria-label="Aankondiging">
+
+        <img
+          id="aankondigingsfoto"
+          class="aankondigingsfoto"
+          alt="Aankondiging"
+          hidden
+        >
+
+      </div>
+
     </div>
-  </div>
-</section>
 
-<section id="nieuws" class="section">
-  <div class="heading">
-    <div><span class="eyebrow">ACTUEEL</span><h2>Laatste nieuws</h2></div>
-    <a class="more" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/news.html" target="_blank">Alle nieuws →</a>
-  </div>
-  <iframe class="module" src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html" title="Laatste nieuws"></iframe>
-</section>
+  </section>
 
-<section id="club" class="section dark">
-  <div class="heading"><div><span class="eyebrow">HV NOVITAS</span><h2>Onze club</h2></div></div>
-  <div class="cards">
-    <a class="card" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/club100-view.html" target="_blank"><b>100</b><h3>Club100</h3><p>Onze Club100-leden.</p></a>
-    <a class="card" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/highlights-view.html" target="_blank"><b>★</b><h3>Highlights</h3><p>Momenten uit de historie van Novitas.</p></a>
-    <a class="card" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/omejan-view.html" target="_blank"><b>♥</b><h3>Ome Jan</h3><p>Foto's uit de collectie van Ome Jan.</p></a>
-  </div>
-</section>
 
-<section id="agenda" class="section">
-  <div class="heading"><div><span class="eyebrow">SAMEN OP HET VELD</span><h2>Agenda</h2></div></div>
-  <div class="placeholder">Agenda komt hier.</div>
-</section>
+  <!-- =========================
+       NIEUWS
+       ========================= -->
 
-<section id="contact" class="contact">
-  <div><span class="eyebrow">HV NOVITAS</span><h2>Kom bij ons handballen</h2><p>Ontdek de club, onze teams en onze trainingen.</p></div>
-  <a class="btn darkbtn" href="https://hvnovitas.nl" target="_blank">hvnovitas.nl →</a>
-</section>
+  <section id="nieuws" class="section">
+
+    <div class="heading">
+
+      <div>
+        <span class="eyebrow">
+          ACTUEEL
+        </span>
+
+        <h2>
+          Laatste nieuws
+        </h2>
+      </div>
+
+      <a
+        class="more"
+        href="https://hvnovitas-ux.github.io/hvnovitas-beheer/news.html"
+        target="_blank"
+        rel="noopener"
+      >
+        Alle nieuws →
+      </a>
+
+    </div>
+
+
+    <iframe
+      class="module"
+      src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html"
+      title="Laatste nieuws">
+    </iframe>
+
+  </section>
+
+
+  <!-- =========================
+       ONZE CLUB
+       ========================= -->
+
+  <section id="club" class="section dark">
+
+    <div class="heading">
+
+      <div>
+
+        <span class="eyebrow">
+          HV NOVITAS
+        </span>
+
+        <h2>
+          Onze club
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="cards">
+
+      <a
+        class="card"
+        href="https://hvnovitas-ux.github.io/hvnovitas-beheer/club100-view.html"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <b>
+          100
+        </b>
+
+        <h3>
+          Club100
+        </h3>
+
+        <p>
+          Onze Club100-leden.
+        </p>
+
+      </a>
+
+
+      <a
+        class="card"
+        href="https://hvnovitas-ux.github.io/hvnovitas-beheer/highlights-view.html"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <b>
+          ★
+        </b>
+
+        <h3>
+          Highlights
+        </h3>
+
+        <p>
+          Momenten uit de historie van Novitas.
+        </p>
+
+      </a>
+
+
+      <a
+        class="card"
+        href="https://hvnovitas-ux.github.io/hvnovitas-beheer/omejan-view.html"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <b>
+          ♥
+        </b>
+
+        <h3>
+          Ome Jan
+        </h3>
+
+        <p>
+          Foto's uit de collectie van Ome Jan.
+        </p>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       AGENDA
+       ========================= -->
+
+  <section id="agenda" class="section">
+
+    <div class="heading">
+
+      <div>
+
+        <span class="eyebrow">
+          SAMEN OP HET VELD
+        </span>
+
+        <h2>
+          Agenda
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="placeholder">
+      Agenda komt hier.
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT
+       ========================= -->
+
+  <section id="contact" class="contact">
+
+    <div>
+
+      <span class="eyebrow">
+        HV NOVITAS
+      </span>
+
+      <h2>
+        Kom bij ons handballen
+      </h2>
+
+      <p>
+        Ontdek de club, onze teams en onze trainingen.
+      </p>
+
+    </div>
+
+
+    <a
+      class="btn darkbtn"
+      href="https://hvnovitas.nl"
+      target="_blank"
+      rel="noopener"
+    >
+      hvnovitas.nl →
+    </a>
+
+  </section>
+
 </main>
 
-<footer>© HV Novitas · Handbalclub Hulst · Zeeuws-Vlaanderen</footer>
-<script type="module" src="https://hvnovitas-ux.github.io/hvnovitas-beheer/aankondiging.js"></script>
+
+<footer>
+  © HV Novitas · Handbalclub Hulst · Zeeuws-Vlaanderen
+</footer>
+
+
+<!-- ==================================================
+     AANKONDIGINGSFOTO UIT HET BESTAANDE CMS
+     ================================================== -->
+
+<script type="module">
+
+  import {
+    initializeApp,
+    getApps,
+    getApp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+  import {
+    getDatabase,
+    ref,
+    onValue
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+  /* =========================================
+     BESTAANDE HV NOVITAS FIREBASE CONFIG
+     ========================================= */
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyDWYYS09i4YN9tnCmAzeiicD9T4YZ3a6HE",
+
+    authDomain:
+      "hv-novitas-beheer.firebaseapp.com",
+
+    databaseURL:
+      "https://hv-novitas-beheer-default-rtdb.europe-west1.firebasedatabase.app",
+
+    projectId:
+      "hv-novitas-beheer",
+
+    storageBucket:
+      "hv-novitas-beheer.appspot.com",
+
+    messagingSenderId:
+      "71716605241",
+
+    appId:
+      "1:71716605241:web:b7e87d680b7499421a6ce8"
+
+  };
+
+
+  const app =
+    getApps().length
+      ? getApp()
+      : initializeApp(firebaseConfig);
+
+
+  const db =
+    getDatabase(app);
+
+
+  const image =
+    document.getElementById("aankondigingsfoto");
+
+
+  /* =========================================
+     AANKONDIGINGSFOTO
+     ========================================= */
+
+  const DB_PATH =
+    "aankondigingsfoto";
+
+
+  const BASE_SLOTS = [
+    "foto1",
+    "foto2",
+    "foto3"
+  ];
+
+
+  /* =========================================
+     EERSTE BESCHIKBARE BASISFOTO
+     ========================================= */
+
+  function findFirstBase(basePhotos) {
+
+    for (const slot of BASE_SLOTS) {
+
+      if (
+        basePhotos[slot] &&
+        basePhotos[slot].imageUrl
+      ) {
+
+        return basePhotos[slot].imageUrl;
+
+      }
+
+    }
+
+    return "";
+
+  }
+
+
+  /* =========================================
+     DATUM NAAR TIMESTAMP
+     ========================================= */
+
+  function toTimestamp(value) {
+
+    if (!value) {
+      return 0;
+    }
+
+    const timestamp =
+      new Date(value).getTime();
+
+    return Number.isNaN(timestamp)
+      ? 0
+      : timestamp;
+
+  }
+
+
+  /* =========================================
+     FOTO UIT FIREBASE LADEN
+     ========================================= */
+
+  if (image) {
+
+    onValue(
+
+      ref(db, DB_PATH),
+
+      (snapshot) => {
+
+        const data =
+          snapshot.val() || {};
+
+
+        const basePhotos =
+          data.basePhotos || {};
+
+
+        const selectedBase =
+          data.selectedBase || "foto1";
+
+
+        const special =
+          data.special || {};
+
+
+        const now =
+          Date.now();
+
+
+        const start =
+          toTimestamp(special.start);
+
+
+        const end =
+          toTimestamp(special.end);
+
+
+        /* =========================================
+           TIJDELIJKE / SPECIALE FOTO ACTIEF?
+           ========================================= */
+
+        const specialActive =
+
+          Boolean(special.imageUrl) &&
+
+          Boolean(start) &&
+
+          Boolean(end) &&
+
+          now >= start &&
+
+          now <= end;
+
+
+        let imageUrl = "";
+
+
+        /* =========================================
+           SPECIALE FOTO
+           ========================================= */
+
+        if (specialActive) {
+
+          imageUrl =
+            special.imageUrl;
+
+        }
+
+        /* =========================================
+           NORMALE AANKONDIGINGSFOTO
+           ========================================= */
+
+        else {
+
+          imageUrl =
+
+            basePhotos[selectedBase]?.imageUrl ||
+
+            findFirstBase(basePhotos);
+
+        }
+
+
+        /* =========================================
+           FOTO TONEN
+           ========================================= */
+
+        if (imageUrl) {
+
+          image.src =
+            imageUrl;
+
+          image.hidden =
+            false;
+
+        }
+
+        else {
+
+          image.removeAttribute("src");
+
+          image.hidden =
+            true;
+
+        }
+
+      },
+
+
+      /* =========================================
+         FIREBASE FOUT
+         ========================================= */
+
+      (error) => {
+
+        console.error(
+          "Aankondigingsfoto Firebase-fout:",
+          error
+        );
+
+        image.hidden =
+          true;
+
+      }
+
+    );
+
+  }
+
+</script>
+
+
 <script src="script.js"></script>
+
 </body>
 </html>
