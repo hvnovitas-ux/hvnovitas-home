@@ -88,14 +88,11 @@ a {
 .hero {
   min-height: 460px;
   color: #fff;
-  display: flex;
-  align-items: center;
-
   background:
     linear-gradient(
       90deg,
       rgba(15, 15, 15, .93),
-      rgba(15, 15, 15, .4)
+      rgba(15, 15, 15, .40)
     ),
     linear-gradient(
       135deg,
@@ -108,13 +105,14 @@ a {
 .hero-inner {
   max-width: 1200px;
   width: 100%;
-  margin: auto;
-  padding: 50px 24px;
+  min-height: 460px;
+  margin: 0 auto;
+  padding: 45px 24px;
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  column-gap: 50px;
   align-items: center;
-  gap: 50px;
 }
 
 .hero-copy {
@@ -135,8 +133,6 @@ a {
   line-height: .98;
   margin: 0;
 }
-
-/* Grote slogan */
 
 .slogan {
   margin-top: 14px;
@@ -161,20 +157,32 @@ a {
    ========================= */
 
 .hero-announcement {
-  width: 360px;
+  width: 330px;
+  max-width: 330px;
+  height: 330px;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
 }
 
 .aankondigingsfoto {
   display: block;
-  width: 360px;
-  max-width: 100%;
-  max-height: 360px;
+
+  width: 330px !important;
+  max-width: 330px !important;
+
+  height: 330px;
+  max-height: 330px !important;
+
   object-fit: contain;
+
   border-radius: 14px;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, .35);
 }
 
 
@@ -353,7 +361,7 @@ footer {
 
 
 /* =========================
-   TABLET / MOBIEL
+   TABLET
    ========================= */
 
 @media (max-width: 850px) {
@@ -373,25 +381,35 @@ footer {
   }
 
   .hero {
-    min-height: 500px;
+    min-height: auto;
   }
 
   .hero-inner {
+    min-height: auto;
+
     grid-template-columns: 1fr;
-    gap: 30px;
+
+    row-gap: 35px;
+
     padding-top: 50px;
     padding-bottom: 50px;
   }
 
   .hero-announcement {
-    width: 100%;
+    width: 330px;
+    max-width: 100%;
+    height: 300px;
+    max-height: 300px;
+
     justify-content: flex-start;
   }
 
   .aankondigingsfoto {
-    width: 360px;
-    max-width: 100%;
-    max-height: 300px;
+    width: 330px !important;
+    max-width: 100% !important;
+
+    height: 300px;
+    max-height: 300px !important;
   }
 
   .slogan {
@@ -433,8 +451,17 @@ footer {
     gap: 28px;
   }
 
+  .hero-announcement {
+    width: 100%;
+    max-width: 330px;
+    height: 280px;
+  }
+
   .aankondigingsfoto {
-    max-height: 300px;
+    width: 330px !important;
+    max-width: 100% !important;
+    height: 280px;
+    max-height: 280px !important;
   }
 
   .hero p {
