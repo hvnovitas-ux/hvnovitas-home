@@ -29,12 +29,12 @@ a {
 .hero {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, #101010 0%, #1d1d1d 48%, #70400f 100%);
-  color: #fff;
   min-height: 440px;
   display: flex;
   align-items: center;
+  color: #fff;
+  background:
+    linear-gradient(125deg, rgba(12,12,12,.98) 0%, rgba(28,28,28,.98) 48%, rgba(112,48,5,.96) 100%);
 }
 
 .hero::before {
@@ -42,19 +42,21 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(115deg, transparent 48%, rgba(255,106,0,.16) 48%, rgba(255,106,0,.03) 73%, transparent 73%);
+    linear-gradient(115deg, transparent 47%, rgba(255,106,0,.18) 47%, rgba(255,106,0,.03) 68%, transparent 68%),
+    radial-gradient(circle at 92% 40%, rgba(255,106,0,.18), transparent 36%);
   pointer-events: none;
 }
 
 .hero-inner {
   position: relative;
   z-index: 1;
-  width: min(1100px, calc(100% - 40px));
+  width: min(1180px, calc(100% - 40px));
+  min-height: 440px;
   margin: 0 auto;
-  padding: 36px 0;
+  padding: 38px 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
-  gap: 36px;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 52px;
   align-items: center;
 }
 
@@ -69,11 +71,10 @@ a {
 
 .hero h1 {
   margin: 8px 0 0;
-  font-size: clamp(3.2rem, 6vw, 5.8rem);
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
   line-height: .92;
-  letter-spacing: -.04em;
+  letter-spacing: -.05em;
   color: #ff6a00;
-  white-space: nowrap;
 }
 
 .slogan {
@@ -91,57 +92,48 @@ a {
 .hero-socials {
   display: flex;
   gap: 14px;
-  margin-top: 26px;
+  margin-top: 28px;
   align-items: center;
 }
 
 .hero-socials a {
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 7px 16px rgba(0,0,0,.25);
-  transition: transform .15s ease;
+  font-weight: 900;
+  font-size: 28px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.24);
+  transition: transform .16s ease;
 }
 
 .hero-socials a:hover {
-  transform: translateY(-2px);
-}
-
-.hero-socials a img {
-  width: 28px;
-  height: 28px;
-  max-width: 28px;
-  max-height: 28px;
-  object-fit: contain;
+  transform: translateY(-3px);
 }
 
 .social-youtube { background: #ff0000; }
-.social-facebook { background: #1877f2; }
-.social-tiktok { background: #fff; }
-.social-instagram { background: #e90074; }
+.social-facebook { background: #1877f2; font-size: 31px !important; }
+.social-tiktok { background: #fff; color: #111 !important; }
+.social-instagram { background: #ea087a; }
 
 .hero-announcement {
-  width: 100%;
   min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .hero-announcement iframe {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1.54 / 1;
+  height: 390px;
   border: 0;
   border-radius: 12px;
-  background: transparent;
-  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 15px 35px rgba(0,0,0,.28);
 }
 
 .section {
@@ -374,7 +366,7 @@ h3 {
     grid-template-columns: 1fr;
     text-align: center;
     min-height: auto;
-    padding: 34px 0 42px;
+    padding: 35px 0 45px;
   }
 
   .hero-copy {
@@ -383,13 +375,16 @@ h3 {
     align-items: center;
   }
 
-  .hero h1 {
-    white-space: normal;
-  }
-
   .hero-announcement {
     width: min(390px, 100%);
-    order: -1;
+  }
+
+  .hero-announcement iframe {
+    height: 390px;
+  }
+
+  .hero-socials {
+    justify-content: center;
   }
 
   .quick-links {
@@ -412,25 +407,17 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .hero-inner,
-  .content-wide,
-  .content-narrow {
-    width: calc(100% - 28px);
-    max-width: calc(100% - 28px);
-  }
-
   .hero-inner {
-    gap: 24px;
-    padding: 28px 0 36px;
+    width: min(100% - 28px, 1180px);
+    gap: 28px;
   }
 
-  .hero h1 {
-    font-size: clamp(2.8rem, 12vw, 4.5rem);
-    white-space: normal;
+  .hero-announcement {
+    width: 100%;
   }
 
   .hero-announcement iframe {
-    aspect-ratio: 1.54 / 1;
+    height: min(360px, 84vw);
   }
 
   .hero-socials {
@@ -438,13 +425,28 @@ h3 {
   }
 
   .hero-socials a {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+  }
+  .hero {
+    min-height: auto;
   }
 
-  .hero-socials a img {
-    width: 25px;
-    height: 25px;
+  .hero-inner,
+  .content-wide,
+  .content-narrow {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .hero-inner {
+    padding: 30px 0 38px;
+    gap: 28px;
+  }
+
+  .aankondigingsfoto {
+    width: min(300px, 85vw);
+    height: min(300px, 85vw);
   }
 
   .section {
@@ -472,10 +474,6 @@ h3 {
     height: 400px;
   }
 
-  .news-frame-wrap {
-    height: 520px;
-  }
-
   .agenda-box,
   .agenda-box iframe {
     min-height: 500px;
@@ -491,37 +489,12 @@ h3 {
 /* Bij browserzoom: geen vaste breedtes die horizontaal forceren. */
 @media (min-width: 901px) and (max-width: 1200px) {
   .hero-inner {
-    width: calc(100% - 40px);
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 30px;
   }
 
-  .hero h1 {
-    font-size: clamp(3rem, 6vw, 5.2rem);
+  .aankondigingsfoto {
+    width: 320px;
+    height: 320px;
   }
-
-  .hero-announcement iframe {
-    aspect-ratio: 1.54 / 1;
-  }
-}
-
-/* Pagina blijft binnen het scherm bij 100% zoom */
-html, body, main {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.content-wide,
-.content-narrow,
-.media-grid,
-.section {
-  min-width: 0;
-  max-width: 100%;
-}
-
-.news-frame-wrap,
-.news-frame-wrap iframe,
-.sponsor-frame-wrap,
-.sponsor-frame {
-  max-width: 100%;
 }

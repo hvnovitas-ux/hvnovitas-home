@@ -19,26 +19,17 @@
         <p>Handbal, plezier en clubgevoel in Zeeuws-Vlaanderen.</p>
 
         <div class="hero-socials" aria-label="Social media">
-          <a class="social-youtube" href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener" aria-label="YouTube">
-            <img src="https://cdn.simpleicons.org/youtube/ffffff" alt="">
-          </a>
-          <a class="social-facebook" href="https://www.facebook.com/HvNovitas" target="_blank" rel="noopener" aria-label="Facebook">
-            <img src="https://cdn.simpleicons.org/facebook/ffffff" alt="">
-          </a>
-          <a class="social-tiktok" href="https://www.tiktok.com/@hvnovitas?_t=ZN-8te65jUHZVG&_r=1" target="_blank" rel="noopener" aria-label="TikTok">
-            <img src="https://cdn.simpleicons.org/tiktok/000000" alt="">
-          </a>
-          <a class="social-instagram" href="https://www.instagram.com/hvnovitas/" target="_blank" rel="noopener" aria-label="Instagram">
-            <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="">
-          </a>
+          <a class="social-youtube" href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+          <a class="social-facebook" href="#" aria-label="Facebook">f</a>
+          <a class="social-tiktok" href="#" aria-label="TikTok">♪</a>
+          <a class="social-instagram" href="#" aria-label="Instagram">◎</a>
         </div>
       </div>
 
       <div class="hero-announcement">
         <iframe
           src="https://hvnovitas-ux.github.io/hvnovitas-beheer/aankondiging.html"
-          title="Aankondiging HV Novitas"
-          loading="eager">
+          title="Aankondiging HV Novitas">
         </iframe>
       </div>
     </div>
@@ -80,13 +71,7 @@
       <div class="content-wide">
         <p class="section-label">NIEUWS</p>
         <h2>Het laatste nieuws</h2>
-        <div class="news-frame-wrap">
-          <iframe
-            src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html"
-            title="Laatste nieuws HV Novitas"
-            loading="lazy">
-          </iframe>
-        </div>
+        <div class="news-placeholder">Bestaand nieuwsblok</div>
       </div>
     </section>
 
@@ -205,6 +190,44 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Firebase-aankondigingsfoto: alleen de bestaande CMS-data lezen -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    // PLAATS HIER DEZELFDE firebaseConfig ALS IN DE BESTAANDE WERKENDE HOMEPAGE.
+    const firebaseConfig = {
+      apiKey: "VUL_HIER_DE_BESTAANDE_API_KEY_IN",
+      authDomain: "VUL_HIER_DE_BESTAANDE_AUTH_DOMAIN_IN",
+      databaseURL: "VUL_HIER_DE_BESTAANDE_DATABASE_URL_IN",
+      projectId: "VUL_HIER_DE_BESTAANDE_PROJECT_ID_IN",
+      storageBucket: "VUL_HIER_DE_BESTAANDE_STORAGE_BUCKET_IN",
+      messagingSenderId: "VUL_HIER_DE_BESTAANDE_MESSAGING_SENDER_ID_IN",
+      appId: "VUL_HIER_DE_BESTAANDE_APP_ID_IN"
+    };
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const fotoRef = ref(db, "aankondigingsfoto");
+
+      onValue(fotoRef, (snapshot) => {
+        const value = snapshot.val();
+        const img = document.getElementById("aankondigingsfoto");
+
+        if (!img || !value) return;
+
+        const url = typeof value === "string" ? value : value.url;
+        if (url) {
+          img.src = url;
+          img.hidden = false;
+        }
+      });
+    } catch (error) {
+      console.warn("Aankondigingsfoto kon niet worden geladen.", error);
+    }
+  </script>
+
+  <script src="script.js?v=4"></script>
 </body>
 </html>
