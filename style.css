@@ -562,3 +562,100 @@ html, body, main {
     height: 430px;
   }
 }
+
+/* Aankondiging: iframe exact op de inhoud, geen wit vlak eronder */
+.hero-announcement {
+  overflow: hidden;
+}
+
+.hero-announcement iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.54 / 1;
+  display: block;
+  border: 0;
+  background: transparent;
+}
+
+/* Nieuws: breed over de volledige beschikbare contentkolom */
+#nieuws .content-wide {
+  width: min(1180px, calc(100% - 32px));
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.news-frame-wrap,
+.news-frame-wrap iframe {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+/* Highlights + foto's naast elkaar */
+.image-sections-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.image-section-card {
+  min-width: 0;
+}
+
+.image-section-card .embed-frame-wrap {
+  width: 100%;
+}
+
+.image-section-card .embed-frame {
+  width: 100%;
+  height: 500px;
+}
+
+.image-section-card h2 {
+  margin: 8px 0 18px;
+}
+
+/* Forever: tekst en video naast elkaar */
+.media-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.forever-text {
+  min-width: 0;
+}
+
+.forever-video-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111;
+}
+
+.forever-video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Niet meer naar 1 kolom bij normale tablet/desktopbreedte */
+@media (max-width: 700px) {
+  .image-sections-grid,
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #nieuws .content-wide {
+    width: calc(100% - 20px);
+  }
+
+  .image-section-card .embed-frame {
+    height: 430px;
+  }
+}
