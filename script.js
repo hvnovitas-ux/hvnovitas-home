@@ -1,13 +1,1 @@
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", event => {
-      const selector = link.getAttribute("href");
-      if (!selector || selector === "#") return;
-      const target = document.querySelector(selector);
-      if (target) {
-        event.preventDefault();
-        target.scrollIntoView({behavior:"smooth", block:"start"});
-      }
-    });
-  });
-});
+document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const s=a.getAttribute("href");if(!s||s==="#")return;const t=document.querySelector(s);if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth",block:"start"})}}));});
