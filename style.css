@@ -742,3 +742,35 @@ html, body, main {
     padding-bottom: 20px;
   }
 }
+
+/* Forever Novitas: donkere sectie */
+.media-section {
+  width: 100%;
+  background: #1d1d1d;
+  color: #fff;
+}
+
+.media-section .media-card {
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+}
+
+.media-section .media-card h2,
+.media-section .media-card p {
+  color: #fff;
+}
+
+.media-section .media-card .section-label {
+  color: #ff6a00;
+}
+
+.media-section .short-card {
+  background: #292929;
+  color: #fff;
+}
+
+.media-section .video-box,
+.media-section .short-video {
+  background: #000;
+}
