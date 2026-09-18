@@ -774,3 +774,112 @@ html, body, main {
 .media-section .short-video {
   background: #000;
 }
+
+/* Één consistente breedte voor de hele homepage */
+.content-wide,
+.media-grid {
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 0;
+}
+
+.content-narrow {
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 0;
+}
+
+.section {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.section > .content-wide,
+.section > .content-narrow {
+  min-width: 0;
+}
+
+/* Nieuws en sponsors krijgen dezelfde inhoudsbreedte als de rest.
+   De achtergrond mag wel over de hele pagina lopen. */
+#nieuws .content-wide,
+.sponsors-section .content-wide {
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#nieuws .news-frame-wrap {
+  width: 100%;
+  max-width: 1180px;
+  height: 420px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#nieuws .news-frame-wrap iframe {
+  width: 100%;
+  max-width: 1180px;
+  height: 420px;
+  display: block;
+  border: 0;
+}
+
+.sponsors-section {
+  width: 100%;
+  max-width: none;
+}
+
+.sponsors-section .sponsor-frame-wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Banners volgen dezelfde hoofdbreedte. */
+.banners-section .content-wide {
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+}
+
+/* Geen horizontale afwijkingen bij zoom */
+html, body, main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1200px) {
+  .content-wide,
+  .content-narrow,
+  .media-grid,
+  #nieuws .content-wide,
+  .sponsors-section .content-wide,
+  .banners-section .content-wide {
+    width: calc(100% - 40px);
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 600px) {
+  .content-wide,
+  .content-narrow,
+  .media-grid,
+  #nieuws .content-wide,
+  .sponsors-section .content-wide,
+  .banners-section .content-wide {
+    width: calc(100% - 28px);
+    max-width: calc(100% - 28px);
+  }
+
+  #nieuws .news-frame-wrap,
+  #nieuws .news-frame-wrap iframe {
+    height: 520px;
+  }
+}
