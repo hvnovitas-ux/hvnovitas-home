@@ -37,7 +37,8 @@
       <div class="hero-announcement">
         <iframe
           src="https://hvnovitas-ux.github.io/hvnovitas-beheer/aankondiging.html"
-          title="Aankondiging HV Novitas">
+          title="Aankondiging HV Novitas"
+          loading="eager">
         </iframe>
       </div>
     </div>
@@ -83,7 +84,8 @@
           <iframe
             src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html"
             title="Laatste nieuws HV Novitas"
-            loading="lazy"></iframe>
+            loading="lazy">
+          </iframe>
         </div>
       </div>
     </section>
@@ -203,44 +205,6 @@
     </div>
   </footer>
 
-  <!-- Firebase-aankondigingsfoto: alleen de bestaande CMS-data lezen -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    // PLAATS HIER DEZELFDE firebaseConfig ALS IN DE BESTAANDE WERKENDE HOMEPAGE.
-    const firebaseConfig = {
-      apiKey: "VUL_HIER_DE_BESTAANDE_API_KEY_IN",
-      authDomain: "VUL_HIER_DE_BESTAANDE_AUTH_DOMAIN_IN",
-      databaseURL: "VUL_HIER_DE_BESTAANDE_DATABASE_URL_IN",
-      projectId: "VUL_HIER_DE_BESTAANDE_PROJECT_ID_IN",
-      storageBucket: "VUL_HIER_DE_BESTAANDE_STORAGE_BUCKET_IN",
-      messagingSenderId: "VUL_HIER_DE_BESTAANDE_MESSAGING_SENDER_ID_IN",
-      appId: "VUL_HIER_DE_BESTAANDE_APP_ID_IN"
-    };
-
-    try {
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-      const fotoRef = ref(db, "aankondigingsfoto");
-
-      onValue(fotoRef, (snapshot) => {
-        const value = snapshot.val();
-        const img = document.getElementById("aankondigingsfoto");
-
-        if (!img || !value) return;
-
-        const url = typeof value === "string" ? value : value.url;
-        if (url) {
-          img.src = url;
-          img.hidden = false;
-        }
-      });
-    } catch (error) {
-      console.warn("Aankondigingsfoto kon niet worden geladen.", error);
-    }
-  </script>
-
-  <script src="script.js?v=4"></script>
+  <script src="script.js"></script>
 </body>
 </html>
