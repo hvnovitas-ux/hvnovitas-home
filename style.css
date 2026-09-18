@@ -5,6 +5,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -14,6 +15,21 @@ body {
   background: #fff;
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+section,
+.content-wide,
+.content-narrow {
+  width: min(760px, 100%);
+  margin: 0;
 }
 
 img {
@@ -50,7 +66,7 @@ a {
 .hero-inner {
   position: relative;
   z-index: 1;
-  width: min(1180px, calc(100% - 40px));
+  width: min(1080px, calc(100% - 40px));
   min-height: 440px;
   margin: 0 auto;
   padding: 38px 0;
@@ -84,7 +100,7 @@ a {
 }
 
 .hero p {
-  max-width: 620px;
+  max-width: 560px;
   font-size: 1.1rem;
   margin-top: 18px;
 }
@@ -104,10 +120,16 @@ a {
   place-items: center;
   color: #fff;
   text-decoration: none;
-  font-weight: 900;
-  font-size: 28px;
   box-shadow: 0 8px 18px rgba(0,0,0,.24);
   transition: transform .16s ease;
+}
+
+.hero-socials a img {
+  width: 29px;
+  height: 29px;
+  max-width: 29px;
+  max-height: 29px;
+  object-fit: contain;
 }
 
 .hero-socials a:hover {
@@ -115,8 +137,8 @@ a {
 }
 
 .social-youtube { background: #ff0000; }
-.social-facebook { background: #1877f2; font-size: 31px !important; }
-.social-tiktok { background: #fff; color: #111 !important; }
+.social-facebook { background: #1877f2; }
+.social-tiktok { background: #fff; }
 .social-instagram { background: #ea087a; }
 
 .hero-announcement {
@@ -124,6 +146,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background: transparent;
 }
 
 .hero-announcement iframe {
@@ -132,8 +156,8 @@ a {
   height: 390px;
   border: 0;
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 15px 35px rgba(0,0,0,.28);
+  background: transparent;
+  overflow: hidden;
 }
 
 .section {
@@ -141,12 +165,12 @@ a {
 }
 
 .content-wide {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1080px, calc(100% - 40px));
   margin: 0 auto;
 }
 
 .content-narrow {
-  width: min(850px, calc(100% - 40px));
+  width: min(760px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -408,7 +432,7 @@ h3 {
 
 @media (max-width: 600px) {
   .hero-inner {
-    width: min(100% - 28px, 1180px);
+    width: min(100% - 28px, 1080px);
     gap: 28px;
   }
 
@@ -418,6 +442,7 @@ h3 {
 
   .hero-announcement iframe {
     height: min(360px, 84vw);
+    background: transparent;
   }
 
   .hero-socials {
@@ -436,7 +461,7 @@ h3 {
   .hero-inner,
   .content-wide,
   .content-narrow {
-    width: min(100% - 28px, 1180px);
+    width: min(100% - 28px, 1080px);
   }
 
   .hero-inner {
@@ -496,5 +521,66 @@ h3 {
   .aankondigingsfoto {
     width: 320px;
     height: 320px;
+  }
+}
+
+/* Horizontale overflow voorkomen bij 100% browserzoom */
+.welcome,
+.content-wide,
+.content-narrow,
+.media-card,
+.media-grid,
+.section,
+.section > div {
+  min-width: 0;
+}
+
+p, h1, h2, h3, a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1200px) {
+  .section,
+  .content-wide,
+  .content-narrow,
+  .hero-inner {
+    width: calc(100% - 40px);
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 600px) {
+  .section,
+  .content-wide,
+  .content-narrow,
+  .hero-inner {
+    width: calc(100% - 28px);
+    max-width: calc(100% - 28px);
+  }
+}
+
+/* Extra breedtebeperking: inhoud blijft netjes binnen het scherm */
+html, body, main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.hero-inner,
+.content-wide,
+.content-narrow,
+.media-grid {
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  .hero-inner,
+  .content-wide,
+  .content-narrow,
+  .media-grid {
+    max-width: calc(100vw - 24px);
   }
 }
