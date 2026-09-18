@@ -1,172 +1,283 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="HV Novitas – Handbalclub Hulst, Zeeuws-Vlaanderen.">
-<title>HV Novitas – Handbalclub Hulst</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HV Novitas – handbalclub uit Hulst in Zeeuws-Vlaanderen.">
+  <title>HV Novitas – Handbalclub Hulst</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="header">
+<header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="#top"><img src="images/hvnovitas-logo.jpg" alt="HV Novitas"></a>
-    <div class="motto">More than a club!</div>
-    <nav>
+    <a class="brand" href="#top" aria-label="HV Novitas home">
+      <span class="brand-ball">🤾</span>
+      <span class="brand-text">
+        <strong>HV NOVITAS</strong>
+        <small>Handbalclub Hulst</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Hoofdnavigatie">
       <a class="active" href="#top">Home</a>
       <a href="#welkom">Over Novitas</a>
+      <a href="#actueel">Actueel</a>
       <a href="#nieuws">Nieuws</a>
-      <a href="#actueel">Activiteiten</a>
-      <a href="#sponsors">Sponsoren</a>
-      <a href="#contact">Contact</a>
+      <a href="#beelden">In beeld</a>
+      <a href="#agenda">Agenda</a>
     </nav>
-    <div class="social">
+
+    <div class="social-top" aria-label="Social media">
+      <a href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
       <a href="#" aria-label="Facebook">f</a>
       <a href="#" aria-label="Instagram">◎</a>
-      <a href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
-      <a href="#" aria-label="Zoeken">⌕</a>
     </div>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- DE BESPROKEN BANNER: GEEN LOSSE FOTO ERNAST -->
+  <!-- Bestaande aankondigingsbanner blijft leidend; Firebase vervangt de fallback -->
   <section class="hero">
-    <img src="images/hvnovitas-banner.jpg" alt="HV Novitas – Samen spelen, samen groeien">
-  </section>
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="hero-kicker">HANDBALCLUB HULST</span>
+        <h1>HV NOVITAS</h1>
+        <p class="hero-slogan">NO STRESS, ENJOY!</p>
+        <p class="hero-sub">Handbal, plezier en clubgevoel in Zeeuws-Vlaanderen.</p>
+        <div class="hero-actions">
+          <a class="btn orange" href="#actueel">Bekijk wat er speelt</a>
+          <a class="btn outline" href="#agenda">Onze agenda</a>
+        </div>
+      </div>
 
-  <section id="actueel" class="promo-strip">
-    <div class="promo-grid">
-      <a class="promo-card" href="https://docs.google.com/forms/d/1Naoxd0nUkjq9F0AQxLanIGKehbu98ApGIFrrVLhocy0/edit" target="_blank" rel="noopener">
-        <img src="images/proeftrainingen.png" alt="Gratis proeftrainingen">
-      </a>
-      <a class="promo-card" href="https://gooijijdebaldoor.nl/schools" target="_blank" rel="noopener">
-        <img src="images/gooi-jij-de-bal-door.png" alt="Gooi jij de bal door?">
-      </a>
-      <div class="promo-card"><img src="images/gold-dry.jpg" alt="Gold Dry"></div>
+      <div class="hero-announcement">
+        <img id="aankondigingsfoto"
+             src="images/aankondiging-fallback.png"
+             alt="Aankondiging HV Novitas">
+      </div>
     </div>
   </section>
 
-  <section class="quick-section" aria-label="Snelle links">
+  <section id="welkom" class="welcome section">
+    <div class="welcome-label">
+      <span class="eyebrow">WELKOM BIJ HV NOVITAS</span>
+      <div class="orange-rule"></div>
+    </div>
+    <div class="welcome-content">
+      <h2>We presteren met plezier,<br><em>voor het spel.</em></h2>
+      <p class="lead">Bij HV Novitas geloven we dat plezier de basis is van alles. Samen sporten, groeien als team en genieten van het spel – daar doen we het voor.</p>
+
+      <div class="two-copy">
+        <article>
+          <h3>Voor iedereen die houdt van snelheid.</h3>
+          <p>Handbal is snel, dynamisch en zit vol energie. Benieuwd of <strong>handbal in Hulst</strong> iets voor jou is? Kom gerust eens langs voor een training of kennismaking – je bent van harte welkom!</p>
+        </article>
+        <article>
+          <h3>Meer dan alleen handbal</h3>
+          <p>Onze vereniging is ook een plek voor gezelligheid en verbinding. We organiseren jeugdkampen, feestavonden, BBQ's en gaan regelmatig naar internationale toernooien.</p>
+          <p>Ook buiten het veld is er genoeg te beleven – zoals onze gezellige pubquiz, waar ook niet-leden welkom zijn.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="actueel" class="promo-area">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">DOE MEE</span>
+          <h2>Bij HV Novitas is er altijd iets te doen</h2>
+        </div>
+      </div>
+
+      <div class="promo-grid">
+        <a class="promo-card" href="https://docs.google.com/forms/d/1Naoxd0nUkjq9F0AQxLanIGKehbu98ApGIFrrVLhocy0/edit" target="_blank" rel="noopener">
+          <img src="images/proeftrainingen.png" alt="Gratis proeftrainingen aanvragen">
+        </a>
+
+        <a class="promo-card" href="https://gooijijdebaldoor.nl/schools" target="_blank" rel="noopener">
+          <img src="images/gooi-jij-de-bal-door.png" alt="Gooi jij de bal door?">
+        </a>
+
+        <a class="promo-card" href="#" aria-label="Gold Dry sponsor">
+          <img src="images/gold-dry.jpg" alt="Gold Dry – Premium Soda">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-area section">
     <div class="quick-grid">
-      <a href="https://www.hvnovitas.nl/Jeugd-Teams" target="_blank" rel="noopener"><span class="quick-icon">🏃</span><strong>Don Nova's<br>Jeugdclub</strong><b>JEUGDCLUB →</b></a>
-      <a href="https://www.hvnovitas.nl/toernooien" target="_blank" rel="noopener"><span class="quick-icon">🏆</span><strong>Toernooien</strong><b>TOERNOOIEN →</b></a>
-      <a href="https://www.hvnovitas.nl/vrienden-van-novitas" target="_blank" rel="noopener"><span class="quick-icon">👥</span><strong>Vrienden<br>van Novitas</strong><b>VRIENDEN →</b></a>
-      <a href="https://sites.google.com/site/hvnovitas/10-jaar-geleden?authuser=0" target="_blank" rel="noopener"><span class="quick-icon">↶</span><strong>10 jaar geleden</strong><b>10 JAAR GELEDEN →</b></a>
-      <a href="https://clubs.stanno.com/nl/hv-novitas/clubcollectie" target="_blank" rel="noopener"><span class="quick-icon">🛒</span><strong>Webshop</strong><b>WEBSHOP →</b></a>
-      <a href="https://hvnovitas-ux.github.io/hvnovitas-beheer/inschrijven.html" target="_blank" rel="noopener"><span class="quick-icon">📝</span><strong>Lid worden</strong><b>LID WORDEN →</b></a>
-      <a href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener"><span class="quick-icon">▶</span><strong>Video's</strong><b>VIDEO'S →</b></a>
+      <a href="https://www.hvnovitas.nl/Jeugd-Teams" target="_blank" rel="noopener"><span>🏃</span><b>Don Nova's<br>Jeugdclub</b></a>
+      <a href="https://www.hvnovitas.nl/toernooien" target="_blank" rel="noopener"><span>🏆</span><b>Toernooien</b></a>
+      <a href="https://www.hvnovitas.nl/vrienden-van-novitas" target="_blank" rel="noopener"><span>🧡</span><b>Vrienden<br>van Novitas</b></a>
+      <a href="https://sites.google.com/site/hvnovitas/10-jaar-geleden?authuser=0" target="_blank" rel="noopener"><span>↩</span><b>10 jaar geleden</b></a>
+      <a href="https://clubs.stanno.com/nl/hv-novitas/clubcollectie" target="_blank" rel="noopener"><span>🛒</span><b>Webshop</b></a>
+      <a href="https://hvnovitas-ux.github.io/hvnovitas-beheer/inschrijven.html" target="_blank" rel="noopener"><span>📝</span><b>Lid worden</b></a>
+      <a href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener"><span>▶</span><b>Video's</b></a>
     </div>
   </section>
 
-  <section id="welkom" class="section intro">
-    <div class="section-label">WELKOM BIJ HV NOVITAS</div>
-    <h2>We presteren met plezier, <span>voor het spel.</span></h2>
-    <p class="lead">Bij HV Novitas geloven we dat plezier de basis is van alles. Samen sporten, groeien als team en genieten van het spel – daar doen we het voor.</p>
-    <div class="intro-grid">
-      <div>
-        <h3>Voor iedereen die houdt van snelheid.</h3>
-        <p>Handbal is snel, dynamisch en zit vol energie. Benieuwd of <strong>handbal in Hulst</strong> iets voor jou is? Kom gerust eens langs voor een training of kennismaking – je bent van harte welkom!</p>
-      </div>
-      <div>
-        <h3>Meer dan alleen handbal</h3>
-        <p>Onze vereniging is ook een plek voor gezelligheid en verbinding. We organiseren jeugdkampen, feestavonden, BBQ's en gaan regelmatig naar internationale toernooien.</p>
-        <p>Ook buiten het veld is er genoeg te beleven – zoals onze gezellige pubquiz, waar ook niet-leden welkom zijn.</p>
-      </div>
+  <section id="nieuws" class="content-area section">
+    <div class="section-head">
+      <div><span class="eyebrow">ACTUEEL</span><h2>Laatste nieuws</h2></div>
+      <a class="more-link" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/news.html" target="_blank" rel="noopener">Alle nieuws →</a>
     </div>
-  </section>
 
-  <section id="nieuws" class="section grey">
-    <div class="heading">
-      <div><span class="section-label">ACTUEEL</span><h2>Laatste nieuws</h2></div>
-      <a class="more" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/news.html" target="_blank" rel="noopener">AL HET NIEUWS →</a>
-    </div>
-    <div class="columns">
-      <article class="column">
-        <h3>Laatste nieuws</h3>
-        <div class="under"></div>
-        <div class="embed news-embed"><iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html" title="Laatste nieuws" loading="lazy"></iframe></div>
+    <div class="three-columns">
+      <article class="column-card news-card">
+        <div class="column-title"><h3>Laatste nieuws</h3></div>
+        <iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html"
+                title="Laatste nieuws HV Novitas" loading="lazy"></iframe>
       </article>
 
-      <article class="column">
-        <h3>Highlights Novitas</h3>
-        <div class="under"></div>
-        <div class="embed highlight-embed"><iframe src="https://www.youtube.com/embed/videoseries?list=PLK1aboL2Hk9I" title="HV Novitas Highlights" loading="lazy" allowfullscreen></iframe></div>
-        <a class="orange-link" href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener">BEKIJK ALLE HIGHLIGHTS →</a>
+      <article class="column-card">
+        <div class="column-title"><h3>Highlights Novitas</h3></div>
+        <div class="video-box">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLnMKEW1hQu3_dCCQrK9Wo51mQb-e9Qn0j"
+                  title="HV Novitas nieuwste handbalvideo" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <p class="caption">Bekijk de nieuwste handbalbeelden van HV Novitas.</p>
       </article>
 
-      <article class="column">
-        <h3>Foto's</h3>
-        <div class="under"></div>
-        <div class="embed photos-embed"><iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/omejan-view.html" title="Foto carrousel HV Novitas" loading="lazy"></iframe></div>
-        <p class="caption">De mooiste foto's van onze club.</p>
+      <article class="column-card">
+        <!-- De titel 'Ome Jan' staat bewust niet in de carrousel; het is alleen een interne naam. -->
+        <div class="column-title"><h3>Foto's</h3></div>
+        <div class="ome-frame">
+          <iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/omejan-view.html"
+                  title="Foto carrousel HV Novitas" loading="lazy"></iframe>
+        </div>
+        <p class="caption">De mooiste foto's uit onze clubcollectie.</p>
       </article>
     </div>
   </section>
 
-  <section id="sponsors" class="section sponsor-section">
-    <div class="heading">
-      <div><span class="section-label">SAMEN STERK</span><h2>Onze sponsors</h2></div>
+  <section class="sponsor-area section">
+    <div class="section-head compact">
+      <div><span class="eyebrow">SAMEN STERK</span><h2>Onze sponsors</h2></div>
     </div>
-    <div class="sponsor-embed"><iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsors-view.html" title="Sponsors HV Novitas" loading="lazy"></iframe></div>
+    <div class="sponsor-flat">
+      <iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsors-view.html"
+              title="Sponsors HV Novitas" loading="lazy"></iframe>
+    </div>
   </section>
 
-  <section class="forever-band">
+  <section id="beelden" class="forever-band">
     <div class="forever-inner">
-      <div><span class="section-label light">FOREVER NOVITAS</span><h2>Onze club. Onze geschiedenis. Onze mensen.</h2></div>
-      <a href="#forever" class="orange-btn">BEKIJK VIDEO →</a>
+      <div>
+        <span class="eyebrow light">FOREVER NOVITAS</span>
+        <h2>Onze club. Onze geschiedenis. Onze mensen.</h2>
+        <p>Nostalgische beelden uit de geschiedenis van HV Novitas.</p>
+      </div>
+      <a class="btn orange" href="#forever-video">Bekijk video →</a>
     </div>
   </section>
 
-  <section id="forever" class="section">
-    <div class="forever-grid">
-      <div class="forever-text">
-        <span class="section-label">FOREVER NOVITAS</span>
+  <section id="forever-video" class="media section">
+    <div class="media-grid media-duo">
+      <article class="forever-copy">
+        <span class="eyebrow">FOREVER NOVITAS</span>
         <h2>Terugkijken naar onze geschiedenis</h2>
         <p><strong>Forever Novitas</strong> is een nostalgische videoserie waarin we terugkijken naar de geschiedenis van HV Novitas. Met beelden uit verschillende jaren brengen we mooie herinneringen opnieuw tot leven en laten we zien hoe onze vereniging zich door de jaren heen heeft ontwikkeld.</p>
         <p>Iedere aflevering neemt je mee terug naar bijzondere momenten uit het verleden. Voor oud-leden een feest van herkenning en voor nieuwe leden een mooie kennismaking met de geschiedenis van onze vereniging.</p>
         <p>Veel kijkplezier!</p>
         <p>🤾‍♂️ <strong>Lijkt handbal jou ook leuk?</strong></p>
         <p>Of je nu ervaring hebt of nog nooit een handbal hebt vastgehouden, je bent altijd welkom om vrijblijvend een keer mee te trainen.</p>
+      </article>
+
+      <article class="short-card">
+        <span class="eyebrow light">NIEUWSTE SHORTS</span>
+        <h2>Doelpunten</h2>
+        <div class="short-video">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLnMKEW1hQu38XtZoTrRsPIgQ5AahcK61U"
+                  title="Nieuwste Shorts – Doelpunten" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </article>
+    </div>
+
+    <div class="forever-video-row">
+      <div class="playlist-box">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PLK1aboL2Hk9I"
+                title="Forever Novitas" loading="lazy" allowfullscreen></iframe>
       </div>
-      <div class="large-video"><iframe src="https://www.youtube.com/embed/videoseries?list=PLK1aboL2Hk9I" title="Forever Novitas" loading="lazy" allowfullscreen></iframe></div>
     </div>
   </section>
 
-  <section class="section grey shorts">
-    <div class="shorts-grid">
-      <div>
-        <span class="section-label">NIEUWSTE SHORTS – DOELPUNTEN</span>
-        <h2>De nieuwste doelpunten</h2>
-        <p>Korte handbalbeelden van HV Novitas.</p>
-      </div>
-      <div class="short-video"><iframe src="https://www.youtube.com/embed/videoseries?list=PLnMKEW1hQu38XtZoTrRsPIgQ5AahcK61U" title="Nieuwste Shorts – Doelpunten" loading="lazy" allowfullscreen></iframe></div>
+  <section id="agenda" class="agenda section">
+    <div class="section-head">
+      <div><span class="eyebrow">SAMEN OP HET VELD</span><h2>Onze agenda</h2></div>
+    </div>
+    <div class="agenda-box agenda-month">
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=hvnovitas%40gmail.com&ctz=Europe%2FAmsterdam&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0"
+        title="Agenda HV Novitas – maandweergave"
+        loading="lazy"></iframe>
     </div>
   </section>
 
-  <section id="agenda" class="section agenda">
-    <div class="heading"><div><span class="section-label">AGENDA</span><h2>Onze agenda</h2></div></div>
-    <div class="agenda-frame"><iframe src="https://calendar.google.com/calendar/embed?src=hvnovitas%40gmail.com&ctz=Europe%2FAmsterdam" title="Agenda HV Novitas" loading="lazy"></iframe></div>
+  <section class="ad-reserve" aria-label="Ruimte voor toekomstige AdSense">
+    <span>Ruimte gereserveerd voor toekomstige advertenties</span>
   </section>
 
-  <div class="ad-space"></div>
-
-  <section id="contact" class="contact">
-    <div><span class="section-label light">HV NOVITAS</span><h2>Kom bij ons handballen</h2><p>Je bent altijd welkom om vrijblijvend een keer mee te trainen.</p></div>
-    <a href="https://hvnovitas-ux.github.io/hvnovitas-beheer/inschrijven.html" target="_blank" rel="noopener">LID WORDEN →</a>
+  <section id="contact" class="contact-band">
+    <div>
+      <span class="eyebrow light">HV NOVITAS</span>
+      <h2>Kom bij ons handballen.</h2>
+      <p>Of je nu begint of al ervaring hebt: je bent welkom.</p>
+    </div>
+    <a class="btn dark" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/inschrijven.html" target="_blank" rel="noopener">Lid worden →</a>
   </section>
 
 </main>
 
 <footer>
   <div class="footer-inner">
-    <div><strong>HV NOVITAS</strong><span>Handbalclub Hulst · Zeeuws-Vlaanderen</span></div>
-    <div class="footer-social"><a href="#">f</a><a href="#">◎</a><a href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener">▶</a></div>
+    <div>
+      <strong>HV NOVITAS</strong>
+      <span>Handbalclub Hulst · Zeeuws-Vlaanderen</span>
+    </div>
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">◎</a>
+      <a href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+    </div>
   </div>
-  <div class="footer-bottom"><span>© HV Novitas · Hulst</span><a href="https://www.hvnovitas.nl/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></div>
+  <div class="footer-bottom">
+    <span>© 2026 HV Novitas – Hulst</span>
+    <span><a href="https://www.hvnovitas.nl/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> · Contact</span>
+  </div>
 </footer>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDWYYS09i4YN9tnCmAzeiicD9T4YZ3a6HE",
+    authDomain: "hv-novitas-beheer.firebaseapp.com",
+    databaseURL: "https://hv-novitas-beheer-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "hv-novitas-beheer"
+  };
+
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    onValue(ref(db, "aankondigingsfoto"), snapshot => {
+      const value = snapshot.val();
+      const img = document.getElementById("aankondigingsfoto");
+      if (!img || !value) return;
+
+      const url = typeof value === "string" ? value : value.url;
+      if (url) img.src = url;
+    });
+  } catch (error) {
+    console.warn("Aankondigingsfoto kon niet worden geladen.", error);
+  }
+</script>
+<script src="script.js"></script>
 </body>
 </html>
