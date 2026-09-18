@@ -659,3 +659,21 @@ html, body, main {
     height: 430px;
   }
 }
+
+/* Nieuws zelf over de volledige pagina breedte */
+#nieuws {
+  width: 100%;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#nieuws .news-frame-wrap,
+#nieuws .news-frame-wrap iframe {
+  width: 100%;
+  max-width: none;
+}
+
+#nieuws .news-frame-wrap {
+  border-radius: 0;
+}
