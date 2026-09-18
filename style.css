@@ -677,3 +677,68 @@ html, body, main {
 #nieuws .news-frame-wrap {
   border-radius: 0;
 }
+
+/* Nieuws: breed, vlak en hoog genoeg voor de volledige nieuwscomponent */
+#nieuws {
+  width: 100%;
+  max-width: none;
+  padding-top: 42px;
+  padding-bottom: 18px;
+}
+
+#nieuws .content-wide {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+#nieuws .news-frame-wrap {
+  width: 100%;
+  max-width: none;
+  height: 650px;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+#nieuws .news-frame-wrap iframe {
+  width: 100%;
+  height: 650px;
+  border: 0;
+  display: block;
+}
+
+/* Sponsors meteen onder het nieuws en compact */
+.sponsors-section {
+  width: 100%;
+  max-width: none;
+  padding-top: 8px;
+  padding-bottom: 28px;
+}
+
+.sponsors-section .content-wide {
+  width: 100%;
+  max-width: none;
+}
+
+.sponsors-section .sponsor-frame-wrap {
+  border-radius: 0;
+}
+
+@media (max-width: 600px) {
+  #nieuws .news-frame-wrap,
+  #nieuws .news-frame-wrap iframe {
+    height: 560px;
+  }
+
+  #nieuws {
+    padding-bottom: 10px;
+  }
+
+  .sponsors-section {
+    padding-top: 5px;
+    padding-bottom: 20px;
+  }
+}
