@@ -66,13 +66,12 @@ a {
 .hero-inner {
   position: relative;
   z-index: 1;
-  width: min(1080px, calc(100% - 40px));
-  min-height: 440px;
+  width: min(1000px, calc(100% - 40px));
   margin: 0 auto;
   padding: 38px 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
-  gap: 52px;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 30px;
   align-items: center;
 }
 
@@ -87,7 +86,7 @@ a {
 
 .hero h1 {
   margin: 8px 0 0;
-  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  font-size: clamp(3.1rem, 6.2vw, 5.5rem);
   line-height: .92;
   letter-spacing: -.05em;
   color: #ff6a00;
@@ -153,7 +152,7 @@ a {
 .hero-announcement iframe {
   display: block;
   width: 100%;
-  height: 390px;
+  height: 300px;
   border: 0;
   border-radius: 12px;
   background: transparent;
@@ -431,10 +430,30 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .hero-inner {
-    width: min(100% - 28px, 1080px);
-    gap: 28px;
+  .hero-inner,
+  .content-wide,
+  .content-narrow {
+    width: calc(100% - 28px);
+    max-width: calc(100% - 28px);
   }
+
+  .hero-inner {
+    gap: 24px;
+    padding: 30px 0 38px;
+  }
+
+  .hero-announcement iframe {
+    height: min(280px, 78vw);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 13vw, 4.7rem);
+  }
+
+  .news-frame-wrap {
+    height: 520px;
+  }
+}
 
   .hero-announcement {
     width: 100%;
@@ -514,13 +533,13 @@ h3 {
 /* Bij browserzoom: geen vaste breedtes die horizontaal forceren. */
 @media (min-width: 901px) and (max-width: 1200px) {
   .hero-inner {
-    grid-template-columns: minmax(0, 1fr) 320px;
-    gap: 30px;
+    width: min(1000px, calc(100% - 40px));
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 26px;
   }
 
-  .aankondigingsfoto {
-    width: 320px;
-    height: 320px;
+  .hero-announcement iframe {
+    height: 285px;
   }
 }
 
@@ -583,4 +602,27 @@ html, body, main {
   .media-grid {
     max-width: calc(100vw - 24px);
   }
+}
+
+/* Definitieve breedtebeveiliging */
+html, body, main {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.hero-inner,
+.section,
+.content-wide,
+.content-narrow,
+.media-grid,
+.news-frame-wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.news-frame-wrap iframe {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  border: 0;
 }
