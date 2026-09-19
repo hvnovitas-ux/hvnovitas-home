@@ -305,6 +305,32 @@ h3 {
   margin: 0 auto;
 }
 
+.news-more-wrap {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  min-height: 32px;
+}
+
+.news-more {
+  display: inline-flex;
+  align-items: center;
+  color: #b55407;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 4px 0;
+  line-height: 1.2;
+  visibility: visible;
+  opacity: 1;
+}
+
+.news-more:hover {
+  text-decoration: underline;
+}
+
 .news-frame-wrap {
   width: 100%;
   max-width: 100%;
