@@ -53,8 +53,8 @@ a {
   margin: 0 auto;
   padding: 36px 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
-  gap: 36px;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
+  gap: 44px;
   align-items: center;
 }
 
@@ -695,7 +695,7 @@ html, body, main {
 #nieuws .news-frame-wrap {
   width: 100%;
   max-width: none;
-  height: 650px;
+  height: 780px;
   margin: 0;
   border-radius: 0;
   box-shadow: none;
@@ -705,7 +705,7 @@ html, body, main {
 
 #nieuws .news-frame-wrap iframe {
   width: 100%;
-  height: 650px;
+  height: 780px;
   border: 0;
   display: block;
 }
@@ -775,111 +775,94 @@ html, body, main {
   background: #000;
 }
 
-/* Één consistente breedte voor de hele homepage */
-.content-wide,
-.media-grid {
-  width: min(1180px, calc(100% - 40px));
-  max-width: 1180px;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 0;
-}
 
-.content-narrow {
-  width: min(1180px, calc(100% - 40px));
-  max-width: 1180px;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 0;
-}
-
-.section {
+/* === LAATSTE PAGINA-AANPASSINGEN === */
+.hero-announcement iframe {
   width: 100%;
-  max-width: none;
+  aspect-ratio: 1.54 / 1;
+}
+
+/* Gold Dry onder de Forever Novitas-video */
+.forever-video-column {
   min-width: 0;
 }
 
-.section > .content-wide,
-.section > .content-narrow {
+.gold-dry-banner {
+  margin-top: 18px;
+}
+
+/* Agenda links, sponsor + twee banners rechts */
+.agenda-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, .8fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.agenda-column,
+.agenda-side {
   min-width: 0;
 }
 
-/* Nieuws en sponsors krijgen dezelfde inhoudsbreedte als de rest.
-   De achtergrond mag wel over de hele pagina lopen. */
-#nieuws .content-wide,
-.sponsors-section .content-wide {
-  width: min(1180px, calc(100% - 40px));
-  max-width: 1180px;
-  margin-left: auto;
-  margin-right: auto;
+.agenda-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-#nieuws .news-frame-wrap {
+.week-sponsor-wrap {
   width: 100%;
-  max-width: 1180px;
-  height: 420px;
-  margin: 0 auto;
-  border-radius: 12px;
   overflow: hidden;
+  border-radius: 12px;
+  background: #f7f7f7;
 }
 
-#nieuws .news-frame-wrap iframe {
+.week-sponsor-wrap iframe {
   width: 100%;
-  max-width: 1180px;
-  height: 420px;
+  height: 250px;
   display: block;
   border: 0;
 }
 
-.sponsors-section {
+.side-banners {
+  display: grid;
+  gap: 18px;
+}
+
+.side-banners .promo-banner {
   width: 100%;
-  max-width: none;
 }
 
-.sponsors-section .sponsor-frame-wrap {
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
+.news-frame-wrap iframe {
+  overflow: hidden;
 }
 
-/* Banners volgen dezelfde hoofdbreedte. */
-.banners-section .content-wide {
-  width: min(1180px, calc(100% - 40px));
-  max-width: 1180px;
-}
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
 
-/* Geen horizontale afwijkingen bij zoom */
-html, body, main {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
+  .hero-announcement {
+    width: min(430px, 100%);
+    justify-self: center;
+  }
 
-@media (max-width: 1200px) {
-  .content-wide,
-  .content-narrow,
-  .media-grid,
-  #nieuws .content-wide,
-  .sponsors-section .content-wide,
-  .banners-section .content-wide {
-    width: calc(100% - 40px);
-    max-width: calc(100% - 40px);
+  .agenda-layout {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 600px) {
-  .content-wide,
-  .content-narrow,
-  .media-grid,
-  #nieuws .content-wide,
-  .sponsors-section .content-wide,
-  .banners-section .content-wide {
-    width: calc(100% - 28px);
-    max-width: calc(100% - 28px);
+  .news-frame-wrap,
+  #nieuws .news-frame-wrap {
+    height: 720px;
   }
 
-  #nieuws .news-frame-wrap,
   #nieuws .news-frame-wrap iframe {
-    height: 520px;
+    height: 720px;
+  }
+
+  .week-sponsor-wrap iframe {
+    height: 220px;
   }
 }
