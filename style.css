@@ -1,40 +1,14 @@
-/* =========================================================
-   HV NOVITAS - COMPLETE STYLE.CSS
-   ========================================================= */
-
 * {
   box-sizing: border-box;
 }
 
 :root {
   --orange: #ff6a00;
-  --orange-light: #ff7a00;
   --orange-dark: #c94f00;
-  --orange-deep: #9f3e00;
-
-  --black: #080808;
-  --dark: #111111;
-  --dark-2: #171717;
-  --dark-3: #242424;
-
-  --white: #ffffff;
-  --cream: #fffaf6;
-
   --ink: #1f2022;
-  --muted: #666666;
+  --muted: #666;
   --line: #ececec;
-
-  --shadow-soft:
-    0 12px 32px rgba(24, 25, 27, 0.08);
-
-  --shadow-deep:
-    0 18px 42px rgba(24, 25, 27, 0.14);
 }
-
-
-/* =========================================================
-   BASIS
-   ========================================================= */
 
 html {
   scroll-behavior: smooth;
@@ -43,241 +17,85 @@ html {
 
 body {
   margin: 0;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family: Arial, Helvetica, sans-serif;
   color: var(--ink);
-
-  background: var(--cream);
-
+  background: #fff;
   line-height: 1.6;
-
   overflow-x: hidden;
 }
 
 img {
-  display: block;
-
   max-width: 100%;
-
   height: auto;
+  display: block;
 }
 
 a {
   color: inherit;
 }
 
-iframe {
-  max-width: 100%;
-}
-
-main,
-section,
-.section,
-.content-wide,
-.content-narrow {
-  min-width: 0;
-  max-width: 100%;
-}
-
-
-/* =========================================================
-   ALGEMENE SECTIES
-   ========================================================= */
-
-.section {
-  padding:
-    clamp(42px, 5vw, 72px)
-    0;
-}
-
-.content-wide {
-  width:
-    min(
-      1180px,
-      calc(100% - 40px)
-    );
-
-  margin: 0 auto;
-}
-
-.content-narrow {
-  width:
-    min(
-      1120px,
-      calc(100% - 40px)
-    );
-
-  margin: 0 auto;
-}
-
-.section-label {
-  display: block;
-
-  margin:
-    0
-    0
-    8px;
-
-  color: var(--orange);
-
-  font-size: 0.82rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.13em;
-
-  text-transform: uppercase;
-}
-
-h2 {
-  margin:
-    8px
-    0
-    20px;
-
-  font-size:
-    clamp(
-      2.15rem,
-      4.1vw,
-      3.55rem
-    );
-
-  line-height: 1.05;
-
-  letter-spacing: -0.035em;
-}
-
-h3 {
-  margin:
-    30px
-    0
-    8px;
-
-  font-size: 1.45rem;
-
-  line-height: 1.2;
-}
-
-p {
-  margin-top: 0;
-}
-
-
-/* =========================================================
-   HOOFDBANNER
-   ORANJE + ZWART
-   ========================================================= */
-
+/* =========================
+   HERO
+   ========================= */
 .hero {
   position: relative;
-
-  min-height: 450px;
-
-  display: flex;
-
-  align-items: center;
-
   overflow: hidden;
-
-  color: #ffffff;
-
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  color: #fff;
   background:
-    linear-gradient(
-      112deg,
+    linear-gradient(112deg,
       #ff7a00 0%,
       #f16500 38%,
       #d94f00 47.5%,
       #242424 48.2%,
-      #171717 100%
-    );
+      #171717 100%);
+  box-shadow: 0 14px 34px rgba(0,0,0,.18);
+}
 
-  box-shadow:
-    0 14px 34px rgba(0, 0, 0, 0.18);
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
 }
 
 .hero::before {
-  content: "";
-
-  position: absolute;
-
   inset: 0;
-
-  pointer-events: none;
-
   background:
-    linear-gradient(
-      128deg,
+    linear-gradient(128deg,
       transparent 0 30%,
       rgba(255,255,255,.10) 30.2% 31%,
-      transparent 31.2%
-    ),
-
-    linear-gradient(
-      128deg,
+      transparent 31.2%),
+    linear-gradient(128deg,
       transparent 0 46%,
       rgba(0,0,0,.16) 46.2% 47.2%,
-      transparent 47.4%
-    ),
-
-    radial-gradient(
-      circle at 22% 38%,
-      rgba(255,255,255,.14),
-      transparent 34%
-    );
+      transparent 47.4%),
+    radial-gradient(circle at 22% 38%, rgba(255,255,255,.14), transparent 34%);
 }
 
 .hero::after {
-  content: "";
-
-  position: absolute;
-
   width: 520px;
   height: 520px;
-
   right: -190px;
   top: -150px;
-
-  border:
-    1px solid rgba(255,255,255,.10);
-
+  border: 1px solid rgba(255,255,255,.10);
   border-radius: 50%;
-
   box-shadow:
     0 0 0 48px rgba(255,255,255,.025),
     0 0 0 96px rgba(255,255,255,.018);
-
-  pointer-events: none;
 }
 
 .hero-inner {
   position: relative;
-
-  z-index: 2;
-
-  width:
-    min(
-      1180px,
-      calc(100% - 40px)
-    );
-
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-
-  padding:
-    34px
-    0;
-
+  padding: 34px 0;
   display: grid;
-
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(420px,500px);
-
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 500px);
   gap: 52px;
-
   align-items: center;
 }
 
@@ -286,25 +104,17 @@ p {
 }
 
 .hero .eyebrow {
-  display: block;
-
-  color: #ffffff;
-
-  opacity: 0.98;
+  color: #fff;
+  opacity: .98;
 }
 
 .eyebrow,
 .section-label {
   display: block;
-
-  font-size: 0.82rem;
-
+  font-size: .82rem;
   font-weight: 800;
-
-  letter-spacing: 0.13em;
-
+  letter-spacing: .13em;
   text-transform: uppercase;
-
   color: var(--orange);
 }
 
@@ -313,799 +123,352 @@ p {
 }
 
 .hero h1 {
-  margin:
-    8px
-    0
-    0;
-
-  font-size:
-    clamp(
-      3.2rem,
-      6vw,
-      5.8rem
-    );
-
-  line-height: 0.92;
-
-  letter-spacing: -0.045em;
-
-  color: #ffffff;
-
+  margin: 8px 0 0;
+  font-size: clamp(3.2rem, 6vw, 5.8rem);
+  line-height: .92;
+  letter-spacing: -.045em;
+  color: #fff;
   white-space: nowrap;
-
-  text-shadow:
-    0 7px 22px rgba(0,0,0,.22);
+  text-shadow: 0 7px 22px rgba(0,0,0,.22);
 }
 
-.hero .slogan {
+.slogan {
   margin-top: 18px;
-
-  font-size:
-    clamp(
-      1.5rem,
-      3vw,
-      2.5rem
-    );
-
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   line-height: 1.05;
-
   font-weight: 800;
-
-  color: #ffffff;
+  color: #fff;
 }
 
 .hero p {
   max-width: 650px;
-
-  margin-top: 18px;
-
   font-size: 1.08rem;
-
-  color:
-    rgba(255,255,255,.96);
+  margin-top: 18px;
+  color: rgba(255,255,255,.96);
 }
-
-
-/* =========================================================
-   SOCIAL ICONS
-   ========================================================= */
 
 .hero-socials {
   display: flex;
-
-  align-items: center;
-
   gap: 14px;
-
   margin-top: 26px;
+  align-items: center;
 }
 
 .hero-socials a {
   width: 56px;
   height: 56px;
-
-  display: grid;
-
-  place-items: center;
-
   border-radius: 50%;
-
-  color: #ffffff;
-
+  display: grid;
+  place-items: center;
+  color: #fff;
   text-decoration: none;
-
-  box-shadow:
-    0 9px 20px rgba(0,0,0,.28);
-
-  transition:
-    transform .18s ease,
-    box-shadow .18s ease;
+  box-shadow: 0 9px 20px rgba(0,0,0,.28);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
 .hero-socials a:hover {
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    0 13px 24px rgba(0,0,0,.34);
+  transform: translateY(-3px);
+  box-shadow: 0 13px 24px rgba(0,0,0,.34);
 }
 
 .hero-socials a img {
   width: 28px;
   height: 28px;
-
   max-width: 28px;
   max-height: 28px;
-
   object-fit: contain;
 }
 
-.social-youtube {
-  background: #ff0000;
-}
-
-.social-facebook {
-  background: #1877f2;
-}
-
-.social-tiktok {
-  background: #ffffff;
-}
-
-.social-instagram {
-  background: #e90074;
-}
-
-
-/* =========================================================
-   AANKONDIGING
-   ========================================================= */
+.social-youtube { background: #ff0000; }
+.social-facebook { background: #1877f2; }
+.social-tiktok { background: #fff; }
+.social-instagram { background: #e90074; }
 
 .hero-announcement {
   width: 100%;
-
   min-width: 0;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   overflow: hidden;
 }
 
 .hero-announcement iframe {
   display: block;
-
   width: 100%;
-
   height: auto;
-
   aspect-ratio: 1.54 / 1;
-
   border: 0;
-
   border-radius: 16px;
-
   background: transparent;
-
   overflow: hidden;
-
-  box-shadow:
-    0 18px 36px rgba(0,0,0,.30);
+  box-shadow: 0 18px 36px rgba(0,0,0,.30);
 }
 
-
-/* =========================================================
-   EVENEMENTENBANNER OP HOOFDPAGINA
-   ========================================================= */
-
-.event-banner-section {
-  margin: 0;
-
-  padding:
-    10px
-    0
-    12px;
-
-  background: #fffaf6;
-
-  line-height: 0;
+/* =========================
+   SECTIONS / WIDTH
+   ========================= */
+main,
+.section,
+.content-wide,
+.content-narrow {
+  min-width: 0;
+  max-width: 100%;
 }
 
-.event-banner-section iframe {
-  display: block;
-
-  width: 100%;
-
-  height: 190px;
-
-  margin: 0;
-
-  padding: 0;
-
-  border: 0;
-
-  overflow: hidden;
+.section {
+  padding: clamp(42px, 5vw, 72px) 0;
 }
 
+.content-wide {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
 
-/* =========================================================
-   WELKOM
-   ========================================================= */
+.content-narrow {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
 
 .intro {
-  background: #ffffff;
-
-  padding-top:
-    clamp(
-      45px,
-      5vw,
-      72px
-    );
-
+  background: #fff;
+  padding-top: clamp(45px, 5vw, 72px);
   padding-bottom: 38px;
 }
 
-.intro .content-narrow {
-  padding:
-    34px
-    40px
-    30px;
-
-  border-left:
-    5px solid var(--orange);
-
-  border-radius:
-    0
-    18px
-    18px
-    0;
-
-  background: #ffffff;
-
-  box-shadow:
-    var(--shadow-soft);
+h2 {
+  font-size: clamp(2.15rem, 4.1vw, 3.55rem);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  margin: 7px 0 20px;
 }
 
 .intro h2 {
-  color: #161616;
-
-  margin-bottom: 18px;
+  white-space: nowrap;
 }
 
-.intro h3 {
-  position: relative;
-
-  margin-top: 24px;
-
-  padding-left: 17px;
-}
-
-.intro h3::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-
-  top: .2em;
-
-  width: 5px;
-
-  height: 1.05em;
-
-  border-radius: 5px;
-
-  background: var(--orange);
+h3 {
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin: 30px 0 8px;
 }
 
 .intro p {
-  max-width: 1080px;
-
   font-size: 1.06rem;
+  max-width: 1080px;
 }
 
-
-/* =========================================================
+/* =========================
    QUICK LINKS
-   ========================================================= */
-
+   ========================= */
 .quick-links {
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
-
   margin-top: 34px;
 }
 
 .quick-links a {
   position: relative;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   min-height: 56px;
-
-  padding:
-    13px
-    18px;
-
+  padding: 13px 18px;
   text-align: center;
-
   text-decoration: none;
-
   font-weight: 800;
-
-  color: #ffffff;
-
-  border:
-    1px solid rgba(255,255,255,.10);
-
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 11px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ff7a1a 0%,
-      var(--orange) 55%,
-      var(--orange-dark) 100%
-    );
-
+  background: linear-gradient(180deg, #ff7a1a 0%, var(--orange) 55%, var(--orange-dark) 100%);
   box-shadow:
-    0 5px 0 var(--orange-deep),
+    0 5px 0 #9f3e00,
     0 11px 20px rgba(201,79,0,.18);
-
-  transition:
-    transform .16s ease,
-    box-shadow .16s ease,
-    filter .16s ease;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
 }
 
 .quick-links a::after {
   content: "";
-
   position: absolute;
-
-  inset:
-    1px
-    1px
-    auto
-    1px;
-
+  inset: 1px 1px auto 1px;
   height: 45%;
-
-  border-radius:
-    10px
-    10px
-    18px
-    18px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.22),
-      rgba(255,255,255,0)
-    );
-
+  border-radius: 10px 10px 18px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0));
   pointer-events: none;
 }
 
-.quick-links a:nth-child(3n + 2) {
-  background:
-    linear-gradient(
-      180deg,
-      #ff8129 0%,
-      #f36a05 58%,
-      #b94500 100%
-    );
-}
-
-.quick-links a:nth-child(3n + 3) {
-  background:
-    linear-gradient(
-      180deg,
-      #f86a00 0%,
-      #d95600 58%,
-      #a83b00 100%
-    );
-}
-
 .quick-links a:hover {
-  transform:
-    translateY(-3px);
-
+  transform: translateY(-3px);
   box-shadow:
-    0 8px 0 var(--orange-deep),
+    0 8px 0 #9f3e00,
     0 15px 25px rgba(201,79,0,.25);
-
   filter: brightness(1.04);
 }
 
 .quick-links a:active {
-  transform:
-    translateY(2px);
-
-  box-shadow:
-    0 2px 0 var(--orange-deep),
-    0 7px 12px rgba(201,79,0,.18);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #9f3e00, 0 7px 12px rgba(201,79,0,.18);
 }
 
-
-/* =========================================================
+/* =========================
    NIEUWS
-   ORANJE + ZWART
-   ========================================================= */
-
+   ========================= */
 #nieuws {
   position: relative;
-
   width: 100%;
-
   padding-top: 14px;
-
   padding-bottom: 0;
-
   overflow: hidden;
-
   background:
-    linear-gradient(
-      112deg,
+    linear-gradient(112deg,
       #ff7a00 0%,
       #f16500 32%,
       #d94f00 43%,
       #242424 44%,
-      #171717 100%
-    );
+      #171717 100%);
 }
 
 #nieuws::before {
   content: "";
-
   position: absolute;
-
   inset: 0;
-
   pointer-events: none;
-
   background:
-    linear-gradient(
-      128deg,
+    linear-gradient(128deg,
       transparent 0 28%,
-      rgba(255,255,255,.09) 28.2% 29%,
-      transparent 29.2%
-    ),
-
-    linear-gradient(
-      128deg,
+      rgba(255,255,255,.08) 28.2% 29%,
+      transparent 29.2%),
+    linear-gradient(128deg,
       transparent 0 45%,
       rgba(0,0,0,.16) 45.2% 46.2%,
-      transparent 46.4%
-    ),
-
-    radial-gradient(
-      circle at 18% 46%,
-      rgba(255,255,255,.12),
-      transparent 28%
-    );
+      transparent 46.4%),
+    radial-gradient(circle at 18% 46%, rgba(255,255,255,.12), transparent 28%);
 }
 
 #nieuws::after {
   content: "";
-
   position: absolute;
-
   width: 420px;
   height: 420px;
-
   right: -170px;
   top: -220px;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 50%;
-
   box-shadow:
     0 0 0 45px rgba(255,255,255,.02),
     0 0 0 90px rgba(255,255,255,.012);
-
   pointer-events: none;
 }
 
 #nieuws .content-wide {
-  position: relative;
-
-  z-index: 2;
-
-  width:
-    min(
-      1180px,
-      calc(100% - 40px)
-    );
-
+  width: min(1180px, calc(100% - 40px));
   max-width: 1180px;
-
   margin: 0 auto;
-}
-
-#nieuws .section-label {
-  color: #ffffff;
-}
-
-.news-frame-wrap {
-  width: 100%;
-
-  height: 540px;
-
-  overflow: hidden;
-
-  background: #ffffff;
-
-  border-top:
-    5px solid #ffffff;
-
-  border-radius:
-    18px
-    18px
-    0
-    0;
-
-  box-shadow:
-    0 12px 32px rgba(0,0,0,.16);
-}
-
-.news-frame-wrap iframe {
-  width: 100%;
-
-  height: 540px;
-
-  display: block;
-
-  border: 0;
-
-  overflow: hidden;
 }
 
 .news-more-wrap {
   position: relative;
-
   z-index: 5;
-
   display: flex;
-
   justify-content: flex-end;
-
   margin-top: 10px;
-
-  min-height: 42px;
+  min-height: 32px;
 }
 
 .news-more {
   display: inline-flex;
-
   align-items: center;
-
-  padding:
-    8px
-    14px;
-
-  color: #ffffff;
-
-  background:
-    #b94700;
-
-  border-radius: 8px;
-
-  font-size: 15px;
-
+  color: #b55407;
   font-weight: 800;
-
-  line-height: 1.2;
-
+  font-size: 15px;
   text-decoration: none;
-
-  box-shadow:
-    0 5px 12px rgba(0,0,0,.14);
+  padding: 4px 0;
+  line-height: 1.2;
+  visibility: visible;
+  opacity: 1;
 }
 
 .news-more:hover {
-  background:
-    #8f3600;
-
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-
-/* =========================================================
-   SPONSORS
-   ZELFDE LOOK ALS DE HOOFDBANNER
-   DUS GEEN ZALM / LICHTORANJE VLAK
-   ========================================================= */
-
-.sponsors-section {
-  position: relative;
-
+.news-frame-wrap {
   width: 100%;
-
+  max-width: 100%;
+  height: 500px;
   overflow: hidden;
-
-  padding-top: 0;
-
-  padding-bottom: 30px;
-
-  color: #ffffff;
-
-  background:
-    linear-gradient(
-      112deg,
-      #ff7a00 0%,
-      #f16500 31%,
-      #d94f00 42%,
-      #292929 43%,
-      #171717 100%
-    );
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 7px 25px rgba(0,0,0,.08);
 }
 
-.sponsors-section::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      128deg,
-      transparent 0 27%,
-      rgba(255,255,255,.09) 27.2% 28%,
-      transparent 28.2%
-    ),
-
-    linear-gradient(
-      128deg,
-      transparent 0 41%,
-      rgba(0,0,0,.17) 41.2% 42.2%,
-      transparent 42.4%
-    ),
-
-    radial-gradient(
-      circle at 18% 55%,
-      rgba(255,255,255,.12),
-      transparent 30%
-    );
+.news-frame-wrap iframe {
+  width: 100%;
+  height: 500px;
+  max-width: 100%;
+  display: block;
+  border: 0;
+  overflow: hidden;
 }
 
-.sponsors-section::after {
-  content: "";
-
-  position: absolute;
-
-  width: 460px;
-  height: 460px;
-
-  right: -180px;
-  top: -190px;
-
-  border:
-    1px solid rgba(255,255,255,.09);
-
-  border-radius: 50%;
-
-  box-shadow:
-    0 0 0 48px rgba(255,255,255,.022),
-    0 0 0 96px rgba(255,255,255,.015);
-
-  pointer-events: none;
-}
-
-.sponsors-section .content-wide {
-  position: relative;
-
-  z-index: 2;
-}
-
-.sponsors-section .section-label {
-  padding-top: 25px;
-
-  margin-bottom: 14px;
-
-  color: #ffffff;
+/* =========================
+   SPONSORS
+   ========================= */
+.sponsors-section {
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 34px;
 }
 
 .sponsor-frame-wrap {
-  position: relative;
-
   width: 100%;
-
-  height: 175px;
-
+  height: 165px;
   overflow: hidden;
-
-  background: #ffffff;
-
-  border:
-    1px solid rgba(255,255,255,.16);
-
-  border-radius: 16px;
-
-  box-shadow:
-    0 18px 38px rgba(0,0,0,.28);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 7px 25px rgba(0,0,0,.07);
 }
 
 .sponsor-frame {
-  display: block;
-
   width: 100%;
-
-  height: 175px;
-
+  height: 165px;
   border: 0;
+  display: block;
 }
 
-
-/* =========================================================
+/* =========================
    HIGHLIGHTS + FOTO'S
-   ========================================================= */
-
+   ========================= */
 .image-sections {
-  padding-top: 20px;
-
-  padding-bottom: 20px;
-
-  background: #ffffff;
+  padding-top: 18px;
+  padding-bottom: 24px;
 }
 
 .image-sections-grid {
   display: grid;
-
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
-
-  gap: 18px;
-
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
   align-items: start;
 }
 
 .image-section-card {
   min-width: 0;
-
-  overflow: hidden;
-
-  background: #ffffff;
-
-  border-radius: 18px;
-
-  box-shadow:
-    var(--shadow-soft);
-}
-
-.image-section-card::before {
-  content: "";
-
-  display: block;
-
-  height: 5px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--orange),
-      #ff9b4d
-    );
 }
 
 .embed-frame-wrap {
   width: 100%;
-
   overflow: hidden;
-
-  background: #ffffff;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 7px 24px rgba(0,0,0,.06);
 }
 
 .embed-frame {
   width: 100%;
-
   height: 480px;
-
-  display: block;
-
   border: 0;
-
-  background: #ffffff;
+  display: block;
 }
 
 .highlights-wrap,
@@ -1117,150 +480,82 @@ p {
   height: 480px;
 }
 
-
-/* =========================================================
+/* =========================
    FOREVER NOVITAS
-   ========================================================= */
-
+   ========================= */
 .media-section {
-  padding-top: 46px;
-
-  padding-bottom: 22px;
-
-  color: #ffffff;
-
-  background:
-    radial-gradient(
-      circle at 8% 18%,
-      rgba(255,106,0,.10),
-      transparent 25%
-    ),
-    #171717;
+  background: #1b1b1b;
+  color: #fff;
+  padding-top: 62px;
+  padding-bottom: 62px;
 }
 
 .media-grid {
   display: grid;
-
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
-
-  gap: 28px;
-
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
   align-items: center;
 }
 
 .forever-text {
   min-width: 0;
+  padding-right: 8px;
+}
 
-  padding:
-    28px
-    34px
-    22px;
+.forever-text h2 {
+  font-size: clamp(2.35rem, 4.2vw, 4rem);
+  color: #fff;
+  margin-bottom: 22px;
+}
 
-  border-left:
-    5px solid var(--orange);
-
-  border-radius:
-    0
-    18px
-    18px
-    0;
-
-  background:
-    linear-gradient(
-      145deg,
-      #242424,
-      #171717
-    );
-
-  box-shadow:
-    0 18px 34px rgba(0,0,0,.28);
+.forever-text p {
+  color: #e8e8e8;
+  font-size: 1rem;
+  margin: 0 0 17px;
 }
 
 .forever-text .section-label {
   color: var(--orange);
 }
 
-.forever-text h2 {
-  color: #ffffff;
-
-  font-size:
-    clamp(
-      2.35rem,
-      4.2vw,
-      4rem
-    );
-
-  margin-bottom: 22px;
-}
-
-.forever-text p {
-  color: #e8e8e8;
-
-  font-size: 1rem;
-
-  margin:
-    0
-    0
-    17px;
-}
-
 .forever-video-column {
   min-width: 0;
-
   display: flex;
-
   flex-direction: column;
-
-  gap: 7px;
+  gap: 12px;
 }
 
 .forever-video-box {
   width: 100%;
-
   aspect-ratio: 16 / 9;
-
-  border-radius: 18px;
-
+  border-radius: 12px;
   overflow: hidden;
-
-  background: #000000;
-
-  box-shadow:
-    0 20px 42px rgba(0,0,0,.36);
+  background: #000;
+  box-shadow: 0 16px 34px rgba(0,0,0,.28);
 }
 
 .forever-video-box iframe {
   width: 100%;
-
   height: 100%;
-
   border: 0;
 }
 
 .gold-dry-banner {
-  border-radius: 12px;
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.30);
+  border-radius: 10px;
+  box-shadow: 0 9px 21px rgba(0,0,0,.22);
 }
 
 .gold-dry-banner img {
   width: 100%;
+  height: auto;
 }
 
-
-/* =========================================================
+/* =========================
    AGENDA
-   ========================================================= */
-
+   ========================= */
 .agenda-section {
-  padding-top: 30px;
-
-  padding-bottom: 28px;
-
-  background: #ffffff;
+  padding-top: 48px;
+  padding-bottom: 48px;
 }
 
 .agenda-section > .content-wide > .section-label {
@@ -1269,148 +564,88 @@ p {
 
 .agenda-layout {
   display: grid;
-
-  grid-template-columns:
-    minmax(0,1.65fr)
-    minmax(280px,.9fr);
-
-  gap: 18px;
-
+  grid-template-columns: minmax(0, 1.65fr) minmax(290px, .9fr);
+  gap: 24px;
   align-items: start;
 }
 
 .agenda-box {
   width: 100%;
-
   min-height: 620px;
-
   overflow: hidden;
-
-  background: #ffffff;
-
-  border:
-    1px solid rgba(255,106,0,.22);
-
-  border-top:
-    5px solid var(--orange);
-
-  border-radius: 18px;
-
-  box-shadow:
-    var(--shadow-deep);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 9px 26px rgba(0,0,0,.08);
 }
 
 .agenda-box iframe {
   width: 100%;
-
   height: 620px;
-
   border: 0;
-
   display: block;
 }
 
 .agenda-side {
   min-width: 0;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 14px;
 }
 
 .week-sponsor-wrap {
   width: 100%;
-
   height: 205px;
-
   overflow: hidden;
-
-  background: #ffffff;
-
-  border:
-    1px solid rgba(255,106,0,.22);
-
-  border-top:
-    5px solid var(--orange);
-
-  border-radius: 18px;
-
-  box-shadow:
-    var(--shadow-deep);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 9px 26px rgba(0,0,0,.08);
 }
 
 .week-sponsor-wrap iframe {
   width: 100%;
-
   height: 205px;
-
   border: 0;
-
   display: block;
 }
 
 .side-banners {
   display: flex;
-
   flex-direction: column;
-
-  gap: 10px;
+  gap: 12px;
 }
 
 .side-banners .promo-banner {
-  border-radius: 12px;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 10px 23px rgba(24,25,27,.13);
+  box-shadow: 0 8px 20px rgba(0,0,0,.10);
 }
 
-
-/* =========================================================
+/* =========================
    FOOTER
-   ========================================================= */
-
+   ========================= */
 .footer {
-  padding: 34px 0;
-
-  color: #ffffff;
-
   background: #141414;
-
-  box-shadow:
-    inset 0 5px 0 var(--orange);
+  color: #fff;
+  padding: 34px 0;
 }
 
 .footer .content-wide {
   display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  flex-wrap: wrap;
-
   gap: 26px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .footer-left {
   display: flex;
-
   align-items: center;
-
-  flex-wrap: wrap;
-
   gap: 22px;
+  flex-wrap: wrap;
 }
 
 .footer-home,
 .footer-email,
 .social-links a {
   text-decoration: none;
-
   font-weight: 700;
 }
 
@@ -1422,24 +657,16 @@ p {
 
 .social-links {
   display: flex;
-
-  flex-wrap: wrap;
-
   gap: 16px;
+  flex-wrap: wrap;
 }
 
-
-/* =========================================================
-   RESPONSIVE TABLET
-   ========================================================= */
-
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (max-width: 1100px) {
-
   .hero-inner {
-    grid-template-columns:
-      minmax(0,1fr)
-      minmax(360px,440px);
-
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 440px);
     gap: 34px;
   }
 
@@ -1448,27 +675,17 @@ p {
   }
 }
 
-
 @media (max-width: 900px) {
-
   .hero-inner {
     grid-template-columns: 1fr;
-
     text-align: center;
-
     min-height: auto;
-
-    padding:
-      32px
-      0
-      40px;
+    padding: 32px 0 40px;
   }
 
   .hero-copy {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
   }
 
@@ -1477,21 +694,12 @@ p {
   }
 
   .hero-announcement {
-    width:
-      min(
-        480px,
-        100%
-      );
-
+    width: min(480px, 100%);
     order: -1;
   }
 
   .quick-links {
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0,1fr)
-      );
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .image-sections-grid,
@@ -1499,18 +707,16 @@ p {
     grid-template-columns: 1fr;
   }
 
+  /* Mobiel: agenda altijd eerst, daarna sponsor en banners */
   .agenda-layout {
     display: flex;
-
     flex-direction: column;
-
     width: 100%;
   }
 
   .agenda-column,
   .agenda-side {
     width: 100%;
-
     min-width: 0;
   }
 
@@ -1520,9 +726,13 @@ p {
 
   .agenda-side {
     order: 2;
+    display: flex;
+    flex-direction: column;
   }
 
   .side-banners {
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
 
@@ -1531,39 +741,21 @@ p {
   }
 }
 
-
-/* =========================================================
-   MOBIEL
-   ========================================================= */
-
 @media (max-width: 600px) {
-
   .hero-inner,
   .content-wide,
   .content-narrow {
-    width:
-      calc(100% - 28px);
-
-    max-width:
-      calc(100% - 28px);
+    width: calc(100% - 28px);
+    max-width: calc(100% - 28px);
   }
 
   .hero-inner {
     gap: 22px;
-
-    padding:
-      26px
-      0
-      34px;
+    padding: 26px 0 34px;
   }
 
   .hero h1 {
-    font-size:
-      clamp(
-        2.8rem,
-        12vw,
-        4.5rem
-      );
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
   }
 
   .hero-socials {
@@ -1581,14 +773,11 @@ p {
   }
 
   .section {
-    padding:
-      40px
-      0;
+    padding: 40px 0;
   }
 
   .intro {
     padding-top: 40px;
-
     padding-bottom: 28px;
   }
 
@@ -1596,25 +785,578 @@ p {
     white-space: normal;
   }
 
-  .intro .content-narrow {
-    padding:
-      24px
-      18px
-      22px;
-  }
-
   .quick-links {
     grid-template-columns: 1fr;
-
     gap: 12px;
   }
 
   #nieuws .content-wide {
-    width:
-      calc(100% - 20px);
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
 
-    max-width:
-      calc(100% - 20px);
+  .news-frame-wrap {
+    height: 520px;
+  }
+
+  .news-frame-wrap iframe {
+    height: 520px;
+  }
+
+  .sponsor-frame-wrap,
+  .sponsor-frame {
+    height: 150px;
+  }
+
+  .embed-frame,
+  .omejan-wrap .embed-frame {
+    height: 420px;
+  }
+
+  .highlights-wrap,
+  .omejan-wrap {
+    min-height: 420px;
+  }
+
+  .media-section {
+    padding-top: 46px;
+    padding-bottom: 46px;
+  }
+
+  .forever-video-column {
+    gap: 10px;
+  }
+
+  .agenda-box,
+  .agenda-box iframe {
+    min-height: 500px;
+    height: 500px;
+  }
+
+  .week-sponsor-wrap,
+  .week-sponsor-wrap iframe {
+    height: 180px;
+  }
+
+  .side-banners {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer .content-wide {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .footer-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+/* Geen horizontale overloop bij 80–100% zoom */
+html,
+body,
+main,
+section,
+iframe,
+img,
+.content-wide,
+.content-narrow,
+.agenda-layout,
+.media-grid,
+.image-sections-grid {
+  max-width: 100%;
+}
+
+/* =========================================================
+   DEFINITIEVE VISUELE LAAG
+   GEEN ZALM / GEEN LICHT ORANJE ACHTERGRONDEN
+   ========================================================= */
+
+:root {
+  --orange: #ff6a00;
+  --orange-dark: #c94f00;
+  --orange-deep: #9f3e00;
+  --ink: #18191b;
+  --muted: #666666;
+  --line: #ececec;
+  --cream: #ffffff;
+  --shadow-soft: 0 12px 32px rgba(24,25,27,.08);
+  --shadow-deep: 0 18px 42px rgba(24,25,27,.14);
+}
+
+body {
+  background: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   WELKOM
+   --------------------------------------------------------- */
+
+.intro {
+  padding-top: 42px;
+  padding-bottom: 30px;
+  background: #ffffff;
+}
+
+.intro .content-narrow {
+  padding: 34px 40px 30px;
+  border-left: 5px solid var(--orange);
+  border-radius: 0 18px 18px 0;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+.intro h2 {
+  color: #161616;
+  margin-bottom: 18px;
+}
+
+.intro h3 {
+  position: relative;
+  margin-top: 24px;
+  padding-left: 17px;
+}
+
+.intro h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .2em;
+  width: 5px;
+  height: 1.05em;
+  border-radius: 5px;
+  background: var(--orange);
+}
+
+.quick-links {
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.quick-links a:nth-child(3n + 2) {
+  background: linear-gradient(180deg, #ff8129 0%, #f36a05 58%, #b94500 100%);
+}
+
+.quick-links a:nth-child(3n + 3) {
+  background: linear-gradient(180deg, #f86a00 0%, #d95600 58%, #a83b00 100%);
+}
+
+/* ---------------------------------------------------------
+   NIEUWS
+   Zelfde designtaal als de hoofdbanner
+   --------------------------------------------------------- */
+
+#nieuws {
+  position: relative;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 0;
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      112deg,
+      #ff7a00 0%,
+      #f16500 32%,
+      #d94f00 43%,
+      #242424 44%,
+      #171717 100%
+    );
+}
+
+#nieuws::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      128deg,
+      transparent 0 28%,
+      rgba(255,255,255,.09) 28.2% 29%,
+      transparent 29.2%
+    ),
+    linear-gradient(
+      128deg,
+      transparent 0 45%,
+      rgba(0,0,0,.16) 45.2% 46.2%,
+      transparent 46.4%
+    ),
+    radial-gradient(
+      circle at 18% 46%,
+      rgba(255,255,255,.12),
+      transparent 28%
+    );
+}
+
+#nieuws::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -170px;
+  top: -220px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 45px rgba(255,255,255,.02),
+    0 0 0 90px rgba(255,255,255,.012);
+  pointer-events: none;
+}
+
+#nieuws .content-wide {
+  position: relative;
+  z-index: 2;
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+#nieuws .section-label {
+  color: #ffffff;
+}
+
+.news-frame-wrap {
+  height: 540px;
+  border-radius: 18px 18px 0 0;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(0,0,0,.16);
+  border-top: 5px solid #ffffff;
+}
+
+.news-frame-wrap iframe {
+  height: 540px;
+}
+
+.news-more-wrap {
+  min-height: 42px;
+}
+
+.news-more {
+  color: #ffffff;
+  background: #b94700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  box-shadow: 0 5px 12px rgba(0,0,0,.14);
+}
+
+.news-more:hover {
+  background: #8f3600;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------
+   SPONSORS
+   Zelfde visuele familie als hoofdbanner + nieuws
+   GEEN zalmkleur meer
+   --------------------------------------------------------- */
+
+.sponsors-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 30px;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      112deg,
+      #ff7a00 0%,
+      #f16500 31%,
+      #d94f00 42%,
+      #292929 43%,
+      #171717 100%
+    );
+}
+
+.sponsors-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      128deg,
+      transparent 0 27%,
+      rgba(255,255,255,.09) 27.2% 28%,
+      transparent 28.2%
+    ),
+    linear-gradient(
+      128deg,
+      transparent 0 41%,
+      rgba(0,0,0,.17) 41.2% 42.2%,
+      transparent 42.4%
+    ),
+    radial-gradient(
+      circle at 18% 55%,
+      rgba(255,255,255,.12),
+      transparent 30%
+    );
+}
+
+.sponsors-section::after {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  right: -180px;
+  top: -190px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 48px rgba(255,255,255,.022),
+    0 0 0 96px rgba(255,255,255,.015);
+  pointer-events: none;
+}
+
+.sponsors-section .content-wide {
+  position: relative;
+  z-index: 2;
+}
+
+.sponsors-section .section-label {
+  padding-top: 25px;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+.sponsor-frame-wrap {
+  position: relative;
+  width: 100%;
+  height: 175px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 16px;
+  box-shadow: 0 18px 38px rgba(0,0,0,.28);
+}
+
+.sponsor-frame {
+  width: 100%;
+  height: 175px;
+  display: block;
+  border: 0;
+  background: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   HIGHLIGHTS + FOTO'S
+   --------------------------------------------------------- */
+
+.image-sections {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #ffffff;
+}
+
+.image-sections-grid {
+  gap: 18px;
+}
+
+.image-section-card {
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.image-section-card::before {
+  content: "";
+  display: block;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), #ff9b4d);
+}
+
+.embed-frame-wrap {
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.embed-frame {
+  height: 480px;
+  background: #ffffff;
+}
+
+.highlights-wrap,
+.omejan-wrap {
+  min-height: 480px;
+}
+
+/* ---------------------------------------------------------
+   FOREVER NOVITAS
+   --------------------------------------------------------- */
+
+.media-section {
+  padding-top: 46px;
+  padding-bottom: 22px;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      circle at 8% 18%,
+      rgba(255,106,0,.10),
+      transparent 25%
+    ),
+    #171717;
+}
+
+.media-grid {
+  gap: 28px;
+}
+
+.forever-text {
+  padding: 28px 34px 22px;
+  border-left: 5px solid var(--orange);
+  border-radius: 0 18px 18px 0;
+  background: linear-gradient(145deg, #242424, #171717);
+  box-shadow: 0 18px 34px rgba(0,0,0,.28);
+}
+
+.forever-video-column {
+  gap: 7px;
+}
+
+.forever-video-box {
+  border-radius: 18px;
+  box-shadow: 0 20px 42px rgba(0,0,0,.36);
+}
+
+.gold-dry-banner {
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.30);
+}
+
+/* ---------------------------------------------------------
+   AGENDA
+   --------------------------------------------------------- */
+
+.agenda-section {
+  padding-top: 30px;
+  padding-bottom: 28px;
+  background: #ffffff;
+}
+
+.agenda-layout {
+  gap: 18px;
+  grid-template-columns:
+    minmax(0,1.65fr)
+    minmax(280px,.9fr);
+}
+
+.agenda-box,
+.week-sponsor-wrap {
+  border: 1px solid rgba(255,106,0,.22);
+  box-shadow: var(--shadow-deep);
+}
+
+.agenda-box {
+  border-top: 5px solid var(--orange);
+  border-radius: 18px;
+}
+
+.week-sponsor-wrap {
+  border-top: 5px solid var(--orange);
+  border-radius: 18px;
+}
+
+.side-banners {
+  gap: 10px;
+}
+
+.side-banners .promo-banner {
+  border-radius: 12px;
+  box-shadow: 0 10px 23px rgba(24,25,27,.13);
+}
+
+.footer {
+  box-shadow: inset 0 5px 0 var(--orange);
+}
+
+/* ---------------------------------------------------------
+   DESKTOP
+   --------------------------------------------------------- */
+
+@media (min-width: 901px) {
+  .content-wide,
+  #nieuws .content-wide {
+    width: min(1180px, calc(100% - 40px));
+  }
+}
+
+@media (min-width: 881px) {
+  .intro h2 {
+    white-space: nowrap;
+    font-size: clamp(2rem, 3.65vw, 3.35rem);
+  }
+}
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .hero-inner {
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(380px,44%);
+    gap: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .intro .content-narrow {
+    padding: 28px 24px;
+    border-left-width: 4px;
+    border-radius: 0 15px 15px 0;
+  }
+
+  .news-frame-wrap,
+  .news-frame-wrap iframe {
+    height: 540px;
+  }
+
+  .agenda-box,
+  .agenda-box iframe {
+    height: 520px;
+    min-height: 520px;
+  }
+}
+
+/* ---------------------------------------------------------
+   MOBIEL
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .section {
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+
+  .intro {
+    padding-top: 30px;
+    padding-bottom: 22px;
+  }
+
+  .intro .content-narrow {
+    padding: 24px 18px 22px;
+  }
+
+  #nieuws {
+    padding-top: 12px;
+  }
+
+  #nieuws .content-wide {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
   }
 
   .news-frame-wrap,
@@ -1637,172 +1379,14 @@ p {
     min-height: 420px;
   }
 
-  .media-section {
-    padding-top: 46px;
-
-    padding-bottom: 46px;
+  .forever-text {
+    padding: 24px 20px 20px;
   }
 
-  .forever-video-column {
-    gap: 10px;
+  .agenda-section {
+    padding-top: 24px;
+    padding-bottom: 22px;
   }
-
-  .agenda-box,
-  .agenda-box iframe {
-    min-height: 500px;
-
-    height: 500px;
-  }
-
-  .week-sponsor-wrap,
-  .week-sponsor-wrap iframe {
-    height: 180px;
-  }
-
-  .footer .content-wide {
-    align-items: flex-start;
-
-    flex-direction: column;
-
-    gap: 14px;
-  }
-
-  .footer-left {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 6px;
-  }
-}
-
-
-/* =========================================================
-   EVENEMENTENBANNER RUIMTE OP MOBIEL
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .event-banner-section {
-    padding:
-      6px
-      0
-      8px !important;
-  }
-
-  .event-banner-section iframe {
-    height: 190px;
-  }
-
-  .event-banner-section + main .section.intro {
-    padding-top:
-      18px !important;
-  }
-}
-
-
-/* =========================================================
-   OVERLOOP BEVEILIGING
-   ========================================================= */
-
-html,
-body,
-main,
-section,
-iframe,
-img,
-.content-wide,
-.content-narrow,
-.agenda-layout,
-.media-grid,
-.image-sections-grid {
-  max-width: 100%;
-}
-
-
-/* =========================================================
-   DESKTOP FINETUNING
-   ========================================================= */
-
-@media (min-width: 901px) {
-
-  .content-wide,
-  #nieuws .content-wide {
-    width:
-      min(
-        1180px,
-        calc(100% - 40px)
-      );
-  }
-}
-
-
-@media (min-width: 881px) {
-
-  .intro h2 {
-    white-space: nowrap;
-
-    font-size:
-      clamp(
-        2rem,
-        3.65vw,
-        3.35rem
-      );
-  }
-}
-
-
-/* =========================================================
-   TABLET FINETUNING
-   ========================================================= */
-
-@media (max-width: 1200px) and (min-width: 901px) {
-
-  .hero-inner {
-    grid-template-columns:
-      minmax(0,1fr)
-      minmax(380px,44%);
-
-    gap: 28px;
-  }
-}
-
-
-@media (max-width: 900px) {
-
-  .intro .content-narrow {
-    padding:
-      28px
-      24px;
-
-    border-left-width: 4px;
-
-    border-radius:
-      0
-      15px
-      15px
-      0;
-  }
-
-  .news-frame-wrap,
-  .news-frame-wrap iframe {
-    height: 540px;
-  }
-
-  .agenda-box,
-  .agenda-box iframe {
-    height: 520px;
-
-    min-height: 520px;
-  }
-}
-
-
-/* =========================================================
-   EXTRA SPONSOR RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 600px) {
 
   .sponsors-section {
     padding-bottom: 22px;
