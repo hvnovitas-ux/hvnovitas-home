@@ -5,10 +5,32 @@
 :root {
   --orange: #ff6a00;
   --orange-dark: #c94f00;
+  --orange-deep: #a83b00;
+
+  --orange-soft: #ff7a00;
+  --cream: #fffaf6;
+
   --ink: #1f2022;
-  --muted: #666;
+  --muted: #666666;
   --line: #ececec;
+
+  --dark: #111111;
+  --dark-2: #191919;
+  --dark-3: #242424;
+
+  --white: #ffffff;
+
+  --shadow-soft:
+    0 12px 32px rgba(24,25,27,.08);
+
+  --shadow-deep:
+    0 18px 42px rgba(24,25,27,.14);
 }
+
+
+/* =========================================================
+   BASIS
+   ========================================================= */
 
 html {
   scroll-behavior: smooth;
@@ -17,294 +39,33 @@ html {
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color: var(--ink);
-  background: #fff;
+  background: var(--cream);
+
   line-height: 1.6;
+
   overflow-x: hidden;
 }
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 a {
   color: inherit;
 }
 
-/* =========================
-   HERO
-   ========================= */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 450px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-
-  background:
-    linear-gradient(
-      112deg,
-      #ff7a00 0%,
-      #f16500 38%,
-      #d94f00 47.5%,
-      #242424 48.2%,
-      #171717 100%
-    );
-
-  box-shadow:
-    0 14px 34px rgba(0,0,0,.18);
+iframe {
+  max-width: 100%;
 }
-
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-
-.hero::before {
-  inset: 0;
-
-  background:
-    linear-gradient(
-      128deg,
-      transparent 0 30%,
-      rgba(255,255,255,.10) 30.2% 31%,
-      transparent 31.2%
-    ),
-    linear-gradient(
-      128deg,
-      transparent 0 46%,
-      rgba(0,0,0,.16) 46.2% 47.2%,
-      transparent 47.4%
-    ),
-    radial-gradient(
-      circle at 22% 38%,
-      rgba(255,255,255,.14),
-      transparent 34%
-    );
-}
-
-.hero::after {
-  width: 520px;
-  height: 520px;
-
-  right: -190px;
-  top: -150px;
-
-  border:
-    1px solid rgba(255,255,255,.10);
-
-  border-radius: 50%;
-
-  box-shadow:
-    0 0 0 48px rgba(255,255,255,.025),
-    0 0 0 96px rgba(255,255,255,.018);
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-
-  width:
-    min(
-      1180px,
-      calc(100% - 40px)
-    );
-
-  margin: 0 auto;
-  padding: 34px 0;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(420px, 500px);
-
-  gap: 52px;
-
-  align-items: center;
-}
-
-.hero-copy {
-  min-width: 0;
-}
-
-.hero .eyebrow {
-  color: #fff;
-  opacity: .98;
-}
-
-.eyebrow,
-.section-label {
-  display: block;
-
-  font-size: .82rem;
-  font-weight: 800;
-
-  letter-spacing: .13em;
-  text-transform: uppercase;
-
-  color: var(--orange);
-}
-
-.hero .eyebrow {
-  color: rgba(255,255,255,.94);
-}
-
-.hero h1 {
-  margin: 8px 0 0;
-
-  font-size:
-    clamp(
-      3.2rem,
-      6vw,
-      5.8rem
-    );
-
-  line-height: .92;
-  letter-spacing: -.045em;
-
-  color: #fff;
-
-  white-space: nowrap;
-
-  text-shadow:
-    0 7px 22px rgba(0,0,0,.22);
-}
-
-.slogan {
-  margin-top: 18px;
-
-  font-size:
-    clamp(
-      1.5rem,
-      3vw,
-      2.5rem
-    );
-
-  line-height: 1.05;
-
-  font-weight: 800;
-
-  color: #fff;
-}
-
-.hero p {
-  max-width: 650px;
-
-  font-size: 1.08rem;
-
-  margin-top: 18px;
-
-  color: rgba(255,255,255,.96);
-}
-
-.hero-socials {
-  display: flex;
-
-  gap: 14px;
-
-  margin-top: 26px;
-
-  align-items: center;
-}
-
-.hero-socials a {
-  width: 56px;
-  height: 56px;
-
-  border-radius: 50%;
-
-  display: grid;
-  place-items: center;
-
-  color: #fff;
-
-  text-decoration: none;
-
-  box-shadow:
-    0 9px 20px rgba(0,0,0,.28);
-
-  transition:
-    transform .18s ease,
-    box-shadow .18s ease;
-}
-
-.hero-socials a:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 13px 24px rgba(0,0,0,.34);
-}
-
-.hero-socials a img {
-  width: 28px;
-  height: 28px;
-
-  max-width: 28px;
-  max-height: 28px;
-
-  object-fit: contain;
-}
-
-.social-youtube {
-  background: #ff0000;
-}
-
-.social-facebook {
-  background: #1877f2;
-}
-
-.social-tiktok {
-  background: #fff;
-}
-
-.social-instagram {
-  background: #e90074;
-}
-
-.hero-announcement {
-  width: 100%;
-  min-width: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-}
-
-.hero-announcement iframe {
-  display: block;
-
-  width: 100%;
-  height: auto;
-
-  aspect-ratio: 1.54 / 1;
-
-  border: 0;
-
-  border-radius: 16px;
-
-  background: transparent;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 18px 36px rgba(0,0,0,.30);
-}
-
-
-/* =========================
-   SECTIONS / WIDTH
-   ========================= */
 
 main,
 .section,
@@ -313,6 +74,11 @@ main,
   min-width: 0;
   max-width: 100%;
 }
+
+
+/* =========================================================
+   ALGEMENE SECTIES
+   ========================================================= */
 
 .section {
   padding:
@@ -340,8 +106,383 @@ main,
   margin: 0 auto;
 }
 
+.section-label {
+  display: block;
+
+  margin:
+    0
+    0
+    8px;
+
+  font-size: .82rem;
+
+  font-weight: 800;
+
+  letter-spacing: .13em;
+
+  text-transform: uppercase;
+
+  color: var(--orange);
+}
+
+h2 {
+  margin:
+    8px
+    0
+    20px;
+
+  font-size:
+    clamp(
+      2.15rem,
+      4.1vw,
+      3.55rem
+    );
+
+  line-height: 1.05;
+
+  letter-spacing: -.035em;
+}
+
+h3 {
+  margin:
+    30px
+    0
+    8px;
+
+  font-size: 1.45rem;
+
+  line-height: 1.2;
+}
+
+p {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   HOOFDBANNER
+   ========================================================= */
+
+.hero {
+  position: relative;
+
+  min-height: 450px;
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      112deg,
+      #ff7a00 0%,
+      #f16500 38%,
+      #d94f00 47.5%,
+      #242424 48.2%,
+      #171717 100%
+    );
+
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.18);
+}
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      128deg,
+      transparent 0 30%,
+      rgba(255,255,255,.10) 30.2% 31%,
+      transparent 31.2%
+    ),
+
+    linear-gradient(
+      128deg,
+      transparent 0 46%,
+      rgba(0,0,0,.16) 46.2% 47.2%,
+      transparent 47.4%
+    ),
+
+    radial-gradient(
+      circle at 22% 38%,
+      rgba(255,255,255,.14),
+      transparent 34%
+    );
+}
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  right: -190px;
+  top: -150px;
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 48px rgba(255,255,255,.025),
+    0 0 0 96px rgba(255,255,255,.018);
+
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+
+  z-index: 2;
+
+  width:
+    min(
+      1180px,
+      calc(100% - 40px)
+    );
+
+  margin: 0 auto;
+
+  padding:
+    34px
+    0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(420px,500px);
+
+  gap: 52px;
+
+  align-items: center;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.hero .eyebrow {
+  color: #ffffff;
+  opacity: .98;
+}
+
+.hero h1 {
+  margin:
+    8px
+    0
+    0;
+
+  font-size:
+    clamp(
+      3.2rem,
+      6vw,
+      5.8rem
+    );
+
+  line-height: .92;
+
+  letter-spacing: -.045em;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 7px 22px rgba(0,0,0,.22);
+}
+
+.hero .slogan {
+  margin-top: 18px;
+
+  font-size:
+    clamp(
+      1.5rem,
+      3vw,
+      2.5rem
+    );
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+.hero p {
+  max-width: 650px;
+
+  margin-top: 18px;
+
+  font-size: 1.08rem;
+
+  color:
+    rgba(255,255,255,.96);
+}
+
+
+/* =========================================================
+   SOCIALS
+   ========================================================= */
+
+.hero-socials {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 26px;
+}
+
+.hero-socials a {
+  width: 56px;
+  height: 56px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 9px 20px rgba(0,0,0,.28);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.hero-socials a:hover {
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 13px 24px rgba(0,0,0,.34);
+}
+
+.hero-socials a img {
+  width: 28px;
+  height: 28px;
+
+  max-width: 28px;
+  max-height: 28px;
+
+  object-fit: contain;
+}
+
+.social-youtube {
+  background: #ff0000;
+}
+
+.social-facebook {
+  background: #1877f2;
+}
+
+.social-tiktok {
+  background: #ffffff;
+}
+
+.social-instagram {
+  background: #e90074;
+}
+
+
+/* =========================================================
+   AANKONDIGING
+   ========================================================= */
+
+.hero-announcement {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.hero-announcement iframe {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  aspect-ratio: 1.54 / 1;
+
+  border: 0;
+
+  border-radius: 16px;
+
+  background: transparent;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 18px 36px rgba(0,0,0,.30);
+}
+
+
+/* =========================================================
+   EVENEMENTENBANNER
+   ========================================================= */
+
+.event-banner-section {
+  margin: 0;
+
+  padding:
+    10px
+    0
+    12px;
+
+  background: #fffaf6;
+
+  line-height: 0;
+}
+
+.event-banner-section iframe {
+  display: block;
+
+  width: 100%;
+
+  height: 190px;
+
+  margin: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   WELKOM
+   ========================================================= */
+
 .intro {
-  background: #fff;
+  background: #ffffff;
 
   padding-top:
     clamp(
@@ -353,49 +494,69 @@ main,
   padding-bottom: 38px;
 }
 
-h2 {
-  font-size:
-    clamp(
-      2.15rem,
-      4.1vw,
-      3.55rem
-    );
+.intro .content-narrow {
+  padding:
+    34px
+    40px
+    30px;
 
-  line-height: 1.05;
+  border-left:
+    5px solid var(--orange);
 
-  letter-spacing: -.035em;
-
-  margin:
-    7px
+  border-radius:
     0
-    20px;
+    18px
+    18px
+    0;
+
+  background: #ffffff;
+
+  box-shadow:
+    var(--shadow-soft);
 }
 
 .intro h2 {
-  white-space: nowrap;
+  color: #161616;
+
+  margin-bottom: 18px;
 }
 
-h3 {
-  font-size: 1.45rem;
+.intro h3 {
+  position: relative;
 
-  line-height: 1.2;
+  margin-top: 24px;
 
-  margin:
-    30px
-    0
-    8px;
+  padding-left: 17px;
+}
+
+.intro h3::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: .2em;
+
+  width: 5px;
+
+  height: 1.05em;
+
+  border-radius: 5px;
+
+  background: var(--orange);
 }
 
 .intro p {
-  font-size: 1.06rem;
-
   max-width: 1080px;
+
+  font-size: 1.06rem;
 }
 
 
-/* =========================
-   QUICK LINKS
-   ========================= */
+/* =========================================================
+   KNOPPEN
+   ========================================================= */
 
 .quick-links {
   display: grid;
@@ -431,10 +592,7 @@ h3 {
 
   font-weight: 800;
 
-  color: #fff;
-
-  border:
-    1px solid rgba(255,255,255,.1);
+  color: #ffffff;
 
   border-radius: 11px;
 
@@ -485,8 +643,29 @@ h3 {
   pointer-events: none;
 }
 
+.quick-links a:nth-child(3n + 2) {
+  background:
+    linear-gradient(
+      180deg,
+      #ff8129 0%,
+      #f36a05 58%,
+      #b94500 100%
+    );
+}
+
+.quick-links a:nth-child(3n + 3) {
+  background:
+    linear-gradient(
+      180deg,
+      #f86a00 0%,
+      #d95600 58%,
+      #a83b00 100%
+    );
+}
+
 .quick-links a:hover {
-  transform: translateY(-3px);
+  transform:
+    translateY(-3px);
 
   box-shadow:
     0 8px 0 #9f3e00,
@@ -496,7 +675,8 @@ h3 {
 }
 
 .quick-links a:active {
-  transform: translateY(2px);
+  transform:
+    translateY(2px);
 
   box-shadow:
     0 2px 0 #9f3e00,
@@ -504,15 +684,24 @@ h3 {
 }
 
 
-/* =========================
+/* =========================================================
    NIEUWS
-   ========================= */
+   ========================================================= */
 
 #nieuws {
   width: 100%;
 
-  padding-top: 8px;
-  padding-bottom: 12px;
+  padding-top: 12px;
+
+  padding-bottom: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ff6a00 0%,
+      #f15b00 42%,
+      #cc4d00 100%
+    );
 }
 
 #nieuws .content-wide {
@@ -527,6 +716,40 @@ h3 {
   margin: 0 auto;
 }
 
+.news-frame-wrap {
+  width: 100%;
+
+  height: 540px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border-top:
+    5px solid #ffffff;
+
+  border-radius:
+    18px
+    18px
+    0
+    0;
+
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.16);
+}
+
+.news-frame-wrap iframe {
+  width: 100%;
+
+  height: 540px;
+
+  display: block;
+
+  border: 0;
+
+  overflow: hidden;
+}
+
 .news-more-wrap {
   position: relative;
 
@@ -538,7 +761,7 @@ h3 {
 
   margin-top: 10px;
 
-  min-height: 32px;
+  min-height: 42px;
 }
 
 .news-more {
@@ -546,98 +769,179 @@ h3 {
 
   align-items: center;
 
-  color: #b55407;
+  padding:
+    8px
+    14px;
 
-  font-weight: 800;
+  color: #ffffff;
+
+  background:
+    #b94700;
+
+  border-radius: 8px;
+
   font-size: 15px;
 
-  text-decoration: none;
-
-  padding: 4px 0;
+  font-weight: 800;
 
   line-height: 1.2;
 
-  visibility: visible;
-  opacity: 1;
+  text-decoration: none;
+
+  box-shadow:
+    0 5px 12px rgba(0,0,0,.14);
 }
 
 .news-more:hover {
-  text-decoration: underline;
-}
+  background:
+    #8f3600;
 
-.news-frame-wrap {
-  width: 100%;
-  max-width: 100%;
-
-  height: 500px;
-
-  overflow: hidden;
-
-  border-radius: 14px;
-
-  background: #fff;
-
-  box-shadow:
-    0 7px 25px rgba(0,0,0,.08);
-}
-
-.news-frame-wrap iframe {
-  width: 100%;
-  height: 500px;
-
-  max-width: 100%;
-
-  display: block;
-
-  border: 0;
-
-  overflow: hidden;
+  text-decoration: none;
 }
 
 
-/* =========================
+/* =========================================================
    SPONSORS
-   ========================= */
+   ZELFDE DESIGNTAAL ALS HOOFDBANNER
+   ========================================================= */
 
 .sponsors-section {
+  position: relative;
+
   width: 100%;
-
-  padding-top: 8px;
-  padding-bottom: 34px;
-}
-
-.sponsor-frame-wrap {
-  width: 100%;
-
-  height: 165px;
 
   overflow: hidden;
 
-  border-radius: 14px;
+  padding-top: 0;
 
-  background: #fff;
+  padding-bottom: 30px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      112deg,
+      #ff7a00 0%,
+      #f16500 31%,
+      #d94f00 42%,
+      #292929 43%,
+      #171717 100%
+    );
+}
+
+.sponsors-section::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      128deg,
+      transparent 0 27%,
+      rgba(255,255,255,.09) 27.2% 28%,
+      transparent 28.2%
+    ),
+
+    linear-gradient(
+      128deg,
+      transparent 0 41%,
+      rgba(0,0,0,.17) 41.2% 42.2%,
+      transparent 42.4%
+    ),
+
+    radial-gradient(
+      circle at 18% 55%,
+      rgba(255,255,255,.12),
+      transparent 30%
+    );
+}
+
+.sponsors-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 460px;
+  height: 460px;
+
+  right: -180px;
+  top: -190px;
+
+  border:
+    1px solid rgba(255,255,255,.09);
+
+  border-radius: 50%;
 
   box-shadow:
-    0 7px 25px rgba(0,0,0,.07);
+    0 0 0 48px rgba(255,255,255,.022),
+    0 0 0 96px rgba(255,255,255,.015);
+
+  pointer-events: none;
+}
+
+.sponsors-section .content-wide {
+  position: relative;
+
+  z-index: 2;
+}
+
+.sponsors-section .section-label {
+  padding-top: 25px;
+
+  margin-bottom: 14px;
+
+  color: #ffffff;
+}
+
+
+/* Het sponsorvlak zelf blijft wit,
+   zodat logo's goed zichtbaar blijven */
+
+.sponsor-frame-wrap {
+  position: relative;
+
+  width: 100%;
+
+  height: 175px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border:
+    1px solid rgba(255,255,255,.16);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 18px 38px rgba(0,0,0,.28);
 }
 
 .sponsor-frame {
+  display: block;
+
   width: 100%;
-  height: 165px;
+
+  height: 175px;
 
   border: 0;
-
-  display: block;
 }
 
 
-/* =========================
+/* =========================================================
    HIGHLIGHTS + FOTO'S
-   ========================= */
+   ========================================================= */
 
 .image-sections {
-  padding-top: 18px;
-  padding-bottom: 24px;
+  padding-top: 20px;
+
+  padding-bottom: 20px;
+
+  background: #ffffff;
 }
 
 .image-sections-grid {
@@ -647,13 +951,37 @@ h3 {
     minmax(0,1fr)
     minmax(0,1fr);
 
-  gap: 24px;
+  gap: 18px;
 
   align-items: start;
 }
 
 .image-section-card {
   min-width: 0;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  box-shadow:
+    var(--shadow-soft);
+}
+
+.image-section-card::before {
+  content: "";
+
+  display: block;
+
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--orange),
+      #ff9b4d
+    );
 }
 
 .embed-frame-wrap {
@@ -661,21 +989,19 @@ h3 {
 
   overflow: hidden;
 
-  border-radius: 14px;
-
-  background: #fff;
-
-  box-shadow:
-    0 7px 24px rgba(0,0,0,.06);
+  background: #ffffff;
 }
 
 .embed-frame {
   width: 100%;
+
   height: 480px;
+
+  display: block;
 
   border: 0;
 
-  display: block;
+  background: #ffffff;
 }
 
 .highlights-wrap,
@@ -688,17 +1014,24 @@ h3 {
 }
 
 
-/* =========================
+/* =========================================================
    FOREVER NOVITAS
-   ========================= */
+   ========================================================= */
 
 .media-section {
-  background: #1b1b1b;
+  background:
+    radial-gradient(
+      circle at 8% 18%,
+      rgba(255,106,0,.10),
+      transparent 25%
+    ),
+    #171717;
 
-  color: #fff;
+  color: #ffffff;
 
-  padding-top: 62px;
-  padding-bottom: 62px;
+  padding-top: 46px;
+
+  padding-bottom: 22px;
 }
 
 .media-grid {
@@ -708,7 +1041,7 @@ h3 {
     minmax(0,1fr)
     minmax(0,1fr);
 
-  gap: 32px;
+  gap: 28px;
 
   align-items: center;
 }
@@ -716,18 +1049,44 @@ h3 {
 .forever-text {
   min-width: 0;
 
-  padding-right: 8px;
+  padding:
+    28px
+    34px
+    22px;
+
+  border-left:
+    5px solid var(--orange);
+
+  border-radius:
+    0
+    18px
+    18px
+    0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #242424,
+      #171717
+    );
+
+  box-shadow:
+    0 18px 34px rgba(0,0,0,.28);
+}
+
+.forever-text .section-label {
+  color: var(--orange);
 }
 
 .forever-text h2 {
+  color: #ffffff;
+
   font-size:
     clamp(
       2.35rem,
       4.2vw,
       4rem
     );
-
-  color: #fff;
 
   margin-bottom: 22px;
 }
@@ -743,10 +1102,6 @@ h3 {
     17px;
 }
 
-.forever-text .section-label {
-  color: var(--orange);
-}
-
 .forever-video-column {
   min-width: 0;
 
@@ -754,7 +1109,7 @@ h3 {
 
   flex-direction: column;
 
-  gap: 12px;
+  gap: 7px;
 }
 
 .forever-video-box {
@@ -762,47 +1117,46 @@ h3 {
 
   aspect-ratio: 16 / 9;
 
-  border-radius: 12px;
+  border-radius: 18px;
 
   overflow: hidden;
 
-  background: #000;
+  background: #000000;
 
   box-shadow:
-    0 16px 34px rgba(0,0,0,.28);
+    0 20px 42px rgba(0,0,0,.36);
 }
 
 .forever-video-box iframe {
   width: 100%;
+
   height: 100%;
 
   border: 0;
 }
 
 .gold-dry-banner {
-  border-radius: 10px;
+  border-radius: 12px;
 
   box-shadow:
-    0 9px 21px rgba(0,0,0,.22);
+    0 10px 24px rgba(0,0,0,.30);
 }
 
 .gold-dry-banner img {
   width: 100%;
-  height: auto;
 }
 
 
-/* =========================
+/* =========================================================
    AGENDA
-   ========================= */
+   ========================================================= */
 
 .agenda-section {
-  padding-top: 48px;
-  padding-bottom: 48px;
-}
+  padding-top: 30px;
 
-.agenda-section > .content-wide > .section-label {
-  margin-bottom: 14px;
+  padding-bottom: 28px;
+
+  background: #ffffff;
 }
 
 .agenda-layout {
@@ -810,9 +1164,9 @@ h3 {
 
   grid-template-columns:
     minmax(0,1.65fr)
-    minmax(290px,.9fr);
+    minmax(280px,.9fr);
 
-  gap: 24px;
+  gap: 18px;
 
   align-items: start;
 }
@@ -824,16 +1178,23 @@ h3 {
 
   overflow: hidden;
 
-  border-radius: 14px;
+  background: #ffffff;
 
-  background: #fff;
+  border:
+    1px solid rgba(255,106,0,.22);
+
+  border-top:
+    5px solid var(--orange);
+
+  border-radius: 18px;
 
   box-shadow:
-    0 9px 26px rgba(0,0,0,.08);
+    var(--shadow-deep);
 }
 
 .agenda-box iframe {
   width: 100%;
+
   height: 620px;
 
   border: 0;
@@ -858,16 +1219,23 @@ h3 {
 
   overflow: hidden;
 
-  border-radius: 14px;
+  background: #ffffff;
 
-  background: #fff;
+  border:
+    1px solid rgba(255,106,0,.22);
+
+  border-top:
+    5px solid var(--orange);
+
+  border-radius: 18px;
 
   box-shadow:
-    0 9px 26px rgba(0,0,0,.08);
+    var(--shadow-deep);
 }
 
 .week-sponsor-wrap iframe {
   width: 100%;
+
   height: 205px;
 
   border: 0;
@@ -880,37 +1248,44 @@ h3 {
 
   flex-direction: column;
 
-  gap: 12px;
+  gap: 10px;
 }
 
 .side-banners .promo-banner {
+  border-radius: 12px;
+
+  overflow: hidden;
+
   box-shadow:
-    0 8px 20px rgba(0,0,0,.10);
+    0 10px 23px rgba(24,25,27,.13);
 }
 
 
-/* =========================
+/* =========================================================
    FOOTER
-   ========================= */
+   ========================================================= */
 
 .footer {
+  padding: 34px 0;
+
+  color: #ffffff;
+
   background: #141414;
 
-  color: #fff;
-
-  padding: 34px 0;
+  box-shadow:
+    inset 0 5px 0 var(--orange);
 }
 
 .footer .content-wide {
   display: flex;
-
-  gap: 26px;
 
   align-items: center;
 
   justify-content: space-between;
 
   flex-wrap: wrap;
+
+  gap: 26px;
 }
 
 .footer-left {
@@ -918,9 +1293,9 @@ h3 {
 
   align-items: center;
 
-  gap: 22px;
-
   flex-wrap: wrap;
+
+  gap: 22px;
 }
 
 .footer-home,
@@ -940,15 +1315,15 @@ h3 {
 .social-links {
   display: flex;
 
-  gap: 16px;
-
   flex-wrap: wrap;
+
+  gap: 16px;
 }
 
 
-/* =========================
+/* =========================================================
    RESPONSIVE
-   ========================= */
+   ========================================================= */
 
 @media (max-width: 1100px) {
 
@@ -964,6 +1339,7 @@ h3 {
     white-space: normal;
   }
 }
+
 
 @media (max-width: 900px) {
 
@@ -993,7 +1369,11 @@ h3 {
   }
 
   .hero-announcement {
-    width: min(480px, 100%);
+    width:
+      min(
+        480px,
+        100%
+      );
 
     order: -1;
   }
@@ -1010,9 +1390,6 @@ h3 {
   .media-grid {
     grid-template-columns: 1fr;
   }
-
-  /* Mobiel: agenda altijd eerst,
-     daarna sponsor en banners */
 
   .agenda-layout {
     display: flex;
@@ -1035,17 +1412,9 @@ h3 {
 
   .agenda-side {
     order: 2;
-
-    display: flex;
-
-    flex-direction: column;
   }
 
   .side-banners {
-    display: flex;
-
-    flex-direction: column;
-
     width: 100%;
   }
 
@@ -1053,6 +1422,7 @@ h3 {
     width: 100%;
   }
 }
+
 
 @media (max-width: 600px) {
 
@@ -1090,25 +1460,33 @@ h3 {
 
   .hero-socials a {
     width: 50px;
+
     height: 50px;
   }
 
   .hero-socials a img {
     width: 25px;
+
     height: 25px;
   }
 
   .section {
-    padding: 40px 0;
+    padding:
+      40px
+      0;
   }
 
   .intro {
     padding-top: 40px;
+
     padding-bottom: 28px;
   }
 
-  .intro h2 {
-    white-space: normal;
+  .intro .content-narrow {
+    padding:
+      24px
+      18px
+      22px;
   }
 
   .quick-links {
@@ -1150,6 +1528,7 @@ h3 {
 
   .media-section {
     padding-top: 46px;
+
     padding-bottom: 46px;
   }
 
@@ -1160,18 +1539,13 @@ h3 {
   .agenda-box,
   .agenda-box iframe {
     min-height: 500px;
+
     height: 500px;
   }
 
   .week-sponsor-wrap,
   .week-sponsor-wrap iframe {
     height: 180px;
-  }
-
-  .side-banners {
-    display: flex;
-
-    flex-direction: column;
   }
 
   .footer .content-wide {
@@ -1192,9 +1566,33 @@ h3 {
 }
 
 
-/* =========================
-   GEEN HORIZONTALE OVERLOOP
-   ========================= */
+/* =========================================================
+   EVENEMENTENBANNER MOBIEL
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .event-banner-section {
+    padding:
+      6px
+      0
+      8px !important;
+  }
+
+  .event-banner-section iframe {
+    height: 190px;
+  }
+
+  .event-banner-section + main .section.intro {
+    padding-top:
+      18px !important;
+  }
+}
+
+
+/* =========================================================
+   OVERLOOP BEVEILIGING
+   ========================================================= */
 
 html,
 body,
@@ -1211,403 +1609,9 @@ img,
 }
 
 
-/* =========================
-   VISUELE FINETUNING
-   ========================= */
-
-:root {
-  --orange: #ff6a00;
-  --orange-deep: #c94b00;
-  --orange-soft: #fff1e6;
-  --cream: #fffaf6;
-  --ink: #18191b;
-
-  --shadow-soft:
-    0 12px 32px rgba(24,25,27,.08);
-
-  --shadow-deep:
-    0 18px 42px rgba(24,25,27,.14);
-}
-
-body {
-  background: var(--cream);
-}
-
-.section {
-  padding-top: 34px;
-  padding-bottom: 34px;
-}
-
-.intro {
-  padding-top: 42px;
-  padding-bottom: 30px;
-  background: #fff;
-}
-
-.intro .content-narrow {
-  padding:
-    34px
-    40px
-    30px;
-
-  border-left:
-    5px solid var(--orange);
-
-  border-radius:
-    0
-    18px
-    18px
-    0;
-
-  box-shadow:
-    var(--shadow-soft);
-
-  background: #fff;
-}
-
-.intro h2 {
-  color: #161616;
-
-  margin-bottom: 18px;
-}
-
-.intro h3 {
-  position: relative;
-
-  margin-top: 24px;
-
-  padding-left: 17px;
-}
-
-.intro h3::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  top: .2em;
-
-  width: 5px;
-  height: 1.05em;
-
-  border-radius: 5px;
-
-  background: var(--orange);
-}
-
-.quick-links {
-  gap: 12px;
-
-  margin-top: 28px;
-}
-
-.quick-links a:nth-child(3n + 2) {
-  background:
-    linear-gradient(
-      180deg,
-      #ff8129 0%,
-      #f36a05 58%,
-      #b94500 100%
-    );
-}
-
-.quick-links a:nth-child(3n + 3) {
-  background:
-    linear-gradient(
-      180deg,
-      #f86a00 0%,
-      #d95600 58%,
-      #a83b00 100%
-    );
-}
-
-
-/* =========================
-   NIEUWS FINETUNING
-   ========================= */
-
-#nieuws {
-  padding-top: 18px;
-  padding-bottom: 0;
-
-  background:
-    var(--orange);
-}
-
-.news-frame-wrap {
-  height: 540px;
-
-  border-radius:
-    18px
-    18px
-    0
-    0;
-
-  background: #fff;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.12);
-
-  border-top:
-    5px solid #fff;
-}
-
-.news-frame-wrap iframe {
-  height: 540px;
-}
-
-#nieuws .section-label {
-  color: #fff;
-}
-
-#nieuws .news-more {
-  color: #fff;
-
-  background:
-    var(--orange-dark);
-
-  padding:
-    8px
-    14px;
-
-  border-radius: 8px;
-}
-
-#nieuws .news-more:hover {
-  background: #a83b00;
-
-  text-decoration: none;
-}
-
-
-/* =========================
-   SPONSORS FINETUNING
-   ========================= */
-
-.sponsors-section {
-  padding-top: 0;
-  padding-bottom: 24px;
-
-  background:
-    var(--orange-soft);
-}
-
-.sponsors-section .section-label {
-  padding-top: 18px;
-
-  margin-bottom: 10px;
-}
-
-.sponsor-frame-wrap {
-  height: 175px;
-
-  border-radius:
-    0
-    0
-    18px
-    18px;
-
-  box-shadow:
-    0 14px 30px rgba(201,79,0,.10);
-
-  border-bottom:
-    4px solid var(--orange);
-}
-
-.sponsor-frame {
-  height: 175px;
-}
-
-
-/* =========================
-   IMAGE SECTIES FINETUNING
-   ========================= */
-
-.image-sections {
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  background: #fff;
-}
-
-.image-sections-grid {
-  gap: 18px;
-}
-
-.image-section-card {
-  border-radius: 18px;
-
-  background: #fff;
-
-  box-shadow:
-    var(--shadow-soft);
-
-  overflow: hidden;
-}
-
-.image-section-card::before {
-  content: "";
-
-  display: block;
-
-  height: 5px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--orange),
-      #ff9b4d
-    );
-}
-
-.embed-frame-wrap {
-  border-radius: 0;
-
-  background: #fff;
-
-  box-shadow: none;
-}
-
-.embed-frame {
-  height: 480px;
-
-  background: #fff;
-}
-
-.highlights-wrap,
-.omejan-wrap {
-  min-height: 480px;
-}
-
-
-/* =========================
-   FOREVER NOVITAS FINETUNING
-   ========================= */
-
-.media-section {
-  padding-top: 46px;
-  padding-bottom: 22px;
-
-  background:
-    radial-gradient(
-      circle at 8% 18%,
-      rgba(255,106,0,.10),
-      transparent 25%
-    ),
-    #171717;
-}
-
-.media-grid {
-  gap: 28px;
-}
-
-.forever-text {
-  padding:
-    28px
-    34px
-    22px;
-
-  border-left:
-    5px solid var(--orange);
-
-  border-radius:
-    0
-    18px
-    18px
-    0;
-
-  background:
-    linear-gradient(
-      145deg,
-      #242424,
-      #171717
-    );
-
-  box-shadow:
-    0 18px 34px rgba(0,0,0,.28);
-}
-
-.forever-video-column {
-  gap: 7px;
-}
-
-.forever-video-box {
-  border-radius: 18px;
-
-  box-shadow:
-    0 20px 42px rgba(0,0,0,.36);
-}
-
-.gold-dry-banner {
-  border-radius: 12px;
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.30);
-}
-
-
-/* =========================
-   AGENDA FINETUNING
-   ========================= */
-
-.agenda-section {
-  padding-top: 30px;
-  padding-bottom: 28px;
-
-  background: #fff;
-}
-
-.agenda-layout {
-  gap: 18px;
-
-  grid-template-columns:
-    minmax(0,1.65fr)
-    minmax(280px,.9fr);
-}
-
-.agenda-box,
-.week-sponsor-wrap {
-  border:
-    1px solid rgba(255,106,0,.22);
-
-  box-shadow:
-    var(--shadow-deep);
-}
-
-.agenda-box {
-  border-top:
-    5px solid var(--orange);
-
-  border-radius: 18px;
-}
-
-.week-sponsor-wrap {
-  border-top:
-    5px solid var(--orange);
-
-  border-radius: 18px;
-}
-
-.side-banners {
-  gap: 10px;
-}
-
-.side-banners .promo-banner {
-  border-radius: 12px;
-
-  box-shadow:
-    0 10px 23px rgba(24,25,27,.13);
-}
-
-.footer {
-  box-shadow:
-    inset 0 5px 0 var(--orange);
-}
-
-
-/* =========================
-   80–100% ZOOM
-   ========================= */
+/* =========================================================
+   DESKTOP
+   ========================================================= */
 
 @media (min-width: 901px) {
 
@@ -1620,6 +1624,7 @@ body {
       );
   }
 }
+
 
 @media (min-width: 881px) {
 
@@ -1636,9 +1641,9 @@ body {
 }
 
 
-/* =========================
-   TABLET
-   ========================= */
+/* =========================================================
+   TABLET FINETUNING
+   ========================================================= */
 
 @media (max-width: 1200px) and (min-width: 901px) {
 
@@ -1651,11 +1656,8 @@ body {
   }
 }
 
-@media (max-width: 900px) {
 
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 900px) {
 
   .intro .content-narrow {
     padding:
@@ -1685,61 +1687,21 @@ body {
 }
 
 
-/* =========================
-   MOBIEL
-   ========================= */
+/* =========================================================
+   SPONSORS MOBIEL
+   ========================================================= */
 
 @media (max-width: 600px) {
 
-  .section {
-    padding-top: 26px;
-    padding-bottom: 26px;
-  }
-
-  .intro {
-    padding-top: 30px;
+  .sponsors-section {
     padding-bottom: 22px;
   }
 
-  .intro .content-narrow {
-    padding:
-      24px
-      18px
-      22px;
+  .sponsors-section .section-label {
+    padding-top: 22px;
   }
 
-  #nieuws {
-    padding-top: 12px;
-  }
-
-  .news-frame-wrap,
-  .news-frame-wrap iframe {
-    height: 520px;
-  }
-
-  .sponsor-frame-wrap,
-  .sponsor-frame {
-    height: 150px;
-  }
-
-  .image-sections-grid {
-    gap: 14px;
-  }
-
-  .embed-frame,
-  .omejan-wrap .embed-frame {
-    height: 420px;
-  }
-
-  .forever-text {
-    padding:
-      24px
-      20px
-      20px;
-  }
-
-  .agenda-section {
-    padding-top: 24px;
-    padding-bottom: 22px;
+  .sponsor-frame-wrap {
+    border-radius: 12px;
   }
 }
