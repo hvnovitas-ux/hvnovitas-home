@@ -292,11 +292,7 @@ function addEvent(
 
   addOccurrence(
     event,
-    {
-      item: event.component,
-      startDate: event.startDate,
-      endDate: event.endDate
-    },
+    null,
     start,
     end,
     groups
@@ -318,26 +314,27 @@ function addOccurrence(
   const dateKey =
     getDateKey(start);
 
+  /*
+     Belangrijk:
+     details.item is geen ICAL.Component.
+     Daarom gebruiken we rechtstreeks event.summary
+     en event.location.
+  */
+
   const title =
     cleanText(
       event.summary ||
-      details.item?.getFirstPropertyValue(
-        "summary"
-      ) ||
       "Activiteit"
     );
 
   const location =
     cleanText(
       event.location ||
-      details.item?.getFirstPropertyValue(
-        "location"
-      ) ||
       ""
     );
 
   const isAllDay =
-    details.startDate &&
+    details?.startDate &&
     details.startDate.isDate;
 
   const item = {
