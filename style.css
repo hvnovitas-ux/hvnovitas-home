@@ -1,30 +1,34 @@
+/* =========================================================
+   HV NOVITAS - COMPLETE STYLE.CSS
+   ========================================================= */
+
 * {
   box-sizing: border-box;
 }
 
 :root {
   --orange: #ff6a00;
+  --orange-light: #ff7a00;
   --orange-dark: #c94f00;
-  --orange-deep: #a83b00;
+  --orange-deep: #9f3e00;
 
-  --orange-soft: #ff7a00;
+  --black: #080808;
+  --dark: #111111;
+  --dark-2: #171717;
+  --dark-3: #242424;
+
+  --white: #ffffff;
   --cream: #fffaf6;
 
   --ink: #1f2022;
   --muted: #666666;
   --line: #ececec;
 
-  --dark: #111111;
-  --dark-2: #191919;
-  --dark-3: #242424;
-
-  --white: #ffffff;
-
   --shadow-soft:
-    0 12px 32px rgba(24,25,27,.08);
+    0 12px 32px rgba(24, 25, 27, 0.08);
 
   --shadow-deep:
-    0 18px 42px rgba(24,25,27,.14);
+    0 18px 42px rgba(24, 25, 27, 0.14);
 }
 
 
@@ -46,6 +50,7 @@ body {
     sans-serif;
 
   color: var(--ink);
+
   background: var(--cream);
 
   line-height: 1.6;
@@ -55,7 +60,9 @@ body {
 
 img {
   display: block;
+
   max-width: 100%;
+
   height: auto;
 }
 
@@ -68,6 +75,7 @@ iframe {
 }
 
 main,
+section,
 .section,
 .content-wide,
 .content-narrow {
@@ -114,15 +122,15 @@ main,
     0
     8px;
 
-  font-size: .82rem;
+  color: var(--orange);
+
+  font-size: 0.82rem;
 
   font-weight: 800;
 
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
 
   text-transform: uppercase;
-
-  color: var(--orange);
 }
 
 h2 {
@@ -140,7 +148,7 @@ h2 {
 
   line-height: 1.05;
 
-  letter-spacing: -.035em;
+  letter-spacing: -0.035em;
 }
 
 h3 {
@@ -161,6 +169,7 @@ p {
 
 /* =========================================================
    HOOFDBANNER
+   ORANJE + ZWART
    ========================================================= */
 
 .hero {
@@ -187,7 +196,7 @@ p {
     );
 
   box-shadow:
-    0 14px 34px rgba(0,0,0,.18);
+    0 14px 34px rgba(0, 0, 0, 0.18);
 }
 
 .hero::before {
@@ -277,8 +286,30 @@ p {
 }
 
 .hero .eyebrow {
+  display: block;
+
   color: #ffffff;
-  opacity: .98;
+
+  opacity: 0.98;
+}
+
+.eyebrow,
+.section-label {
+  display: block;
+
+  font-size: 0.82rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  color: var(--orange);
+}
+
+.hero .eyebrow {
+  color: rgba(255,255,255,.94);
 }
 
 .hero h1 {
@@ -294,9 +325,9 @@ p {
       5.8rem
     );
 
-  line-height: .92;
+  line-height: 0.92;
 
-  letter-spacing: -.045em;
+  letter-spacing: -0.045em;
 
   color: #ffffff;
 
@@ -336,7 +367,7 @@ p {
 
 
 /* =========================================================
-   SOCIALS
+   SOCIAL ICONS
    ========================================================= */
 
 .hero-socials {
@@ -358,6 +389,8 @@ p {
   place-items: center;
 
   border-radius: 50%;
+
+  color: #ffffff;
 
   text-decoration: none;
 
@@ -416,6 +449,7 @@ p {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   overflow: hidden;
@@ -444,7 +478,7 @@ p {
 
 
 /* =========================================================
-   EVENEMENTENBANNER
+   EVENEMENTENBANNER OP HOOFDPAGINA
    ========================================================= */
 
 .event-banner-section {
@@ -555,7 +589,7 @@ p {
 
 
 /* =========================================================
-   KNOPPEN
+   QUICK LINKS
    ========================================================= */
 
 .quick-links {
@@ -578,6 +612,7 @@ p {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   min-height: 56px;
@@ -594,6 +629,9 @@ p {
 
   color: #ffffff;
 
+  border:
+    1px solid rgba(255,255,255,.10);
+
   border-radius: 11px;
 
   background:
@@ -605,7 +643,7 @@ p {
     );
 
   box-shadow:
-    0 5px 0 #9f3e00,
+    0 5px 0 var(--orange-deep),
     0 11px 20px rgba(201,79,0,.18);
 
   transition:
@@ -668,7 +706,7 @@ p {
     translateY(-3px);
 
   box-shadow:
-    0 8px 0 #9f3e00,
+    0 8px 0 var(--orange-deep),
     0 15px 25px rgba(201,79,0,.25);
 
   filter: brightness(1.04);
@@ -679,32 +717,97 @@ p {
     translateY(2px);
 
   box-shadow:
-    0 2px 0 #9f3e00,
+    0 2px 0 var(--orange-deep),
     0 7px 12px rgba(201,79,0,.18);
 }
 
 
 /* =========================================================
    NIEUWS
+   ORANJE + ZWART
    ========================================================= */
 
 #nieuws {
+  position: relative;
+
   width: 100%;
 
-  padding-top: 12px;
+  padding-top: 14px;
 
   padding-bottom: 0;
 
+  overflow: hidden;
+
   background:
     linear-gradient(
-      180deg,
-      #ff6a00 0%,
-      #f15b00 42%,
-      #cc4d00 100%
+      112deg,
+      #ff7a00 0%,
+      #f16500 32%,
+      #d94f00 43%,
+      #242424 44%,
+      #171717 100%
     );
 }
 
+#nieuws::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      128deg,
+      transparent 0 28%,
+      rgba(255,255,255,.09) 28.2% 29%,
+      transparent 29.2%
+    ),
+
+    linear-gradient(
+      128deg,
+      transparent 0 45%,
+      rgba(0,0,0,.16) 45.2% 46.2%,
+      transparent 46.4%
+    ),
+
+    radial-gradient(
+      circle at 18% 46%,
+      rgba(255,255,255,.12),
+      transparent 28%
+    );
+}
+
+#nieuws::after {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -170px;
+  top: -220px;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 45px rgba(255,255,255,.02),
+    0 0 0 90px rgba(255,255,255,.012);
+
+  pointer-events: none;
+}
+
 #nieuws .content-wide {
+  position: relative;
+
+  z-index: 2;
+
   width:
     min(
       1180px,
@@ -714,6 +817,10 @@ p {
   max-width: 1180px;
 
   margin: 0 auto;
+}
+
+#nieuws .section-label {
+  color: #ffffff;
 }
 
 .news-frame-wrap {
@@ -802,7 +909,8 @@ p {
 
 /* =========================================================
    SPONSORS
-   ZELFDE DESIGNTAAL ALS HOOFDBANNER
+   ZELFDE LOOK ALS DE HOOFDBANNER
+   DUS GEEN ZALM / LICHTORANJE VLAK
    ========================================================= */
 
 .sponsors-section {
@@ -896,10 +1004,6 @@ p {
 
   color: #ffffff;
 }
-
-
-/* Het sponsorvlak zelf blijft wit,
-   zodat logo's goed zichtbaar blijven */
 
 .sponsor-frame-wrap {
   position: relative;
@@ -1019,6 +1123,12 @@ p {
    ========================================================= */
 
 .media-section {
+  padding-top: 46px;
+
+  padding-bottom: 22px;
+
+  color: #ffffff;
+
   background:
     radial-gradient(
       circle at 8% 18%,
@@ -1026,12 +1136,6 @@ p {
       transparent 25%
     ),
     #171717;
-
-  color: #ffffff;
-
-  padding-top: 46px;
-
-  padding-bottom: 22px;
 }
 
 .media-grid {
@@ -1157,6 +1261,10 @@ p {
   padding-bottom: 28px;
 
   background: #ffffff;
+}
+
+.agenda-section > .content-wide > .section-label {
+  margin-bottom: 14px;
 }
 
 .agenda-layout {
@@ -1322,7 +1430,7 @@ p {
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE TABLET
    ========================================================= */
 
 @media (max-width: 1100px) {
@@ -1424,6 +1532,10 @@ p {
 }
 
 
+/* =========================================================
+   MOBIEL
+   ========================================================= */
+
 @media (max-width: 600px) {
 
   .hero-inner,
@@ -1460,13 +1572,11 @@ p {
 
   .hero-socials a {
     width: 50px;
-
     height: 50px;
   }
 
   .hero-socials a img {
     width: 25px;
-
     height: 25px;
   }
 
@@ -1480,6 +1590,10 @@ p {
     padding-top: 40px;
 
     padding-bottom: 28px;
+  }
+
+  .intro h2 {
+    white-space: normal;
   }
 
   .intro .content-narrow {
@@ -1503,10 +1617,7 @@ p {
       calc(100% - 20px);
   }
 
-  .news-frame-wrap {
-    height: 520px;
-  }
-
+  .news-frame-wrap,
   .news-frame-wrap iframe {
     height: 520px;
   }
@@ -1567,7 +1678,7 @@ p {
 
 
 /* =========================================================
-   EVENEMENTENBANNER MOBIEL
+   EVENEMENTENBANNER RUIMTE OP MOBIEL
    ========================================================= */
 
 @media (max-width: 600px) {
@@ -1610,7 +1721,7 @@ img,
 
 
 /* =========================================================
-   DESKTOP
+   DESKTOP FINETUNING
    ========================================================= */
 
 @media (min-width: 901px) {
@@ -1688,7 +1799,7 @@ img,
 
 
 /* =========================================================
-   SPONSORS MOBIEL
+   EXTRA SPONSOR RESPONSIVE
    ========================================================= */
 
 @media (max-width: 600px) {
