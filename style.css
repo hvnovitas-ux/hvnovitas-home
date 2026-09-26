@@ -18,7 +18,6 @@
   --dark-3: #242424;
 
   --white: #ffffff;
-  --cream: #ffffff;
 
   --ink: #1f2022;
   --muted: #666666;
@@ -284,7 +283,6 @@ p {
 
 .hero .eyebrow {
   color: #ffffff;
-
   opacity: .98;
 }
 
@@ -356,8 +354,7 @@ p {
 
   font-size: 1.08rem;
 
-  color:
-    rgba(255,255,255,.96);
+  color: rgba(255,255,255,.96);
 }
 
 
@@ -698,7 +695,6 @@ p {
 
 /* =========================================================
    NIEUWS
-   ÉÉN ENKELE OVERGANG
    ========================================================= */
 
 #nieuws {
@@ -724,11 +720,6 @@ p {
       #171717 100%
     );
 }
-
-/*
-   Geen extra pseudo-element met een tweede diagonale
-   achtergrond. Daardoor loopt Nieuws netjes door.
-*/
 
 #nieuws::before,
 #nieuws::after {
@@ -841,8 +832,8 @@ p {
 
 /* =========================================================
    SPONSORS
-   DONKER VLAK
-   ÉÉN SCHONE ORANJE OVERGANG BOVENAAN
+   DIRECT DONKER NA NIEUWS
+   GEEN ORANJE BALK
    ========================================================= */
 
 .sponsors-section {
@@ -866,40 +857,11 @@ p {
 
 
 /*
-   Eén enkele overgangsbalk.
-   Geen extra diagonale pseudo-elementen aan de onderkant.
+   BELANGRIJK:
+   GEEN extra pseudo-elementen.
 */
 
-.sponsors-section::before {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  right: 0;
-
-  height: 16px;
-
-  background:
-    linear-gradient(
-      112deg,
-      #ff7a00 0%,
-      #f16500 28%,
-      #d94f00 38%,
-      #292929 39%,
-      #171717 60%,
-      #171717 100%
-    );
-
-  pointer-events: none;
-}
-
-
-/*
-   Oude tweede decoratieve laag volledig uitgeschakeld.
-*/
-
+.sponsors-section::before,
 .sponsors-section::after {
   display: none;
 }
@@ -910,12 +872,12 @@ p {
 
   z-index: 2;
 
-  padding-top: 16px;
+  padding-top: 0;
 }
 
 
 .sponsors-section .section-label {
-  padding-top: 20px;
+  padding-top: 22px;
 
   margin-bottom: 14px;
 
@@ -957,34 +919,6 @@ p {
   border: 0;
 
   background: #ffffff;
-}
-
-
-/*
-   Rustige donkere ruimte onder sponsors.
-   Geen tweede oranje diagonale rand.
-*/
-
-.sponsors-section .content-wide::after {
-  content: "";
-
-  display: block;
-
-  height: 10px;
-
-  margin-top: 18px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,106,0,.70),
-      rgba(255,106,0,.15) 35%,
-      transparent 70%
-    );
-
-  border-radius: 10px;
-
-  opacity: .55;
 }
 
 
@@ -1630,12 +1564,6 @@ p {
     border-radius: 12px;
   }
 
-  .sponsors-section .content-wide::after {
-    height: 6px;
-
-    margin-top: 14px;
-  }
-
   .footer .content-wide {
     align-items: flex-start;
 
@@ -1698,7 +1626,7 @@ img,
 
 
 /* =========================================================
-   DEFINITIEVE DESKTOP FINETUNING
+   DESKTOP FINETUNING
    ========================================================= */
 
 @media (min-width: 901px) {
@@ -1730,7 +1658,7 @@ img,
 
 
 /* =========================================================
-   EXTRA TABLET FINETUNING
+   TABLET FINETUNING
    ========================================================= */
 
 @media (max-width: 1200px) and (min-width: 901px) {
