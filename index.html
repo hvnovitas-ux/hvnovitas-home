@@ -86,9 +86,6 @@
 
     /* =====================================================
        AGENDA
-       Agenda = smaller
-       Sponsor = center
-       Banners = wider
        ===================================================== */
 
     .agenda-layout {
@@ -161,7 +158,6 @@
 
     /* =====================================================
        SPONSOR VAN DE WEEK
-       GEEN EIGEN SCROLLBAR
        ===================================================== */
 
     .agenda-sponsor {
@@ -273,6 +269,116 @@
 
 
     /* =====================================================
+       HV NOVITAS 15 JAAR BANNER
+       ===================================================== */
+
+    .novitas-15-banner {
+
+      width:
+        100%;
+
+      margin:
+        0;
+
+      overflow:
+        hidden;
+
+      border-radius:
+        0
+        0
+        18px
+        18px;
+
+      background:
+        #111111;
+
+    }
+
+
+    .novitas-15-banner img {
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      height:
+        auto;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
+      border:
+        0;
+
+    }
+
+
+    /* =====================================================
+       OME JAN CARROUSEL
+       GEEN WITTE RUIMTE MEER
+       VOLLEDIGE FOTO ZICHTBAAR
+       ===================================================== */
+
+    .photos-card {
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .photos-card .omejan-wrap {
+
+      width:
+        100%;
+
+      min-height:
+        0 !important;
+
+      height:
+        auto;
+
+      aspect-ratio:
+        16 / 9;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .photos-card .omejan-wrap .embed-frame {
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      height:
+        100% !important;
+
+      min-height:
+        0 !important;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
+      border:
+        0;
+
+    }
+
+
+    /* =====================================================
        TABLET
        ===================================================== */
 
@@ -301,7 +407,10 @@
           grid;
 
         grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
 
       }
 
@@ -384,60 +493,36 @@
           grid;
 
         grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
 
       }
 
-    }
+
+      /* OOK OP MOBIEL 16:9 */
+
+      .photos-card .omejan-wrap {
+
+        min-height:
+          0 !important;
+
+        height:
+          auto;
+
+        aspect-ratio:
+          16 / 9;
+
+      }
 
 
-    /* =====================================================
-       HV NOVITAS 15 JAAR BANNER
-       Onder de fotocarrousel
-       ===================================================== */
+      .photos-card .omejan-wrap .embed-frame {
 
-    .novitas-15-banner {
+        height:
+          100% !important;
 
-      width:
-        100%;
-
-      margin:
-        0;
-
-      overflow:
-        hidden;
-
-      border-radius:
-        0
-        0
-        18px
-        18px;
-
-      background:
-        #111111;
-
-    }
-
-
-    .novitas-15-banner img {
-
-      display:
-        block;
-
-      width:
-        100%;
-
-      height:
-        auto;
-
-      margin:
-        0;
-
-      padding:
-        0;
-
-      border:
-        0;
+      }
 
     }
 
@@ -471,7 +556,6 @@
 
       <div class="hero-copy">
 
-
         <div class="eyebrow">
           HANDBALCLUB HULST
         </div>
@@ -496,7 +580,6 @@
           class="hero-socials"
           aria-label="Social media"
         >
-
 
           <a
             class="social-youtube"
@@ -561,15 +644,12 @@
 
           </a>
 
-
         </div>
-
 
       </div>
 
 
       <div class="hero-announcement">
-
 
         <iframe
           src="https://hvnovitas-ux.github.io/hvnovitas-beheer/aankondiging.html"
@@ -577,9 +657,7 @@
           loading="eager">
         </iframe>
 
-
       </div>
-
 
     </div>
 
@@ -596,14 +674,12 @@
     aria-label="Evenementen HV Novitas"
   >
 
-
     <iframe
       src="https://hvnovitas-ux.github.io/hvnovitas-beheer/evenementenbanner-widget.html?v=20260926-1500"
       title="Evenementenbanner HV Novitas"
       loading="eager"
       scrolling="no">
     </iframe>
-
 
   </section>
 
@@ -618,9 +694,7 @@
 
     <section class="section intro">
 
-
       <div class="content-narrow">
-
 
         <p class="section-label">
           WELKOM BIJ HV NOVITAS
@@ -672,13 +746,7 @@
         </p>
 
 
-
-        <!-- =================================================
-             SNELLE LINKS
-             ================================================= -->
-
         <div class="quick-links">
-
 
           <a
             href="https://sites.google.com/site/hvnovitas/Jeugd-Teams?authuser=0"
@@ -760,12 +828,9 @@
             Video's
           </a>
 
-
         </div>
 
-
       </div>
-
 
     </section>
 
@@ -780,12 +845,9 @@
       id="nieuws"
     >
 
-
       <div class="content-wide">
 
-
         <div class="news-frame-wrap">
-
 
           <iframe
             src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html"
@@ -794,12 +856,10 @@
             scrolling="no">
           </iframe>
 
-
         </div>
 
 
         <div class="news-more-wrap">
-
 
           <a
             class="news-more"
@@ -810,12 +870,9 @@
             Meer nieuws →
           </a>
 
-
         </div>
 
-
       </div>
-
 
     </section>
 
@@ -829,9 +886,7 @@
       class="section sponsors-section"
     >
 
-
       <div class="content-wide">
-
 
         <p class="section-label">
           ONZE SPONSORS
@@ -840,7 +895,6 @@
 
         <div class="sponsor-frame-wrap">
 
-
           <iframe
             class="sponsor-frame"
             src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsors-view.html"
@@ -848,12 +902,9 @@
             loading="lazy">
           </iframe>
 
-
         </div>
 
-
       </div>
-
 
     </section>
 
@@ -867,22 +918,22 @@
       class="section image-sections"
     >
 
-
       <div class="content-wide">
-
 
         <div class="image-sections-grid">
 
+
+          <!-- =================================================
+               LINKS: HIGHLIGHTS
+               ================================================= -->
 
           <article
             class="image-section-card"
           >
 
-
             <div
               class="embed-frame-wrap highlights-wrap"
             >
-
 
               <iframe
                 class="embed-frame"
@@ -891,23 +942,23 @@
                 loading="lazy">
               </iframe>
 
-
             </div>
-
 
           </article>
 
 
 
+          <!-- =================================================
+               RECHTS: FOTO'S + JUBILEUM
+               ================================================= -->
+
           <article
             class="image-section-card photos-card"
           >
 
-
             <div
               class="embed-frame-wrap omejan-wrap"
             >
-
 
               <iframe
                 class="embed-frame"
@@ -915,7 +966,6 @@
                 title="Foto carrousel HV Novitas"
                 loading="lazy">
               </iframe>
-
 
             </div>
 
@@ -931,15 +981,12 @@
 
             </div>
 
-
           </article>
 
 
         </div>
 
-
       </div>
-
 
     </section>
 
@@ -953,9 +1000,7 @@
       class="section media-section"
     >
 
-
       <div class="content-wide">
-
 
         <div class="media-grid">
 
@@ -963,7 +1008,6 @@
           <article
             class="media-card forever-text"
           >
-
 
             <p class="section-label">
               FOREVER NOVITAS
@@ -1010,16 +1054,13 @@
               je bent altijd welkom om vrijblijvend een keer mee te trainen.
             </p>
 
-
           </article>
 
 
 
           <div class="forever-video-column">
 
-
             <div class="forever-video-box">
-
 
               <iframe
                 src="https://www.youtube.com/embed/videoseries?list=PLK1aboL2Hk9I"
@@ -1027,7 +1068,6 @@
                 loading="lazy"
                 allowfullscreen>
               </iframe>
-
 
             </div>
 
@@ -1045,15 +1085,11 @@
 
             </a>
 
-
           </div>
-
 
         </div>
 
-
       </div>
-
 
     </section>
 
@@ -1067,9 +1103,7 @@
       class="section agenda-section"
     >
 
-
       <div class="content-wide">
-
 
         <p class="section-label">
           ONZE AGENDA
@@ -1085,9 +1119,7 @@
 
           <div class="agenda-column">
 
-
             <div class="agenda-box">
-
 
               <iframe
                 src="https://www.hvnovitas.nl/agenda-widget.html?v=20260926-8"
@@ -1096,9 +1128,7 @@
                 scrolling="no">
               </iframe>
 
-
             </div>
-
 
           </div>
 
@@ -1110,9 +1140,7 @@
 
           <div class="agenda-sponsor">
 
-
             <div class="week-sponsor-wrap">
-
 
               <iframe
                 src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsor-week.html"
@@ -1121,9 +1149,7 @@
                 scrolling="no">
               </iframe>
 
-
             </div>
-
 
           </div>
 
@@ -1137,11 +1163,9 @@
             class="agenda-banners"
           >
 
-
             <div
               class="side-banners"
             >
-
 
               <a
                 class="promo-banner"
@@ -1172,18 +1196,14 @@
 
               </a>
 
-
             </div>
-
 
           </aside>
 
 
         </div>
 
-
       </div>
-
 
     </section>
 
@@ -1200,16 +1220,13 @@
     class="footer"
   >
 
-
     <div
       class="content-wide"
     >
 
-
       <div
         class="footer-left"
       >
-
 
         <a
           class="footer-home"
@@ -1226,7 +1243,6 @@
           info@hvnovitas.nl
         </a>
 
-
       </div>
 
 
@@ -1239,7 +1255,6 @@
         class="social-links"
       >
 
-
         <a
           href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg"
           target="_blank"
@@ -1248,12 +1263,9 @@
           YouTube
         </a>
 
-
       </div>
 
-
     </div>
-
 
   </footer>
 
