@@ -34,7 +34,8 @@
 
     .event-banner-section {
 
-      margin: 0 !important;
+      margin:
+        0 !important;
 
       padding:
         10px
@@ -157,7 +158,8 @@
 
 
     /* =====================================================
-       SPONSOR VAN DE WEEK
+       MIDDENKOLOM
+       SPONSOR + VIDEO
        ===================================================== */
 
     .agenda-sponsor {
@@ -165,11 +167,27 @@
       min-width:
         0;
 
+      width:
+        100%;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        14px;
+
       overflow:
-        hidden;
+        visible;
 
     }
 
+
+    /* =====================================================
+       SPONSOR VAN DE WEEK
+       ===================================================== */
 
     .week-sponsor-wrap {
 
@@ -181,6 +199,9 @@
 
       overflow:
         hidden;
+
+      flex:
+        0 0 205px;
 
     }
 
@@ -195,6 +216,53 @@
 
       height:
         205px;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
+      border:
+        0;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    /* =====================================================
+       VIDEO VAN DE WEEK
+       ===================================================== */
+
+    .week-video-wrap {
+
+      width:
+        100%;
+
+      height:
+        340px;
+
+      overflow:
+        hidden;
+
+      flex:
+        0 0 340px;
+
+    }
+
+
+    .week-video-wrap iframe {
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      height:
+        340px;
 
       margin:
         0;
@@ -455,6 +523,22 @@
       }
 
 
+      .week-video-wrap {
+
+        height:
+          340px;
+
+      }
+
+
+      .week-video-wrap iframe {
+
+        height:
+          340px;
+
+      }
+
+
       .agenda-banners .side-banners {
 
         display:
@@ -518,6 +602,7 @@
 
 
       <div class="hero-copy">
+
 
         <div class="eyebrow">
           HANDBALCLUB HULST
@@ -611,10 +696,12 @@
 
         </div>
 
+
       </div>
 
 
       <div class="hero-announcement">
+
 
         <iframe
           src="https://hvnovitas-ux.github.io/hvnovitas-beheer/aankondiging.html"
@@ -622,7 +709,9 @@
           loading="eager">
         </iframe>
 
+
       </div>
+
 
     </div>
 
@@ -639,12 +728,14 @@
     aria-label="Evenementen HV Novitas"
   >
 
+
     <iframe
       src="https://hvnovitas-ux.github.io/hvnovitas-beheer/evenementenbanner-widget.html?v=20260926-1500"
       title="Evenementenbanner HV Novitas"
       loading="eager"
       scrolling="no">
     </iframe>
+
 
   </section>
 
@@ -659,7 +750,9 @@
 
     <section class="section intro">
 
+
       <div class="content-narrow">
+
 
         <p class="section-label">
           WELKOM BIJ HV NOVITAS
@@ -710,6 +803,11 @@
           pubquiz, waar ook niet-leden welkom zijn.
         </p>
 
+
+
+        <!-- =================================================
+             SNELLE LINKS
+             ================================================= -->
 
         <div class="quick-links">
 
@@ -797,7 +895,9 @@
 
         </div>
 
+
       </div>
+
 
     </section>
 
@@ -812,9 +912,12 @@
       id="nieuws"
     >
 
+
       <div class="content-wide">
 
+
         <div class="news-frame-wrap">
+
 
           <iframe
             src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html"
@@ -823,10 +926,12 @@
             scrolling="no">
           </iframe>
 
+
         </div>
 
 
         <div class="news-more-wrap">
+
 
           <a
             class="news-more"
@@ -837,9 +942,12 @@
             Meer nieuws →
           </a>
 
+
         </div>
 
+
       </div>
+
 
     </section>
 
@@ -853,7 +961,9 @@
       class="section sponsors-section"
     >
 
+
       <div class="content-wide">
+
 
         <p class="section-label">
           ONZE SPONSORS
@@ -862,6 +972,7 @@
 
         <div class="sponsor-frame-wrap">
 
+
           <iframe
             class="sponsor-frame"
             src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsors-view.html"
@@ -869,9 +980,12 @@
             loading="lazy">
           </iframe>
 
+
         </div>
 
+
       </div>
+
 
     </section>
 
@@ -885,22 +999,26 @@
       class="section image-sections"
     >
 
+
       <div class="content-wide">
+
 
         <div class="image-sections-grid">
 
 
-          <!-- =================================================
-               LINKS: HIGHLIGHTS
-               ================================================= -->
+          <!-- ===============================================
+               HIGHLIGHTS
+               =============================================== -->
 
           <article
             class="image-section-card"
           >
 
+
             <div
               class="embed-frame-wrap highlights-wrap"
             >
+
 
               <iframe
                 class="embed-frame"
@@ -909,23 +1027,27 @@
                 loading="lazy">
               </iframe>
 
+
             </div>
+
 
           </article>
 
 
 
-          <!-- =================================================
-               RECHTS: FOTO'S + JUBILEUM
-               ================================================= -->
+          <!-- ===============================================
+               FOTO'S + 15 JAAR
+               =============================================== -->
 
           <article
             class="image-section-card photos-card"
           >
 
+
             <div
               class="embed-frame-wrap omejan-wrap"
             >
+
 
               <iframe
                 class="embed-frame"
@@ -934,6 +1056,7 @@
                 loading="lazy">
               </iframe>
 
+
             </div>
 
 
@@ -941,10 +1064,12 @@
               class="novitas-15-banner"
             >
 
+
               <img
                 src="images/novitas-15-jaar-2012-2027.png"
                 alt="HV Novitas 15 jaar 2012 - 2027"
               >
+
 
             </div>
 
@@ -954,7 +1079,9 @@
 
         </div>
 
+
       </div>
+
 
     </section>
 
@@ -968,7 +1095,9 @@
       class="section media-section"
     >
 
+
       <div class="content-wide">
+
 
         <div class="media-grid">
 
@@ -976,6 +1105,7 @@
           <article
             class="media-card forever-text"
           >
+
 
             <p class="section-label">
               FOREVER NOVITAS
@@ -1022,13 +1152,16 @@
               je bent altijd welkom om vrijblijvend een keer mee te trainen.
             </p>
 
+
           </article>
 
 
 
           <div class="forever-video-column">
 
+
             <div class="forever-video-box">
+
 
               <iframe
                 src="https://www.youtube.com/embed/videoseries?list=PLK1aboL2Hk9I"
@@ -1036,6 +1169,7 @@
                 loading="lazy"
                 allowfullscreen>
               </iframe>
+
 
             </div>
 
@@ -1046,18 +1180,24 @@
               aria-label="Gold Dry"
             >
 
+
               <img
                 src="images/gold-dry.jpg"
                 alt="Gold Dry"
               >
 
+
             </a>
+
 
           </div>
 
+
         </div>
 
+
       </div>
+
 
     </section>
 
@@ -1071,7 +1211,9 @@
       class="section agenda-section"
     >
 
+
       <div class="content-wide">
+
 
         <p class="section-label">
           ONZE AGENDA
@@ -1081,9 +1223,15 @@
         <div class="agenda-layout">
 
 
+          <!-- ===============================================
+               AGENDA
+               =============================================== -->
+
           <div class="agenda-column">
 
+
             <div class="agenda-box">
+
 
               <iframe
                 src="https://www.hvnovitas.nl/agenda-widget.html?v=20260926-8"
@@ -1092,36 +1240,75 @@
                 scrolling="no">
               </iframe>
 
+
             </div>
+
 
           </div>
 
 
 
+          <!-- ===============================================
+               SPONSOR + VIDEO VAN DE WEEK
+               =============================================== -->
+
           <div class="agenda-sponsor">
+
+
+            <!-- =============================================
+                 SPONSOR VAN DE WEEK
+                 ============================================= -->
 
             <div class="week-sponsor-wrap">
 
+
               <iframe
-                src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsor-week.html"
+                src="https://hvnovitas-ux.github.io/hvnovitas-beheer/sponsor-week.html?v=20260928-3"
                 title="Sponsor van de Week"
                 loading="lazy"
                 scrolling="no">
               </iframe>
 
+
             </div>
+
+
+
+            <!-- =============================================
+                 VIDEO VAN DE WEEK
+                 ============================================= -->
+
+            <div class="week-video-wrap">
+
+
+              <iframe
+                src="https://hvnovitas-ux.github.io/hvnovitas-beheer/video-week.html?v=20260928-1"
+                title="Video van de Week"
+                loading="lazy"
+                scrolling="no">
+              </iframe>
+
+
+            </div>
+
 
           </div>
 
 
 
+          <!-- ===============================================
+               RECHTER BANNERS
+               =============================================== -->
+
           <aside
             class="agenda-banners"
           >
 
+
             <div
               class="side-banners"
             >
+
 
               <a
                 class="promo-banner"
@@ -1130,12 +1317,15 @@
                 rel="noopener"
               >
 
+
                 <img
                   src="images/proeftrainingen.png"
                   alt="Gratis proeftrainingen"
                 >
 
+
               </a>
+
 
 
               <a
@@ -1145,21 +1335,27 @@
                 rel="noopener"
               >
 
+
                 <img
                   src="images/gooi-jij-de-bal-door.png"
                   alt="Gooi jij de bal door?"
                 >
 
+
               </a>
 
+
             </div>
+
 
           </aside>
 
 
         </div>
 
+
       </div>
+
 
     </section>
 
@@ -1176,13 +1372,16 @@
     class="footer"
   >
 
+
     <div
       class="content-wide"
     >
 
+
       <div
         class="footer-left"
       >
+
 
         <a
           class="footer-home"
@@ -1199,6 +1398,7 @@
           info@hvnovitas.nl
         </a>
 
+
       </div>
 
 
@@ -1211,6 +1411,7 @@
         class="social-links"
       >
 
+
         <a
           href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg"
           target="_blank"
@@ -1219,9 +1420,12 @@
           YouTube
         </a>
 
+
       </div>
 
+
     </div>
+
 
   </footer>
 
