@@ -855,17 +855,10 @@ p {
     #171717;
 }
 
-
-/*
-   BELANGRIJK:
-   GEEN extra pseudo-elementen.
-*/
-
 .sponsors-section::before,
 .sponsors-section::after {
   display: none;
 }
-
 
 .sponsors-section .content-wide {
   position: relative;
@@ -874,7 +867,6 @@ p {
 
   padding-top: 0;
 }
-
 
 .sponsors-section .section-label {
   padding-top: 22px;
@@ -1100,6 +1092,13 @@ p {
   flex-direction: column;
 
   gap: 7px;
+}
+
+/* Video + Gold Dry iets lager voor een mooiere uitlijning */
+@media (min-width: 901px) {
+  .forever-video-column {
+    transform: translateY(18px);
+  }
 }
 
 .forever-video-box {
@@ -1383,6 +1382,10 @@ p {
   .image-sections-grid,
   .media-grid {
     grid-template-columns: 1fr;
+  }
+
+  .forever-video-column {
+    transform: none;
   }
 
   .agenda-layout {
