@@ -138,7 +138,7 @@
       border: 0;
       overflow: hidden;
 
-      /* BELANGRIJK: fullscreen doorgeven aan de geneste YouTube-player */
+      /* Fullscreen doorgeven */
       allow: fullscreen;
     }
 
@@ -216,6 +216,41 @@
 
 
     /* =====================================================
+       BUREAU VOZ BANNER
+       Staat direct boven de Forever Novitas-video.
+       ===================================================== */
+
+    .bureau-voz-banner {
+      display: block;
+      width: 100%;
+      margin: 0 0 10px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111111;
+      box-shadow: 0 10px 24px rgba(0,0,0,.28);
+      line-height: 0;
+    }
+
+    .bureau-voz-banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+
+    /* =====================================================
+       FOREVER NOVITAS VIDEO + GOLD DRY IETS LAGER
+       ===================================================== */
+
+    @media (min-width: 901px) {
+      .forever-video-column {
+        transform: translateY(18px);
+      }
+    }
+
+
+    /* =====================================================
        TABLET
        ===================================================== */
 
@@ -235,6 +270,14 @@
       .agenda-banners .side-banners {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .forever-video-column {
+        transform: none;
+      }
+
+      .bureau-voz-banner {
+        margin-bottom: 10px;
       }
 
     }
@@ -538,7 +581,8 @@
           </a>
 
           <a
-            href="https://hvnovitas-ux.github.io/hvnovitas-beheer/vrienden-van-novitas.html"_blank"
+            href="https://hvnovitas-ux.github.io/hvnovitas-beheer/vrienden-van-novitas.html"
+            target="_blank"
             rel="noopener"
           >
             Vrienden van Novitas
@@ -796,6 +840,27 @@
 
           <div class="forever-video-column">
 
+            <!-- =================================================
+                 BUREAU VOZ
+                 Banner direct boven Forever Novitas video
+                 ================================================= -->
+
+            <a
+              class="bureau-voz-banner"
+              href="https://bureauvoz.nl/"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bezoek Bureau VOZ"
+            >
+
+              <img
+                src="images/bureau-voz-banner.png"
+                alt="Bureau VOZ"
+              >
+
+            </a>
+
+
             <div class="forever-video-box">
 
               <iframe
@@ -807,6 +872,7 @@
               </iframe>
 
             </div>
+
 
             <a
               class="promo-banner gold-dry-banner"
