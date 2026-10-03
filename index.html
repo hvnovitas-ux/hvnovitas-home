@@ -216,8 +216,7 @@
 
 
     /* =====================================================
-       BUREAU VOZ BANNER
-       Staat direct boven de Forever Novitas-video.
+       BUREAU VOZ
        ===================================================== */
 
     .bureau-voz-banner {
@@ -251,6 +250,33 @@
 
 
     /* =====================================================
+       QUICK LINKS - 7 KNOPPEN NETJES UITGELIJND
+       ===================================================== */
+
+    @media (min-width: 901px) {
+      .quick-links a:nth-child(7) {
+        grid-column: 2;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .quick-links a:nth-child(7) {
+        grid-column: 1 / -1;
+        width: 50%;
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .quick-links a:nth-child(7) {
+        grid-column: auto;
+        width: 100%;
+        justify-self: stretch;
+      }
+    }
+
+
+    /* =====================================================
        TABLET
        ===================================================== */
 
@@ -274,10 +300,6 @@
 
       .forever-video-column {
         transform: none;
-      }
-
-      .bureau-voz-banner {
-        margin-bottom: 10px;
       }
 
     }
@@ -573,27 +595,11 @@
           </a>
 
           <a
-            href="https://sites.google.com/site/hvnovitas/toernooien?authuser=0"
-            target="_blank"
-            rel="noopener"
-          >
-            Toernooien
-          </a>
-
-          <a
             href="https://hvnovitas-ux.github.io/hvnovitas-beheer/vrienden-van-novitas.html"
             target="_blank"
             rel="noopener"
           >
             Vrienden van Novitas
-          </a>
-
-          <a
-            href="https://sites.google.com/site/hvnovitas/10-jaar-geleden?authuser=0"
-            target="_blank"
-            rel="noopener"
-          >
-            10 jaar geleden
           </a>
 
           <a
@@ -840,10 +846,7 @@
 
           <div class="forever-video-column">
 
-            <!-- =================================================
-                 BUREAU VOZ
-                 Banner direct boven Forever Novitas video
-                 ================================================= -->
+            <!-- BUREAU VOZ BANNER DIRECT BOVEN FOREVER NOVITAS -->
 
             <a
               class="bureau-voz-banner"
