@@ -216,7 +216,8 @@
 
 
     /* =====================================================
-       BUREAU VOZ
+       BUREAU VOZ BANNER
+       Staat direct boven de Forever Novitas-video.
        ===================================================== */
 
     .bureau-voz-banner {
@@ -250,33 +251,6 @@
 
 
     /* =====================================================
-       QUICK LINKS - 7 KNOPPEN NETJES UITGELIJND
-       ===================================================== */
-
-    @media (min-width: 901px) {
-      .quick-links a:nth-child(7) {
-        grid-column: 2;
-      }
-    }
-
-    @media (min-width: 601px) and (max-width: 900px) {
-      .quick-links a:nth-child(7) {
-        grid-column: 1 / -1;
-        width: 50%;
-        justify-self: center;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .quick-links a:nth-child(7) {
-        grid-column: auto;
-        width: 100%;
-        justify-self: stretch;
-      }
-    }
-
-
-    /* =====================================================
        TABLET
        ===================================================== */
 
@@ -300,6 +274,10 @@
 
       .forever-video-column {
         transform: none;
+      }
+
+      .bureau-voz-banner {
+        margin-bottom: 10px;
       }
 
     }
@@ -377,6 +355,157 @@
         height: 145px;
       }
 
+    }
+
+
+    /* =====================================================
+       NOVITAS HANDBAL QUIZ
+       ===================================================== */
+
+    .agenda-banners {
+      display: flex;
+      min-width: 0;
+    }
+
+    .agenda-banners .side-banners {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      min-height: 619px;
+    }
+
+    .novitas-quiz-banner {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 28px 22px;
+      border-radius: 18px;
+      color: #ffffff;
+      text-decoration: none;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,129,31,.32), transparent 28%),
+        radial-gradient(circle at 85% 75%, rgba(255,106,0,.24), transparent 32%),
+        linear-gradient(145deg, #121212 0%, #202020 55%, #101010 100%);
+      border: 1px solid rgba(255,106,0,.35);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,.20),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+
+    .novitas-quiz-banner::before,
+    .novitas-quiz-banner::after {
+      content: "?";
+      position: absolute;
+      color: rgba(255,106,0,.12);
+      font-weight: 900;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .novitas-quiz-banner::before {
+      left: -12px;
+      top: -30px;
+      font-size: 190px;
+      transform: rotate(-12deg);
+    }
+
+    .novitas-quiz-banner::after {
+      right: -6px;
+      bottom: -42px;
+      font-size: 210px;
+      transform: rotate(9deg);
+    }
+
+    .novitas-quiz-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .novitas-quiz-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 0 12px;
+      margin-bottom: 13px;
+      border-radius: 999px;
+      background: rgba(255,106,0,.18);
+      color: #ff9a50;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .novitas-quiz-banner h3 {
+      margin: 0;
+      color: #ffffff;
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      line-height: .95;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .novitas-quiz-banner h3 span {
+      display: block;
+      color: #ff6900;
+    }
+
+    .novitas-quiz-banner p {
+      max-width: 360px;
+      margin: 14px auto 20px;
+      color: rgba(255,255,255,.76);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .novitas-quiz-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ff8124, #ed5800);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 18px rgba(255,106,0,.28);
+    }
+
+    .novitas-quiz-banner:hover .novitas-quiz-button {
+      filter: brightness(1.06);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      .agenda-banners .side-banners {
+        min-height: 0;
+      }
+
+      .novitas-quiz-banner {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .novitas-quiz-banner {
+        min-height: 310px;
+        padding: 25px 18px;
+      }
+
+      .novitas-quiz-banner h3 {
+        font-size: 2.25rem;
+      }
     }
 
   </style>
@@ -595,11 +724,27 @@
           </a>
 
           <a
+            href="https://sites.google.com/site/hvnovitas/toernooien?authuser=0"
+            target="_blank"
+            rel="noopener"
+          >
+            Toernooien
+          </a>
+
+          <a
             href="https://hvnovitas-ux.github.io/hvnovitas-beheer/vrienden-van-novitas.html"
             target="_blank"
             rel="noopener"
           >
             Vrienden van Novitas
+          </a>
+
+          <a
+            href="https://sites.google.com/site/hvnovitas/10-jaar-geleden?authuser=0"
+            target="_blank"
+            rel="noopener"
+          >
+            10 jaar geleden
           </a>
 
           <a
@@ -846,7 +991,10 @@
 
           <div class="forever-video-column">
 
-            <!-- BUREAU VOZ BANNER DIRECT BOVEN FOREVER NOVITAS -->
+            <!-- =================================================
+                 BUREAU VOZ
+                 Banner direct boven Forever Novitas video
+                 ================================================= -->
 
             <a
               class="bureau-voz-banner"
@@ -1008,6 +1156,33 @@
                   alt="Gooi jij de bal door?"
                 >
 
+              </a>
+
+              <a
+                class="novitas-quiz-banner"
+                href="https://hvnovitas-ux.github.io/hvnovitas-handbal-challenge/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Speel de Novitas Handbal Quiz"
+              >
+                <div class="novitas-quiz-inner">
+                  <div class="novitas-quiz-kicker">
+                    HV NOVITAS
+                  </div>
+
+                  <h3>
+                    NOVITAS
+                    <span>HANDBAL QUIZ</span>
+                  </h3>
+
+                  <p>
+                    Test jouw handbalkennis en kijk hoeveel vragen jij goed hebt.
+                  </p>
+
+                  <span class="novitas-quiz-button">
+                    SPEEL DE QUIZ →
+                  </span>
+                </div>
               </a>
 
             </div>
