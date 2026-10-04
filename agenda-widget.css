@@ -1,7 +1,6 @@
-
 /* =========================================================
    HV NOVITAS AGENDA WIDGET
-   Horizontale dagen - meerdere dagen tegelijk zichtbaar
+   4 activiteiten per dag volledig zichtbaar
 ========================================================= */
 
 *{box-sizing:border-box}
@@ -30,9 +29,11 @@ html,body{
   display:none!important;
 }
 
+/* De lijst krijgt nu de volledige beschikbare hoogte.
+   De oude 225px zorgde ervoor dat een 4e wedstrijd werd afgesneden. */
 .agenda-list{
   width:100%;
-  height:225px!important;
+  height:285px!important;
   padding:10px!important;
   display:grid!important;
   grid-template-columns:repeat(4,minmax(250px,1fr));
@@ -49,7 +50,7 @@ html,body{
 
 .agenda-day{
   min-width:250px!important;
-  height:270px;
+  height:265px!important;
   margin:0!important;
   border:0!important;
   border-right:1px solid #e5e5e5!important;
@@ -64,7 +65,8 @@ html,body{
 .agenda-day-header{
   display:grid!important;
   grid-template-columns:72px minmax(0,1fr)!important;
-  min-height:68px;
+  height:68px!important;
+  min-height:68px!important;
   border-bottom:1px solid #eee!important;
   background:#fafafa!important;
 }
@@ -74,6 +76,7 @@ html,body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  height:68px!important;
   min-height:68px!important;
   padding:6px!important;
   background:#171717!important;
@@ -116,14 +119,18 @@ html,body{
   font-weight:800!important;
 }
 
+/* Vier regels passen binnen één dag:
+   68px header + 4 x 49px = 264px */
 .agenda-event{
   display:grid!important;
   grid-template-columns:8px 102px minmax(0,1fr)!important;
   gap:8px!important;
   align-items:center!important;
+  height:49px!important;
   min-height:49px!important;
-  padding:8px 10px!important;
+  padding:7px 10px!important;
   border-bottom:1px solid #eee!important;
+  overflow:hidden!important;
 }
 
 .agenda-event:last-child{border-bottom:0!important}
@@ -150,14 +157,16 @@ html,body{
 
 .agenda-event-main{
   min-width:0!important;
+  overflow:hidden!important;
 }
 
 .agenda-event-title{
   color:#171717!important;
   font-size:12px!important;
-  line-height:1.25!important;
+  line-height:1.22!important;
   font-weight:800!important;
   white-space:normal!important;
+  overflow:hidden!important;
 }
 
 .agenda-event-location{
@@ -167,7 +176,10 @@ html,body{
   margin-top:2px!important;
   color:#777!important;
   font-size:9px!important;
-  line-height:1.2!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
 }
 
 .agenda-empty{
@@ -184,18 +196,8 @@ html,body{
 }
 
 @media(max-width:700px){
-  .agenda-widget,
-  .agenda-list{
-    height:260px!important;
-  }
-
-  .agenda-list{
-    grid-template-columns:repeat(2,minmax(250px,1fr));
-  }
-
-  .agenda-day{
-    height:240px;
-  }
+  .agenda-widget{height:285px!important}
+  .agenda-list{height:285px!important;grid-template-columns:repeat(2,minmax(250px,1fr))}
 }
 
 @media(max-width:500px){
