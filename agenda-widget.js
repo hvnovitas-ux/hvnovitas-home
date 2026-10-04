@@ -25,6 +25,7 @@ async function loadAgenda() {
     renderAgenda(parseCalendar(icsText));
   } catch (error) {
     console.error("Agenda fout:", error);
+
     listElement.innerHTML = "";
 
     const errorElement = document.createElement("div");
@@ -37,6 +38,26 @@ async function loadAgenda() {
   }
 }
 
+/*
+ * Belangrijk:
+ * Google Agenda kan een verwijderde of gewijzigde herhaling exporteren als
+ * een apart VEVENT met dezelfde UID en een RECURRENCE-ID.
+ *
+ * Voorbeeld:
+ *   UID:...
+ *   RECURRENCE-ID:20261005T180000Z
+ *   STATUS:CANCELLED
+ *
+ * De oude parser negeerde deze uitzonderingen. Daardoor werd de normale
+ * wekelijkse afspraak voor 5 oktober opnieuw gegenereerd.
+ *
+ * Deze parser:
+ * 1. leest EXDATE;
+ * 2. leest RECURRENCE-ID;
+ * 3. leest STATUS:CANCELLED;
+ * 4. gebruikt gewijzigde uitzonderingen als override;
+ * 5. verwijdert dubbele zichtbare afspraken.
+ */
 function parseCalendar(icsText) {
   const lines = unfoldICS(icsText);
   const events = [];
@@ -44,7 +65,9 @@ function parseCalendar(icsText) {
 
   for (const line of lines) {
     if (line === "BEGIN:VEVENT") {
-      current = { exdate: [] };
+      current = {
+        exdate: []
+      };
       continue;
     }
 
@@ -75,7 +98,9 @@ function parseCalendar(icsText) {
       }
     }
 
-    if (key === "DTSTART") {
+    if (key === "UID") {
+      current.uid = unescapeICS(value);
+    } else if (key === "DTSTART") {
       current.dtstart = parseICSDate(value, params);
     } else if (key === "DTEND") {
       current.dtend = parseICSDate(value, params);
@@ -85,6 +110,10 @@ function parseCalendar(icsText) {
       current.location = unescapeICS(value);
     } else if (key === "RRULE") {
       current.rrule = value;
+    } else if (key === "STATUS") {
+      current.status = String(value || "").toUpperCase();
+    } else if (key === "RECURRENCE-ID") {
+      current.recurrenceId = parseICSDate(value, params);
     } else if (key === "EXDATE") {
       current.exdate.push(
         ...value
@@ -99,12 +128,47 @@ function parseCalendar(icsText) {
   const endDate = new Date(today);
   endDate.setDate(endDate.getDate() + DAYS_AHEAD);
 
+  /*
+   * Verzamel alle uitzonderingen voordat we de terugkerende hoofdafspraken
+   * uitwerken.
+   */
+  const cancelledOccurrences = new Set();
+  const overrides = new Map();
+
+  for (const event of events) {
+    if (!event.recurrenceId) continue;
+
+    const key = exceptionKey(event.uid, event.recurrenceId.date);
+
+    if (event.status === "CANCELLED") {
+      cancelledOccurrences.add(key);
+    } else {
+      overrides.set(key, event);
+    }
+  }
+
   const groups = new Map();
 
   for (const event of events) {
     try {
+      /*
+       * Een RECURRENCE-ID-VEVENT is een uitzondering en wordt niet als
+       * zelfstandige afspraak toegevoegd. Hij wordt hieronder verwerkt
+       * vanuit de hoofdafspraak.
+       */
+      if (event.recurrenceId) continue;
+
+      if (event.status === "CANCELLED") continue;
+
       if (event.rrule) {
-        addRecurringEvent(event, today, endDate, groups);
+        addRecurringEvent(
+          event,
+          today,
+          endDate,
+          groups,
+          cancelledOccurrences,
+          overrides
+        );
       } else {
         addSingleEvent(event, today, endDate, groups);
       }
@@ -122,11 +186,15 @@ function unfoldICS(text) {
     .replace(/\r/g, "\n")
     .split("\n")
     .reduce((out, line) => {
-      if ((line.startsWith(" ") || line.startsWith("\t")) && out.length) {
+      if (
+        (line.startsWith(" ") || line.startsWith("\t")) &&
+        out.length
+      ) {
         out[out.length - 1] += line.slice(1);
       } else {
         out.push(line.trimEnd());
       }
+
       return out;
     }, [])
     .filter(Boolean);
@@ -160,6 +228,7 @@ function parseICSDate(value, params = {}) {
   }
 
   const clean = value.replace(/[^\dTZ]/g, "");
+
   const match = clean.match(
     /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?(Z)?$/
   );
@@ -174,13 +243,9 @@ function parseICSDate(value, params = {}) {
   const s = Number(match[6] || 0);
   const isUTC = Boolean(match[7]);
 
-  let date;
-
-  if (isUTC) {
-    date = new Date(Date.UTC(y, mo, d, h, mi, s));
-  } else {
-    date = new Date(y, mo, d, h, mi, s);
-  }
+  const date = isUTC
+    ? new Date(Date.UTC(y, mo, d, h, mi, s))
+    : new Date(y, mo, d, h, mi, s);
 
   return {
     date,
@@ -198,7 +263,9 @@ function addSingleEvent(event, today, endDate, groups) {
   let end = event.dtend ? event.dtend.date : null;
 
   if (!end && event.dtstart.isDate) {
-    end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+    end = new Date(
+      start.getTime() + 24 * 60 * 60 * 1000
+    );
   }
 
   addOccurrence(
@@ -210,7 +277,14 @@ function addSingleEvent(event, today, endDate, groups) {
   );
 }
 
-function addRecurringEvent(event, today, endDate, groups) {
+function addRecurringEvent(
+  event,
+  today,
+  endDate,
+  groups,
+  cancelledOccurrences,
+  overrides
+) {
   const rule = parseRRule(event.rrule);
 
   if (!rule || !rule.FREQ) {
@@ -222,7 +296,8 @@ function addRecurringEvent(event, today, endDate, groups) {
 
   const duration =
     event.dtend && event.dtstart
-      ? event.dtend.date.getTime() - originalStart.getTime()
+      ? event.dtend.date.getTime() -
+        originalStart.getTime()
       : event.dtstart.isDate
         ? 24 * 60 * 60 * 1000
         : 60 * 60 * 1000;
@@ -240,28 +315,86 @@ function addRecurringEvent(event, today, endDate, groups) {
   while (count < max && cursor < endDate) {
     count++;
 
+    const occurrenceKey =
+      exceptionKey(event.uid, cursor);
+
+    const cancelledByExdate =
+      exdates.has(dateTimeKey(cursor));
+
+    const cancelledByException =
+      cancelledOccurrences.has(occurrenceKey);
+
     if (
       cursor >= today &&
-      !exdates.has(dateTimeKey(cursor)) &&
+      !cancelledByExdate &&
+      !cancelledByException &&
       matchesRule(cursor, originalStart, rule)
     ) {
-      addOccurrence(
-        event,
-        new Date(cursor),
-        new Date(cursor.getTime() + duration),
-        groups,
-        event.dtstart.isDate
-      );
+      const override =
+        overrides.get(occurrenceKey);
+
+      if (override && override.dtstart) {
+        /*
+         * Een gewijzigde losse herhaling krijgt de DTSTART/DTEND
+         * van het exception-VEVENT.
+         */
+        const overrideStart =
+          override.dtstart.date;
+
+        const overrideEnd =
+          override.dtend
+            ? override.dtend.date
+            : new Date(
+                overrideStart.getTime() +
+                duration
+              );
+
+        if (
+          overrideStart >= today &&
+          overrideStart < endDate
+        ) {
+          addOccurrence(
+            {
+              ...event,
+              ...override,
+              uid: event.uid
+            },
+            overrideStart,
+            overrideEnd,
+            groups,
+            override.dtstart.isDate
+          );
+        }
+      } else {
+        addOccurrence(
+          event,
+          new Date(cursor),
+          new Date(cursor.getTime() + duration),
+          groups,
+          event.dtstart.isDate
+        );
+      }
     }
 
     cursor = advanceOneDay(cursor);
 
     if (rule.UNTIL) {
       const until = parseRuleUntil(rule.UNTIL);
-      if (until && cursor > until) break;
+
+      if (until && cursor > until) {
+        break;
+      }
     }
 
-    if (rule.COUNT && count >= Number(rule.COUNT) + 366) {
+    /*
+     * COUNT is counted from the original recurrence set.
+     * The 366 safety margin prevents an endless loop when DTSTART
+     * is far in the past and the visible window starts later.
+     */
+    if (
+      rule.COUNT &&
+      count >= Number(rule.COUNT) + 366
+    ) {
       break;
     }
   }
@@ -274,7 +407,9 @@ function parseRRule(value) {
     const eq = part.indexOf("=");
 
     if (eq > 0) {
-      rule[part.slice(0, eq).toUpperCase()] = part.slice(eq + 1);
+      rule[
+        part.slice(0, eq).toUpperCase()
+      ] = part.slice(eq + 1);
     }
   }
 
@@ -282,11 +417,17 @@ function parseRRule(value) {
 }
 
 function matchesRule(date, original, rule) {
-  const freq = String(rule.FREQ || "").toUpperCase();
-  const interval = Math.max(1, Number(rule.INTERVAL || 1));
+  const freq =
+    String(rule.FREQ || "").toUpperCase();
+
+  const interval =
+    Math.max(1, Number(rule.INTERVAL || 1));
 
   const dayDiff = Math.floor(
-    (startOfDay(date) - startOfDay(original)) / 86400000
+    (
+      startOfDay(date) -
+      startOfDay(original)
+    ) / 86400000
   );
 
   if (dayDiff < 0) return false;
@@ -296,9 +437,12 @@ function matchesRule(date, original, rule) {
   }
 
   if (freq === "WEEKLY") {
-    const weekDiff = Math.floor(dayDiff / 7);
+    const weekDiff =
+      Math.floor(dayDiff / 7);
 
-    if (weekDiff % interval !== 0) return false;
+    if (weekDiff % interval !== 0) {
+      return false;
+    }
 
     if (rule.BYDAY) {
       const days = rule.BYDAY
@@ -313,7 +457,10 @@ function matchesRule(date, original, rule) {
 
   if (freq === "MONTHLY") {
     const monthDiff =
-      (date.getFullYear() - original.getFullYear()) * 12 +
+      (
+        date.getFullYear() -
+        original.getFullYear()
+      ) * 12 +
       date.getMonth() -
       original.getMonth();
 
@@ -336,7 +483,8 @@ function matchesRule(date, original, rule) {
 
   if (freq === "YEARLY") {
     const yearDiff =
-      date.getFullYear() - original.getFullYear();
+      date.getFullYear() -
+      original.getFullYear();
 
     if (
       yearDiff < 0 ||
@@ -369,7 +517,8 @@ function dayCodeToNumber(code) {
 function parseRuleUntil(value) {
   if (!value) return null;
 
-  const parsed = parseICSDate(value, {});
+  const parsed =
+    parseICSDate(value, {});
 
   return parsed
     ? parsed.date
@@ -382,37 +531,69 @@ function advanceOneDay(date) {
   return next;
 }
 
-function addOccurrence(event, start, end, groups, isAllDay = false) {
-  const dateKey = getDateKey(start);
+function addOccurrence(
+  event,
+  start,
+  end,
+  groups,
+  isAllDay = false
+) {
+  const dateKey =
+    getDateKey(start);
 
   const item = {
-    title: cleanText(event.summary || "Activiteit"),
-    location: cleanText(event.location || ""),
+    uid: event.uid || "",
+    title: cleanText(
+      event.summary || "Activiteit"
+    ),
+    location: cleanText(
+      event.location || ""
+    ),
     start,
     end,
     isAllDay,
-    type: getEventType(event.summary || "")
+    type: getEventType(
+      event.summary || ""
+    )
   };
 
   if (!groups.has(dateKey)) {
     groups.set(dateKey, []);
   }
 
-  const existing = groups.get(dateKey);
+  const existing =
+    groups.get(dateKey);
 
-  /*
-    Deduplicatie op wat de bezoeker daadwerkelijk ziet:
-    dezelfde titel + dezelfde minuut = één agenda-item.
-    Hierdoor verdwijnen dubbele vermeldingen met alleen afwijkende seconden.
-  */
-  const duplicate = existing.some(entry =>
-    normalizeTitle(entry.title) === normalizeTitle(item.title) &&
-    minuteKey(entry.start) === minuteKey(item.start)
-  );
+  const duplicate =
+    existing.some(entry => {
+      const sameUid =
+        entry.uid &&
+        item.uid &&
+        entry.uid === item.uid &&
+        entry.start.getTime() ===
+          item.start.getTime();
+
+      const sameVisibleActivity =
+        normalizeTitle(entry.title) ===
+          normalizeTitle(item.title) &&
+        minuteKey(entry.start) ===
+          minuteKey(item.start) &&
+        normalizeTitle(entry.location) ===
+          normalizeTitle(item.location);
+
+      return (
+        sameUid ||
+        sameVisibleActivity
+      );
+    });
 
   if (!duplicate) {
     existing.push(item);
   }
+}
+
+function exceptionKey(uid, date) {
+  return `${uid || ""}|${date.getTime()}`;
 }
 
 function normalizeTitle(value) {
@@ -433,7 +614,8 @@ function minuteKey(date) {
 }
 
 function getEventType(title) {
-  const normalized = String(title).toLowerCase();
+  const normalized =
+    String(title).toLowerCase();
 
   if (
     normalized.includes("training") ||
@@ -458,8 +640,12 @@ function renderAgenda(groups) {
   listElement.innerHTML = "";
 
   if (groups.size === 0) {
-    const empty = document.createElement("div");
-    empty.className = "agenda-empty";
+    const empty =
+      document.createElement("div");
+
+    empty.className =
+      "agenda-empty";
+
     empty.textContent =
       "Er staan de komende 14 dagen geen activiteiten in de agenda.";
 
@@ -474,18 +660,26 @@ function renderAgenda(groups) {
   }
 
   const sortedDays =
-    Array.from(groups.entries()).sort((a, b) =>
-      a[0].localeCompare(b[0])
-    );
+    Array.from(groups.entries())
+      .sort((a, b) =>
+        a[0].localeCompare(b[0])
+      );
 
   let totalEvents = 0;
 
   for (const [dateKey, events] of sortedDays) {
-    events.sort((a, b) => a.start - b.start);
-    totalEvents += events.length;
+    events.sort(
+      (a, b) => a.start - b.start
+    );
+
+    totalEvents +=
+      events.length;
 
     listElement.appendChild(
-      createDayElement(dateKey, events)
+      createDayElement(
+        dateKey,
+        events
+      )
     );
   }
 
@@ -495,115 +689,230 @@ function renderAgenda(groups) {
   );
 }
 
-function createDayElement(dateKey, events) {
-  const date = parseDateKey(dateKey);
+function createDayElement(
+  dateKey,
+  events
+) {
+  const date =
+    parseDateKey(dateKey);
 
-  const day = document.createElement("section");
-  day.className = "agenda-day";
+  const day =
+    document.createElement("section");
 
-  const header = document.createElement("header");
-  header.className = "agenda-day-header";
+  day.className =
+    "agenda-day";
 
-  const dateBlock = document.createElement("div");
-  dateBlock.className = "agenda-date";
+  const header =
+    document.createElement("header");
 
-  const number = document.createElement("div");
-  number.className = "agenda-date-number";
-  number.textContent = date.getDate();
+  header.className =
+    "agenda-day-header";
 
-  const month = document.createElement("div");
-  month.className = "agenda-date-month";
+  const dateBlock =
+    document.createElement("div");
+
+  dateBlock.className =
+    "agenda-date";
+
+  const number =
+    document.createElement("div");
+
+  number.className =
+    "agenda-date-number";
+
+  number.textContent =
+    date.getDate();
+
+  const month =
+    document.createElement("div");
+
+  month.className =
+    "agenda-date-month";
+
   month.textContent =
-    new Intl.DateTimeFormat("nl-NL", { month: "long" }).format(date);
+    new Intl.DateTimeFormat(
+      "nl-NL",
+      { month: "long" }
+    ).format(date);
 
-  dateBlock.append(number, month);
+  dateBlock.append(
+    number,
+    month
+  );
 
-  const titleBlock = document.createElement("div");
-  titleBlock.className = "agenda-day-title";
+  const titleBlock =
+    document.createElement("div");
 
-  const weekday = document.createElement("div");
-  weekday.className = "agenda-weekday";
+  titleBlock.className =
+    "agenda-day-title";
+
+  const weekday =
+    document.createElement("div");
+
+  weekday.className =
+    "agenda-weekday";
+
   weekday.textContent =
-    new Intl.DateTimeFormat("nl-NL", { weekday: "long" }).format(date);
+    new Intl.DateTimeFormat(
+      "nl-NL",
+      { weekday: "long" }
+    ).format(date);
 
-  const fullDate = document.createElement("div");
-  fullDate.className = "agenda-full-date";
+  const fullDate =
+    document.createElement("div");
+
+  fullDate.className =
+    "agenda-full-date";
+
   fullDate.textContent =
-    new Intl.DateTimeFormat("nl-NL", {
-      day: "numeric",
-      month: "long"
-    }).format(date);
+    new Intl.DateTimeFormat(
+      "nl-NL",
+      {
+        day: "numeric",
+        month: "long"
+      }
+    ).format(date);
 
-  titleBlock.append(weekday, fullDate);
-  header.append(dateBlock, titleBlock);
+  titleBlock.append(
+    weekday,
+    fullDate
+  );
+
+  header.append(
+    dateBlock,
+    titleBlock
+  );
+
   day.appendChild(header);
 
   for (const event of events) {
-    day.appendChild(createEventElement(event));
+    day.appendChild(
+      createEventElement(event)
+    );
   }
 
   return day;
 }
 
 function createEventElement(event) {
-  const article = document.createElement("article");
-  article.className = `agenda-event ${event.type}`;
+  const article =
+    document.createElement("article");
 
-  const dot = document.createElement("span");
-  dot.className = "agenda-event-dot";
-  dot.setAttribute("aria-hidden", "true");
+  article.className =
+    `agenda-event ${event.type}`;
 
-  const time = document.createElement("div");
-  time.className = "agenda-event-time";
-  time.textContent = formatTime(event);
+  const dot =
+    document.createElement("span");
 
-  const main = document.createElement("div");
-  main.className = "agenda-event-main";
+  dot.className =
+    "agenda-event-dot";
 
-  const title = document.createElement("div");
-  title.className = "agenda-event-title";
-  title.textContent = event.title;
+  dot.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  const time =
+    document.createElement("div");
+
+  time.className =
+    "agenda-event-time";
+
+  time.textContent =
+    formatTime(event);
+
+  const main =
+    document.createElement("div");
+
+  main.className =
+    "agenda-event-main";
+
+  const title =
+    document.createElement("div");
+
+  title.className =
+    "agenda-event-title";
+
+  title.textContent =
+    event.title;
+
   main.appendChild(title);
 
   if (event.location) {
-    const location = document.createElement("div");
-    location.className = "agenda-event-location";
+    const location =
+      document.createElement("div");
 
-    const icon = document.createElement("span");
-    icon.className = "agenda-location-icon";
-    icon.textContent = "📍";
+    location.className =
+      "agenda-event-location";
 
-    const text = document.createElement("span");
-    text.textContent = event.location;
+    const icon =
+      document.createElement("span");
 
-    location.append(icon, text);
+    icon.className =
+      "agenda-location-icon";
+
+    icon.textContent =
+      "📍";
+
+    const text =
+      document.createElement("span");
+
+    text.textContent =
+      event.location;
+
+    location.append(
+      icon,
+      text
+    );
+
     main.appendChild(location);
   }
 
-  article.append(dot, time, main);
+  article.append(
+    dot,
+    time,
+    main
+  );
+
   return article;
 }
 
 function formatTime(event) {
-  if (event.isAllDay) return "Hele dag";
+  if (event.isAllDay) {
+    return "Hele dag";
+  }
 
-  const startText = formatClock(event.start);
+  const startText =
+    formatClock(event.start);
 
-  if (!event.end) return startText;
+  if (!event.end) {
+    return startText;
+  }
 
   return `${startText} – ${formatClock(event.end)}`;
 }
 
 function formatClock(date) {
-  return new Intl.DateTimeFormat("nl-NL", {
-    hour: "2-digit",
-    minute: "2-digit"
-  }).format(date);
+  return new Intl.DateTimeFormat(
+    "nl-NL",
+    {
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  ).format(date);
 }
 
 function startOfDay(date) {
-  const result = new Date(date);
-  result.setHours(0, 0, 0, 0);
+  const result =
+    new Date(date);
+
+  result.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
   return result;
 }
 
@@ -612,8 +921,17 @@ function getDateKey(date) {
 }
 
 function parseDateKey(key) {
-  const [year, month, day] = key.split("-").map(Number);
-  return new Date(year, month - 1, day);
+  const [
+    year,
+    month,
+    day
+  ] = key.split("-").map(Number);
+
+  return new Date(
+    year,
+    month - 1,
+    day
+  );
 }
 
 function dateTimeKey(date) {
@@ -628,7 +946,13 @@ function dateTimeKey(date) {
 }
 
 function cleanText(value) {
-  if (value === null || value === undefined) return "";
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "";
+  }
+
   return String(value)
     .replace(/\n/g, " ")
     .replace(/\s+/g, " ")
@@ -636,8 +960,11 @@ function cleanText(value) {
 }
 
 function setStatus(text, type) {
-  statusElement.textContent = text;
-  statusElement.className = "agenda-status";
+  statusElement.textContent =
+    text;
+
+  statusElement.className =
+    "agenda-status";
 
   if (type) {
     statusElement.classList.add(type);
