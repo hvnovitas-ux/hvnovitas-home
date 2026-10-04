@@ -2,9 +2,7 @@
 <html lang="nl">
 
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
@@ -14,16 +12,9 @@
 
   <title>HV Novitas</title>
 
-  <link
-    rel="stylesheet"
-    href="/style.css?v=20260926"
-  >
+  <link rel="stylesheet" href="/style.css?v=20260926">
 
   <style>
-
-    /* =====================================================
-       EVENEMENTENBANNER
-       ===================================================== */
 
     .event-banner-section {
       margin: 0 !important;
@@ -46,7 +37,6 @@
       padding-top: 24px !important;
     }
 
-
     /* =====================================================
        AGENDA
        ===================================================== */
@@ -57,7 +47,10 @@
       grid-template-areas:
         "agenda banners sponsor";
       gap: 14px;
-      align-items: start;
+
+      /* Belangrijk: de drie kolommen krijgen dezelfde rijhoogte.
+         De sponsor/video-kolom is 205 + 14 + 400 = 619px hoog. */
+      align-items: stretch;
     }
 
     .agenda-column {
@@ -80,9 +73,8 @@
       overflow: hidden;
     }
 
-
     /* =====================================================
-       MIDDENKOLOM
+       SPONSOR + VIDEO VAN DE WEEK
        ===================================================== */
 
     .agenda-sponsor {
@@ -94,11 +86,6 @@
       overflow: visible;
       grid-area: sponsor;
     }
-
-
-    /* =====================================================
-       SPONSOR VAN DE WEEK
-       ===================================================== */
 
     .week-sponsor-wrap {
       width: 100%;
@@ -117,11 +104,6 @@
       overflow: hidden;
     }
 
-
-    /* =====================================================
-       VIDEO VAN DE WEEK
-       ===================================================== */
-
     .week-video-wrap {
       width: 100%;
       height: 400px;
@@ -137,25 +119,19 @@
       padding: 0;
       border: 0;
       overflow: hidden;
-
-      /* Fullscreen doorgeven */
-      allow: fullscreen;
     }
 
-
     /* =====================================================
-       RECHTER BANNERS
+       RECHTER BANNERS + QUIZ
        ===================================================== */
 
     .agenda-banners {
       min-width: 0;
       grid-area: banners;
-    }
 
-    @media (min-width: 901px) {
-      .agenda-banners {
-        min-width: 250px;
-      }
+      /* Laat de kolom de volledige rijhoogte gebruiken. */
+      height: 100%;
+      display: flex;
     }
 
     .agenda-banners .side-banners {
@@ -163,6 +139,8 @@
       flex-direction: column;
       gap: 14px;
       width: 100%;
+      height: 100%;
+      min-height: 0;
     }
 
     .agenda-banners .promo-banner {
@@ -173,6 +151,7 @@
       background: #ffffff;
       box-shadow:
         0 10px 24px rgba(24,25,27,.13);
+      flex: 0 0 auto;
     }
 
     .agenda-banners .promo-banner img {
@@ -182,209 +161,17 @@
       max-width: 100%;
     }
 
-
-    /* =====================================================
-       15 JAAR BANNER
-       ===================================================== */
-
-    .photos-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .novitas-15-banner {
-      position: relative;
-      z-index: 5;
-      width: 100%;
-      height: 190px;
-      margin-top: -190px;
-      overflow: hidden;
-      border-radius: 0 0 18px 18px;
-      background: #111111;
-    }
-
-    .novitas-15-banner img {
-      display: block;
-      width: 100%;
-      height: 190px;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      object-fit: cover;
-      object-position: center;
-    }
-
-
-    /* =====================================================
-       BUREAU VOZ BANNER
-       Staat direct boven de Forever Novitas-video.
-       ===================================================== */
-
-    .bureau-voz-banner {
-      display: block;
-      width: 100%;
-      margin: 0 0 10px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #111111;
-      box-shadow: 0 10px 24px rgba(0,0,0,.28);
-      line-height: 0;
-    }
-
-    .bureau-voz-banner img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-    }
-
-
-    /* =====================================================
-       FOREVER NOVITAS VIDEO + GOLD DRY IETS LAGER
-       ===================================================== */
-
-    @media (min-width: 901px) {
-      .forever-video-column {
-        transform: translateY(18px);
-      }
-    }
-
-
-    /* =====================================================
-       TABLET
-       ===================================================== */
-
-    @media (max-width: 900px) {
-
-      .agenda-layout {
-        grid-template-columns: 1.55fr 0.85fr;
-        grid-template-areas:
-          "agenda sponsor"
-          "banners banners";
-      }
-
-      .agenda-banners {
-        grid-column: auto;
-      }
-
-      .agenda-banners .side-banners {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .forever-video-column {
-        transform: none;
-      }
-
-      .bureau-voz-banner {
-        margin-bottom: 10px;
-      }
-
-    }
-
-
-    /* =====================================================
-       MOBIEL
-       ===================================================== */
-
-    @media (max-width: 600px) {
-
-      .event-banner-section {
-        padding: 6px 0 8px !important;
-      }
-
-      .event-banner-section iframe {
-        height: 190px;
-      }
-
-      .event-banner-section + main .section.intro {
-        padding-top: 18px !important;
-      }
-
-      .agenda-layout {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .agenda-column,
-      .agenda-sponsor,
-      .agenda-banners {
-        width: 100%;
-      }
-
-      .agenda-column {
-        order: 1;
-      }
-
-      .agenda-banners {
-        order: 2;
-      }
-
-      .agenda-sponsor {
-        order: 3;
-      }
-
-      .agenda-box iframe {
-        height: 560px;
-      }
-
-      .week-sponsor-wrap,
-      .week-sponsor-wrap iframe {
-        height: 205px;
-      }
-
-      .week-video-wrap {
-        height: 400px;
-      }
-
-      .week-video-wrap iframe {
-        height: 400px;
-      }
-
-      .agenda-banners .side-banners {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .novitas-15-banner {
-        height: 145px;
-        margin-top: -145px;
-      }
-
-      .novitas-15-banner img {
-        height: 145px;
-      }
-
-    }
-
-
-    /* =====================================================
-       NOVITAS HANDBAL QUIZ
-       ===================================================== */
-
-    .agenda-banners {
-      display: flex;
-      min-width: 0;
-    }
-
-    .agenda-banners .side-banners {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      width: 100%;
-      min-height: 619px;
-    }
-
+    /* Quiz vult exact de overblijvende ruimte.
+       Geen vaste hoogte meer. */
     .novitas-quiz-banner {
       position: relative;
-      flex: 0 0 394px;
-      height: 394px;
-      min-height: 394px;
+      flex: 1 1 auto;
+      min-height: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: 24px 22px;
+      padding: 18px;
       border-radius: 18px;
       color: #ffffff;
       text-decoration: none;
@@ -397,7 +184,7 @@
       box-shadow:
         0 14px 30px rgba(0,0,0,.20),
         inset 0 0 0 1px rgba(255,255,255,.04);
-
+    }
 
     .novitas-quiz-banner::before,
     .novitas-quiz-banner::after {
@@ -488,35 +275,192 @@
       transform: translateY(-2px);
     }
 
-    @media (max-width: 900px) {
-      .agenda-banners .side-banners {
-        min-height: 0;
-      }
+    /* =====================================================
+       15 JAAR BANNER
+       ===================================================== */
 
-      .novitas-quiz-banner {
-        min-height: 300px;
-      }
+    .photos-card {
+      position: relative;
+      overflow: hidden;
     }
 
-    @media (max-width: 600px) {
+    .novitas-15-banner {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 190px;
+      margin-top: -190px;
+      overflow: hidden;
+      border-radius: 0 0 18px 18px;
+      background: #111111;
+    }
+
+    .novitas-15-banner img {
+      display: block;
+      width: 100%;
+      height: 190px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* =====================================================
+       BUREAU VOZ
+       ===================================================== */
+
+    .bureau-voz-banner {
+      display: block;
+      width: 100%;
+      margin: 0 0 10px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111111;
+      box-shadow: 0 10px 24px rgba(0,0,0,.28);
+      line-height: 0;
+    }
+
+    .bureau-voz-banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+    @media (max-width: 900px) {
+
+      .agenda-layout {
+        grid-template-columns: 1.55fr 0.85fr;
+        grid-template-areas:
+          "agenda sponsor"
+          "banners banners";
+        align-items: start;
+      }
+
+      .agenda-banners {
+        height: auto;
+      }
+
+      .agenda-banners .side-banners {
+        height: auto;
+      }
+
       .novitas-quiz-banner {
         flex: 0 0 310px;
         height: 310px;
         min-height: 310px;
-        padding: 25px 18px;
       }
 
-      .novitas-quiz-banner h3 {
-        font-size: 2.25rem;
+      .bureau-voz-banner {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .event-banner-section {
+        padding: 6px 0 8px !important;
+      }
+
+      .event-banner-section iframe {
+        height: 190px;
+      }
+
+      .event-banner-section + main .section.intro {
+        padding-top: 18px !important;
+      }
+
+      .agenda-layout {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .agenda-column,
+      .agenda-sponsor,
+      .agenda-banners {
+        width: 100%;
+      }
+
+      .agenda-column {
+        order: 1;
+      }
+
+      .agenda-banners {
+        order: 2;
+      }
+
+      .agenda-sponsor {
+        order: 3;
+      }
+
+      .agenda-box iframe {
+        height: 560px;
+      }
+
+      .week-sponsor-wrap,
+      .week-sponsor-wrap iframe {
+        height: 205px;
+      }
+
+      .week-video-wrap,
+      .week-video-wrap iframe {
+        height: 400px;
+      }
+
+      .agenda-banners .side-banners {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        height: auto;
+        min-height: 0;
+      }
+
+      .novitas-quiz-banner {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 310px;
+        min-height: 310px;
+      }
+
+      .novitas-15-banner {
+        height: 145px;
+        margin-top: -145px;
+      }
+
+      .novitas-15-banner img {
+        height: 145px;
+      }
+
+    }
+
+    /* =====================================================
+       QUICK LINKS
+       7 KNOPPEN: 3 + 3 + 1
+       ===================================================== */
+
+    @media (min-width: 901px) {
+      .quick-links a:nth-child(7) {
+        grid-column: 2;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .quick-links a:nth-child(7) {
+        grid-column: 1 / -1;
+        width: 50%;
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .quick-links a:nth-child(7) {
+        grid-column: auto;
+        width: 100%;
+        justify-self: stretch;
       }
     }
 
   </style>
-
-
-  <!-- =====================================================
-       GOOGLE ADSENSE
-       ===================================================== -->
 
   <script
     async
@@ -528,11 +472,6 @@
 
 
 <body>
-
-
-  <!-- =====================================================
-       HOOFDBANNER
-       ===================================================== -->
 
   <section class="hero">
 
@@ -617,7 +556,6 @@
 
       </div>
 
-
       <div class="hero-announcement">
 
         <iframe
@@ -632,10 +570,6 @@
 
   </section>
 
-
-  <!-- =====================================================
-       EVENEMENTENBANNER
-       ===================================================== -->
 
   <section
     class="event-banner-section"
@@ -653,11 +587,6 @@
 
 
   <main>
-
-
-    <!-- =====================================================
-         WELKOM
-         ===================================================== -->
 
     <section class="section intro">
 
@@ -704,9 +633,6 @@
           Ook buiten het veld is er genoeg te beleven – zoals onze gezellige
           pubquiz, waar ook niet-leden welkom zijn.
         </p>
-
-
-        <!-- SNELLE LINKS -->
 
         <div class="quick-links">
 
@@ -773,10 +699,6 @@
     </section>
 
 
-    <!-- =====================================================
-         NIEUWS
-         ===================================================== -->
-
     <section
       class="section"
       id="nieuws"
@@ -813,10 +735,6 @@
     </section>
 
 
-    <!-- =====================================================
-         SPONSORS
-         ===================================================== -->
-
     <section
       class="section sponsors-section"
     >
@@ -843,10 +761,6 @@
     </section>
 
 
-    <!-- =====================================================
-         HIGHLIGHTS + FOTO'S
-         ===================================================== -->
-
     <section
       class="section image-sections"
     >
@@ -855,16 +769,9 @@
 
         <div class="image-sections-grid">
 
+          <article class="image-section-card">
 
-          <!-- HIGHLIGHTS -->
-
-          <article
-            class="image-section-card"
-          >
-
-            <div
-              class="embed-frame-wrap highlights-wrap"
-            >
+            <div class="embed-frame-wrap highlights-wrap">
 
               <iframe
                 class="embed-frame"
@@ -877,16 +784,9 @@
 
           </article>
 
+          <article class="image-section-card photos-card">
 
-          <!-- FOTO'S + 15 JAAR -->
-
-          <article
-            class="image-section-card photos-card"
-          >
-
-            <div
-              class="embed-frame-wrap omejan-wrap"
-            >
+            <div class="embed-frame-wrap omejan-wrap">
 
               <iframe
                 class="embed-frame"
@@ -897,9 +797,7 @@
 
             </div>
 
-            <div
-              class="novitas-15-banner"
-            >
+            <div class="novitas-15-banner">
 
               <img
                 src="images/novitas-15-jaar-2012-2027.png"
@@ -917,22 +815,13 @@
     </section>
 
 
-    <!-- =====================================================
-         FOREVER NOVITAS
-         ===================================================== -->
-
-    <section
-      class="section media-section"
-    >
+    <section class="section media-section">
 
       <div class="content-wide">
 
         <div class="media-grid">
 
-
-          <article
-            class="media-card forever-text"
-          >
+          <article class="media-card forever-text">
 
             <p class="section-label">
               FOREVER NOVITAS
@@ -977,11 +866,6 @@
 
 
           <div class="forever-video-column">
-
-            <!-- =================================================
-                 BUREAU VOZ
-                 Banner direct boven Forever Novitas video
-                 ================================================= -->
 
             <a
               class="bureau-voz-banner"
@@ -1034,13 +918,7 @@
     </section>
 
 
-    <!-- =====================================================
-         AGENDA
-         ===================================================== -->
-
-    <section
-      class="section agenda-section"
-    >
+    <section class="section agenda-section">
 
       <div class="content-wide">
 
@@ -1049,9 +927,6 @@
         </p>
 
         <div class="agenda-layout">
-
-
-          <!-- AGENDA -->
 
           <div class="agenda-column">
 
@@ -1068,13 +943,7 @@
 
           </div>
 
-
-          <!-- SPONSOR + VIDEO VAN DE WEEK -->
-
           <div class="agenda-sponsor">
-
-
-            <!-- SPONSOR VAN DE WEEK -->
 
             <div class="week-sponsor-wrap">
 
@@ -1086,9 +955,6 @@
               </iframe>
 
             </div>
-
-
-            <!-- VIDEO VAN DE WEEK -->
 
             <div class="week-video-wrap">
 
@@ -1106,15 +972,9 @@
           </div>
 
 
-          <!-- RECHTER BANNERS -->
+          <aside class="agenda-banners">
 
-          <aside
-            class="agenda-banners"
-          >
-
-            <div
-              class="side-banners"
-            >
+            <div class="side-banners">
 
               <a
                 class="promo-banner"
@@ -1145,6 +1005,7 @@
 
               </a>
 
+
               <a
                 class="novitas-quiz-banner"
                 href="https://hvnovitas-ux.github.io/hvnovitas-handbal-challenge/"
@@ -1152,7 +1013,9 @@
                 rel="noopener"
                 aria-label="Speel de Novitas Handbal Quiz"
               >
+
                 <div class="novitas-quiz-inner">
+
                   <div class="novitas-quiz-kicker">
                     HV NOVITAS
                   </div>
@@ -1169,7 +1032,9 @@
                   <span class="novitas-quiz-button">
                     SPEEL DE QUIZ →
                   </span>
+
                 </div>
+
               </a>
 
             </div>
@@ -1185,21 +1050,11 @@
   </main>
 
 
-  <!-- =====================================================
-       FOOTER
-       ===================================================== -->
+  <footer class="footer">
 
-  <footer
-    class="footer"
-  >
+    <div class="content-wide">
 
-    <div
-      class="content-wide"
-    >
-
-      <div
-        class="footer-left"
-      >
+      <div class="footer-left">
 
         <a
           class="footer-home"
@@ -1221,9 +1076,7 @@
         Handbalclub Hulst – Zeeuws-Vlaanderen
       </span>
 
-      <div
-        class="social-links"
-      >
+      <div class="social-links">
 
         <a
           href="https://www.youtube.com/channel/UCmzIaCENgsWdXidFF4Bq_eg"
@@ -1241,7 +1094,6 @@
 
 
   <script src="script.js"></script>
-
 
 </body>
 
