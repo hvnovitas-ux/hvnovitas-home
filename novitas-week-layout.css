@@ -147,7 +147,7 @@
 }
 
 .quiz-content p::before{
-  content:"10 VRAGEN  •  1 UITDAGING";
+  content:"30 VRAGEN  •  1 UITDAGING";
   display:block;
   margin-bottom:9px;
   color:#ff9a57;
