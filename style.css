@@ -1704,3 +1704,25 @@ img,
     min-height: 520px;
   }
 }
+
+
+/* =========================================================
+   HIGHLIGHTS + RECHTER FOTO GELIJK UITLIJNEN
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+  /* Highlights blijft 650px hoog. */
+  .highlights-wrap,
+  .highlights-wrap .embed-frame {
+    height: 650px !important;
+    min-height: 650px !important;
+  }
+
+  /* Rechter foto-carrousel wordt lager: 500px. */
+  .omejan-wrap,
+  .omejan-wrap .embed-frame {
+    height: 500px !important;
+    min-height: 500px !important;
+  }
+}
