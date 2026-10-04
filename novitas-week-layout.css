@@ -15,6 +15,7 @@
   align-items:stretch!important;
 }
 
+/* Elke kaart heeft exact één vaste hoogte. */
 .week-card{
   position:relative!important;
   display:block!important;
@@ -29,22 +30,29 @@
   box-sizing:border-box!important;
   border-radius:24px!important;
   background:#111!important;
-  border-top:7px solid #ff6a00;
+  border-top:7px solid #ff6a00!important;
   box-shadow:0 12px 30px rgba(0,0,0,.13);
   color:#fff;
 }
+
+/* =========================================================
+   BELANGRIJK:
+   De iframe gebruikt nu ALLE beschikbare ruimte van de Home-kaart.
+   Daardoor blijft er geen zwart stuk onder de oranje balk over.
+   ========================================================= */
 
 .week-sponsor-card iframe,
 .week-video-card iframe{
   display:block!important;
   width:100%!important;
-  height:383px!important;
-  min-height:383px!important;
-  max-height:383px!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
   margin:0!important;
   padding:0!important;
   border:0!important;
   overflow:hidden!important;
+  vertical-align:top!important;
 }
 
 /* =========================================================
@@ -144,6 +152,7 @@
   font-weight:900!important;
   letter-spacing:.14em;
   text-transform:uppercase;
+  box-shadow:0 6px 18px rgba(255,106,0,.10);
 }
 
 .quiz-kicker::before{
@@ -275,13 +284,13 @@
 
   .week-sponsor-card iframe,
   .week-video-card iframe{
-    height:333px!important;
-    min-height:333px!important;
-    max-height:333px!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
   }
 
   .quiz-content{
-    height:333px!important;
+    height:100%!important;
   }
 }
 
@@ -298,13 +307,13 @@
 
   .week-sponsor-card iframe,
   .week-video-card iframe{
-    height:313px!important;
-    min-height:313px!important;
-    max-height:313px!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
   }
 
   .quiz-content{
-    height:313px!important;
+    height:100%!important;
     padding:24px!important;
   }
 
