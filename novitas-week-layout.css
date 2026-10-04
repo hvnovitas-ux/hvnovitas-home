@@ -2,220 +2,32 @@
 
 .week-section{padding:0 0 18px!important;background:#fff!important}
 .week-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr)!important;gap:24px!important;align-items:stretch!important}
-
 .week-card{position:relative;min-width:0!important;height:390px!important;min-height:390px!important;overflow:hidden;border-radius:24px;background:#111;border-top:7px solid #ff6a00;box-shadow:0 12px 30px rgba(0,0,0,.13);color:#fff}
 
 .week-sponsor-card iframe,.week-video-card iframe{display:block!important;width:100%!important;height:390px!important;min-height:390px!important;border:0!important}
 
-
-/* =========================================================
-   NOVITAS HANDBALQUIZ
-   Extra opvallend – zonder logo
-   ========================================================= */
-
 .week-quiz-card{
-  position:relative!important;
-  display:flex!important;
-  align-items:stretch!important;
-  color:#fff!important;
-  text-decoration:none!important;
-  isolation:isolate;
-  overflow:hidden!important;
-  border:0!important;
-  border-top:7px solid #ff6a00!important;
-  border-radius:24px!important;
-
-  background:
-    radial-gradient(circle at 15% 12%,rgba(255,122,0,.42),transparent 24%),
-    radial-gradient(circle at 88% 84%,rgba(255,106,0,.30),transparent 28%),
-    linear-gradient(145deg,#070707 0%,#171717 42%,#241006 100%)!important;
-
-  box-shadow:
-    0 14px 34px rgba(0,0,0,.18),
-    inset 0 0 0 1px rgba(255,255,255,.07)!important;
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease,
-    filter .2s ease;
+position:relative!important;display:flex!important;align-items:stretch!important;color:#fff!important;text-decoration:none!important;isolation:isolate;overflow:hidden!important;border:0!important;border-top:7px solid #ff6a00!important;border-radius:24px!important;
+background:radial-gradient(circle at 15% 12%,rgba(255,122,0,.42),transparent 24%),radial-gradient(circle at 88% 84%,rgba(255,106,0,.30),transparent 28%),linear-gradient(145deg,#070707 0%,#171717 42%,#241006 100%)!important;
+box-shadow:0 14px 34px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.07)!important;
+transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
 }
+.week-quiz-card::before{content:"?";position:absolute;z-index:0;left:-34px;top:-78px;font-family:Arial,Helvetica,sans-serif;font-size:250px;font-weight:900;line-height:1;color:rgba(255,106,0,.11);transform:rotate(-12deg);pointer-events:none}
+.week-quiz-card::after{content:"QUIZ";position:absolute;z-index:0;right:-26px;top:12px;font-family:Arial,Helvetica,sans-serif;font-size:88px;font-weight:900;line-height:1;letter-spacing:-.06em;color:rgba(255,255,255,.035);transform:rotate(8deg);pointer-events:none}
+.week-quiz-card:hover{transform:translateY(-7px) scale(1.012)!important;filter:brightness(1.06);box-shadow:0 24px 46px rgba(0,0,0,.27),0 0 34px rgba(255,106,0,.24)!important}
+.quiz-content{position:relative!important;z-index:2!important;width:100%!important;height:100%!important;padding:28px 30px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+.quiz-kicker{display:inline-flex!important;align-self:flex-start!important;align-items:center;gap:8px;padding:8px 14px!important;margin:0 0 20px!important;border-radius:999px!important;background:rgba(255,106,0,.16)!important;border:1px solid rgba(255,145,72,.34);color:#ff9a57!important;font-size:.68rem!important;font-weight:900!important;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 6px 18px rgba(255,106,0,.10)}
+.quiz-kicker::before{content:"⚡";font-size:13px}
+.quiz-content h2{margin:0!important;color:#fff!important;font-size:clamp(2rem,3.05vw,2.85rem)!important;line-height:.9!important;letter-spacing:-.045em!important;text-transform:uppercase;text-shadow:0 4px 16px rgba(0,0,0,.35)}
+.quiz-content h2 span{display:block!important;margin-top:3px;color:#ff6a00!important;text-shadow:0 0 18px rgba(255,106,0,.22)}
+.quiz-content p{max-width:350px!important;margin:18px 0 0!important;color:rgba(255,255,255,.86)!important;font-size:.98rem!important;line-height:1.45!important}
+.quiz-content p::before{content:"30 VRAGEN  •  1 UITDAGING";display:block;margin-bottom:9px;color:#ff9a57;font-size:.62rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.quiz-button{position:relative;display:flex!important;align-items:center;justify-content:center;min-height:58px!important;margin-top:auto!important;padding:0 22px!important;border-radius:999px!important;color:#fff!important;background:linear-gradient(180deg,#ff8b2a 0%,#ff6a00 55%,#e95400 100%)!important;font-size:.82rem!important;font-weight:900!important;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 10px 24px rgba(255,106,0,.28),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .18s ease,box-shadow .18s ease}
+.quiz-button::after{content:"→";margin-left:9px;font-size:18px;line-height:1}
+@keyframes quizPulse{0%,100%{box-shadow:0 10px 24px rgba(255,106,0,.28),inset 0 1px 0 rgba(255,255,255,.25)}50%{box-shadow:0 12px 30px rgba(255,106,0,.42),0 0 24px rgba(255,106,0,.16),inset 0 1px 0 rgba(255,255,255,.25)}}
+.quiz-button{animation:quizPulse 2.8s ease-in-out infinite}
+.week-quiz-card:hover .quiz-button{animation:none;transform:scale(1.035);box-shadow:0 0 0 5px rgba(255,106,0,.12),0 12px 30px rgba(255,106,0,.38)}
 
-.week-quiz-card::before{
-  content:"?";
-  position:absolute;
-  z-index:0;
-  left:-34px;
-  top:-78px;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:250px;
-  font-weight:900;
-  line-height:1;
-  color:rgba(255,106,0,.11);
-  transform:rotate(-12deg);
-  pointer-events:none;
-}
-
-.week-quiz-card::after{
-  content:"QUIZ";
-  position:absolute;
-  z-index:0;
-  right:-26px;
-  top:12px;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:88px;
-  font-weight:900;
-  line-height:1;
-  letter-spacing:-.06em;
-  color:rgba(255,255,255,.035);
-  transform:rotate(8deg);
-  pointer-events:none;
-}
-
-.week-quiz-card:hover{
-  transform:translateY(-7px) scale(1.012)!important;
-  filter:brightness(1.06);
-  box-shadow:
-    0 24px 46px rgba(0,0,0,.27),
-    0 0 34px rgba(255,106,0,.24)!important;
-}
-
-.week-quiz-card:hover .quiz-button{
-  transform:scale(1.035);
-  box-shadow:
-    0 0 0 5px rgba(255,106,0,.12),
-    0 12px 30px rgba(255,106,0,.38);
-}
-
-.quiz-content{
-  position:relative!important;
-  z-index:2!important;
-  width:100%!important;
-  height:100%!important;
-  padding:28px 30px!important;
-  display:flex!important;
-  flex-direction:column!important;
-  justify-content:flex-start!important;
-}
-
-.quiz-kicker{
-  display:inline-flex!important;
-  align-self:flex-start!important;
-  align-items:center;
-  gap:8px;
-  padding:8px 14px!important;
-  margin:0 0 20px!important;
-  border-radius:999px!important;
-  background:rgba(255,106,0,.16)!important;
-  border:1px solid rgba(255,145,72,.34);
-  color:#ff9a57!important;
-  font-size:.68rem!important;
-  font-weight:900!important;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  box-shadow:0 6px 18px rgba(255,106,0,.10);
-}
-
-.quiz-kicker::before{
-  content:"⚡";
-  font-size:13px;
-}
-
-.quiz-content h2{
-  margin:0!important;
-  color:#fff!important;
-  font-size:clamp(2rem,3.05vw,2.85rem)!important;
-  line-height:.9!important;
-  letter-spacing:-.045em!important;
-  text-transform:uppercase;
-  text-shadow:0 4px 16px rgba(0,0,0,.35);
-}
-
-.quiz-content h2 span{
-  display:block!important;
-  margin-top:3px;
-  color:#ff6a00!important;
-  text-shadow:
-    0 0 18px rgba(255,106,0,.22);
-}
-
-.quiz-content p{
-  max-width:350px!important;
-  margin:18px 0 0!important;
-  color:rgba(255,255,255,.86)!important;
-  font-size:.98rem!important;
-  line-height:1.45!important;
-}
-
-.quiz-content p::before{
-  content:"30 VRAGEN  •  1 UITDAGING";
-  display:block;
-  margin-bottom:9px;
-  color:#ff9a57;
-  font-size:.62rem;
-  font-weight:900;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-}
-
-.quiz-button{
-  position:relative;
-  display:flex!important;
-  align-items:center;
-  justify-content:center;
-  min-height:58px!important;
-  margin-top:auto!important;
-  padding:0 22px!important;
-  border-radius:999px!important;
-  color:#fff!important;
-  background:linear-gradient(180deg,#ff8b2a 0%,#ff6a00 55%,#e95400 100%)!important;
-  font-size:.82rem!important;
-  font-weight:900!important;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  box-shadow:
-    0 10px 24px rgba(255,106,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.25);
-  transition:
-    transform .18s ease,
-    box-shadow .18s ease;
-}
-
-.quiz-button::after{
-  content:"→";
-  margin-left:9px;
-  font-size:18px;
-  line-height:1;
-}
-
-@keyframes quizPulse{
-  0%,100%{box-shadow:0 10px 24px rgba(255,106,0,.28),inset 0 1px 0 rgba(255,255,255,.25)}
-  50%{box-shadow:0 12px 30px rgba(255,106,0,.42),0 0 24px rgba(255,106,0,.16),inset 0 1px 0 rgba(255,255,255,.25)}
-}
-
-.quiz-button{
-  animation:quizPulse 2.8s ease-in-out infinite;
-}
-
-.week-quiz-card:hover .quiz-button{
-  animation:none;
-}
-
-@media(max-width:1100px){
-  .week-grid{grid-template-columns:1fr 1fr!important}
-  .week-quiz-card{grid-column:1/-1}
-}
-
-@media(max-width:900px){
-  .week-grid{grid-template-columns:1fr!important;gap:16px!important}
-  .week-quiz-card{grid-column:auto}
-  .week-card,.week-sponsor-card iframe,.week-video-card iframe{height:340px!important;min-height:340px!important}
-  .quiz-content{min-height:340px!important}
-}
-
-@media(max-width:600px){
-  .week-card,.week-sponsor-card iframe,.week-video-card iframe{height:320px!important;min-height:320px!important}
-  .quiz-content{min-height:320px!important;padding:24px!important}
-  .quiz-content h2{font-size:2.25rem!important}
-  .week-quiz-card::before{font-size:190px;left:-28px;top:-50px}
-  .week-quiz-card::after{font-size:62px}
-}
+@media(max-width:1100px){.week-grid{grid-template-columns:1fr 1fr!important}.week-quiz-card{grid-column:1/-1}}
+@media(max-width:900px){.week-grid{grid-template-columns:1fr!important;gap:16px!important}.week-quiz-card{grid-column:auto}.week-card,.week-sponsor-card iframe,.week-video-card iframe{height:340px!important;min-height:340px!important}.quiz-content{min-height:340px!important}}
+@media(max-width:600px){.week-card,.week-sponsor-card iframe,.week-video-card iframe{height:320px!important;min-height:320px!important}.quiz-content{min-height:320px!important;padding:24px!important}.quiz-content h2{font-size:2.25rem!important}.week-quiz-card::before{font-size:190px;left:-28px;top:-50px}.week-quiz-card::after{font-size:62px}}
