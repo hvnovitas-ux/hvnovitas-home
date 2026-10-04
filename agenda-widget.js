@@ -1,7 +1,6 @@
-import ICAL from "https://cdn.jsdelivr.net/npm/ical.js@2.2.1/+esm";
-
 const FEED_URL = "https://novitas-agenda.hvnovitas.workers.dev/";
 const DAYS_AHEAD = 14;
+
 const statusElement = document.getElementById("agendaStatus");
 const listElement = document.getElementById("agendaList");
 
@@ -11,10 +10,7 @@ async function loadAgenda() {
   setStatus("Agenda laden...", "");
 
   try {
-    const response = await fetch(FEED_URL, {
-      method: "GET",
-      cache: "no-store"
-    });
+    const response = await fetch(FEED_URL, { cache: "no-store" });
 
     if (!response.ok) {
       throw new Error(`Agenda-server gaf HTTP ${response.status}`);
@@ -42,9 +38,71 @@ async function loadAgenda() {
 }
 
 function parseCalendar(icsText) {
-  const parsed = ICAL.parse(icsText);
-  const component = new ICAL.Component(parsed);
-  const vevents = component.getAllSubcomponents("vevent");
+  const lines = unfoldICS(icsText);
+  const events = [];
+  let current = null;
+
+  for (const line of lines) {
+    if (line === "BEGIN:VEVENT") {
+      current = {};
+      continue;
+    }
+
+    if (line === "END:VEVENT") {
+      if (current && current.dtstart) events.push(current);
+      current = null;
+      continue;
+    }
+
+    if (!current) continue;
+
+    const colon = line.indexOf(":");
+    if (colon < 0) continue;
+
+    const rawKey = line.slice(0, colon);
+    const value = line.slice(colon + 1);
+    const parts = rawKey.split(";");
+    const key = parts.shift().toUpperCase();
+    const params = {};
+
+    for (const part of parts) {
+      const eq = part.indexOf("=");
+      if (eq > 0) {
+        params[part.slice(0, eq).toUpperCase()] = part.slice(eq + 1);
+      }
+    }
+
+    if (key === "DTSTART") current.dtstart = parseICSDate(value, params);
+    else if (key === "DTEND") current.dtend = parseICSDate(value, params);
+    else if (key === "SUMMARY") current.summary = unescapeICS(value);
+    else if (key === "LOCATION") current.location = unescapeICS(value);
+    else if (key === "RRULE") current.rrule = value;
+    else if (key === "EXDATE") current.exdate = current.exdate || [];
+  }
+
+  // Parse EXDATE separately because one property can contain multiple dates.
+  let lastEvent = null;
+  for (const line of lines) {
+    if (line === "BEGIN:VEVENT") {
+      lastEvent = events[events.length - 1] || null;
+    }
+    if (!lastEvent) continue;
+    if (line.startsWith("EXDATE")) {
+      const colon = line.indexOf(":");
+      if (colon < 0) continue;
+      const rawKey = line.slice(0, colon);
+      const value = line.slice(colon + 1);
+      const params = {};
+      for (const part of rawKey.split(";").slice(1)) {
+        const eq = part.indexOf("=");
+        if (eq > 0) params[part.slice(0, eq).toUpperCase()] = part.slice(eq + 1);
+      }
+      lastEvent.exdate = (lastEvent.exdate || []).concat(
+        value.split(",").map(v => parseICSDate(v, params)).filter(Boolean)
+      );
+    }
+    if (line === "END:VEVENT") lastEvent = null;
+  }
 
   const today = startOfDay(new Date());
   const endDate = new Date(today);
@@ -52,144 +110,238 @@ function parseCalendar(icsText) {
 
   const groups = new Map();
 
-  for (const vevent of vevents) {
+  for (const event of events) {
     try {
-      const event = new ICAL.Event(vevent);
-
-      if (event.isRecurring()) {
-        processRecurringEvent(event, today, endDate, groups);
+      if (event.rrule) {
+        addRecurringEvent(event, today, endDate, groups);
       } else {
-        processSingleEvent(event, today, endDate, groups);
+        addSingleEvent(event, today, endDate, groups);
       }
-    } catch (eventError) {
-      console.warn("Agenda-item overgeslagen:", eventError);
+    } catch (e) {
+      console.warn("Agenda-item overgeslagen:", e);
     }
   }
 
   return groups;
 }
 
-function processSingleEvent(event, today, endDate, groups) {
-  if (!event.startDate) return;
-
-  const start = event.startDate.toJSDate();
-
-  if (start < today || start >= endDate) return;
-
-  const end = event.endDate ? event.endDate.toJSDate() : null;
-
-  addOccurrence(
-    event,
-    start,
-    end,
-    groups,
-    event.startDate.isDate
-  );
+function unfoldICS(text) {
+  return text
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .split("\n")
+    .reduce((out, line) => {
+      if ((line.startsWith(" ") || line.startsWith("\t")) && out.length) {
+        out[out.length - 1] += line.slice(1);
+      } else {
+        out.push(line.trimEnd());
+      }
+      return out;
+    }, [])
+    .filter(Boolean);
 }
 
-function processRecurringEvent(event, today, endDate, groups) {
-  const iterator = event.iterator();
-  let next;
-  let guard = 0;
+function unescapeICS(value) {
+  return String(value)
+    .replace(/\\n/gi, " ")
+    .replace(/\\,/g, ",")
+    .replace(/\\;/g, ";")
+    .replace(/\\\\/g, "\\")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-  while (guard < 5000 && (next = iterator.next())) {
-    guard++;
+function parseICSDate(value, params = {}) {
+  if (!value) return null;
 
-    const occurrenceDate = next.toJSDate();
+  const isDateOnly =
+    params.VALUE === "DATE" || /^\d{8}$/.test(value);
 
-    if (occurrenceDate >= endDate) break;
-    if (occurrenceDate < today) continue;
+  if (isDateOnly) {
+    const y = Number(value.slice(0, 4));
+    const m = Number(value.slice(4, 6)) - 1;
+    const d = Number(value.slice(6, 8));
+    return { date: new Date(y, m, d), isDate: true };
+  }
 
-    let details = null;
+  const clean = value.replace(/[^\dTZ]/g, "");
+  const m = clean.match(
+    /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?Z?$/
+  );
+  if (!m) return null;
 
-    try {
-      details = event.getOccurrenceDetails(next);
-    } catch (error) {
-      console.warn(
-        "Occurrence-details konden niet worden gelezen:",
-        error
+  const y = Number(m[1]);
+  const mo = Number(m[2]) - 1;
+  const d = Number(m[3]);
+  const h = Number(m[4]);
+  const mi = Number(m[5]);
+  const s = Number(m[6] || 0);
+
+  // The site is Dutch and the calendar uses Europe/Amsterdam.
+  // For the display window, local browser time is the correct representation.
+  return { date: new Date(y, mo, d, h, mi, s), isDate: false };
+}
+
+function addSingleEvent(event, today, endDate, groups) {
+  if (!event.dtstart) return;
+
+  const start = event.dtstart.date;
+  if (start < today || start >= endDate) return;
+
+  let end = event.dtend ? event.dtend.date : null;
+  if (!end && event.dtstart.isDate) {
+    end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+  }
+
+  addOccurrence(event, start, end, groups, event.dtstart.isDate);
+}
+
+function addRecurringEvent(event, today, endDate, groups) {
+  const rule = parseRRule(event.rrule);
+  if (!rule || !rule.FREQ) {
+    addSingleEvent(event, today, endDate, groups);
+    return;
+  }
+
+  const originalStart = event.dtstart.date;
+  const duration =
+    event.dtend && event.dtstart
+      ? event.dtend.date.getTime() - originalStart.getTime()
+      : event.dtstart.isDate ? 24 * 60 * 60 * 1000 : 60 * 60 * 1000;
+
+  const exdates = new Set(
+    (event.exdate || []).map(x => dateTimeKey(x.date))
+  );
+
+  let cursor = new Date(originalStart);
+  let count = 0;
+  const max = 5000;
+
+  while (count < max && cursor < endDate) {
+    count++;
+
+    if (cursor >= today && !exdates.has(dateTimeKey(cursor)) && matchesRule(cursor, originalStart, rule)) {
+      addOccurrence(
+        event,
+        new Date(cursor),
+        new Date(cursor.getTime() + duration),
+        groups,
+        event.dtstart.isDate
       );
     }
 
-    let start = occurrenceDate;
-    let end = null;
-    let isAllDay = false;
+    cursor = advanceOneDay(cursor);
 
-    if (details && details.startDate) {
-      start = details.startDate.toJSDate();
-      isAllDay = !!details.startDate.isDate;
-
-      if (details.endDate) {
-        end = details.endDate.toJSDate();
-      }
+    if (rule.UNTIL) {
+      const until = parseRuleUntil(rule.UNTIL);
+      if (until && cursor > until) break;
     }
-
-    if (!end && event.startDate && event.endDate) {
-      const duration =
-        event.endDate.toJSDate().getTime() -
-        event.startDate.toJSDate().getTime();
-
-      if (duration > 0) {
-        end = new Date(start.getTime() + duration);
-      }
-    }
-
-    if (start < today || start >= endDate) continue;
-
-    addOccurrence(
-      event,
-      start,
-      end,
-      groups,
-      isAllDay
-    );
+    if (rule.COUNT && count >= Number(rule.COUNT) + 366) break;
   }
+}
+
+function parseRRule(value) {
+  const rule = {};
+  for (const part of value.split(";")) {
+    const eq = part.indexOf("=");
+    if (eq > 0) rule[part.slice(0, eq).toUpperCase()] = part.slice(eq + 1);
+  }
+  return rule;
+}
+
+function matchesRule(date, original, rule) {
+  const freq = String(rule.FREQ || "").toUpperCase();
+  const interval = Math.max(1, Number(rule.INTERVAL || 1));
+
+  const dayDiff = Math.floor(
+    (startOfDay(date) - startOfDay(original)) / 86400000
+  );
+
+  if (dayDiff < 0) return false;
+
+  if (freq === "DAILY") {
+    return dayDiff % interval === 0;
+  }
+
+  if (freq === "WEEKLY") {
+    const weekDiff = Math.floor(dayDiff / 7);
+    if (weekDiff % interval !== 0) return false;
+
+    if (rule.BYDAY) {
+      const days = rule.BYDAY.split(",").map(dayCodeToNumber);
+      return days.includes(date.getDay());
+    }
+    return date.getDay() === original.getDay();
+  }
+
+  if (freq === "MONTHLY") {
+    const monthDiff =
+      (date.getFullYear() - original.getFullYear()) * 12 +
+      date.getMonth() - original.getMonth();
+
+    if (monthDiff < 0 || monthDiff % interval !== 0) return false;
+
+    if (rule.BYMONTHDAY) {
+      return rule.BYMONTHDAY.split(",").map(Number).includes(date.getDate());
+    }
+    return date.getDate() === original.getDate();
+  }
+
+  if (freq === "YEARLY") {
+    const yearDiff = date.getFullYear() - original.getFullYear();
+    if (yearDiff < 0 || yearDiff % interval !== 0) return false;
+    return date.getMonth() === original.getMonth() &&
+           date.getDate() === original.getDate();
+  }
+
+  return false;
+}
+
+function dayCodeToNumber(code) {
+  return {
+    SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6
+  }[code.replace(/[+-]?\d+$/, "")];
+}
+
+function parseRuleUntil(value) {
+  if (!value) return null;
+  const parsed = parseICSDate(value, {});
+  return parsed ? parsed.date : null;
+}
+
+function advanceOneDay(date) {
+  const next = new Date(date);
+  next.setDate(next.getDate() + 1);
+  return next;
 }
 
 function addOccurrence(event, start, end, groups, isAllDay = false) {
   const dateKey = getDateKey(start);
 
-  const title = cleanText(
-    event.summary || "Activiteit"
-  );
-
-  const location = cleanText(
-    event.location || ""
-  );
-
   const item = {
-    title,
-    location,
+    title: cleanText(event.summary || "Activiteit"),
+    location: cleanText(event.location || ""),
     start,
     end,
     isAllDay,
-    type: getEventType(title)
+    type: getEventType(event.summary || "")
   };
 
-  if (!groups.has(dateKey)) {
-    groups.set(dateKey, []);
-  }
-
+  if (!groups.has(dateKey)) groups.set(dateKey, []);
   const existing = groups.get(dateKey);
 
-  const duplicate = existing.some(
-    entry =>
-      entry.title === item.title &&
-      entry.start.getTime() === item.start.getTime()
+  const duplicate = existing.some(entry =>
+    entry.title === item.title &&
+    entry.start.getTime() === item.start.getTime()
   );
 
-  if (!duplicate) {
-    existing.push(item);
-  }
+  if (!duplicate) existing.push(item);
 }
 
 function getEventType(title) {
-  const normalized = title.toLowerCase();
+  const normalized = String(title).toLowerCase();
 
-  if (
-    normalized.includes("training") ||
-    normalized.includes("trainen")
-  ) {
+  if (normalized.includes("training") || normalized.includes("trainen")) {
     return "training";
   }
 
@@ -213,17 +365,13 @@ function renderAgenda(groups) {
     empty.className = "agenda-empty";
     empty.textContent =
       "Er staan de komende 14 dagen geen activiteiten in de agenda.";
-
     listElement.appendChild(empty);
-    setStatus(
-      "Geen activiteiten de komende 14 dagen.",
-      "success"
-    );
+    setStatus("Geen activiteiten de komende 14 dagen.", "success");
     return;
   }
 
-  const sortedDays = Array.from(groups.entries()).sort(
-    (a, b) => a[0].localeCompare(b[0])
+  const sortedDays = Array.from(groups.entries()).sort((a, b) =>
+    a[0].localeCompare(b[0])
   );
 
   let totalEvents = 0;
@@ -231,10 +379,7 @@ function renderAgenda(groups) {
   for (const [dateKey, events] of sortedDays) {
     events.sort((a, b) => a.start - b.start);
     totalEvents += events.length;
-
-    listElement.appendChild(
-      createDayElement(dateKey, events)
-    );
+    listElement.appendChild(createDayElement(dateKey, events));
   }
 
   setStatus(
@@ -261,10 +406,7 @@ function createDayElement(dateKey, events) {
 
   const month = document.createElement("div");
   month.className = "agenda-date-month";
-  month.textContent =
-    new Intl.DateTimeFormat("nl-NL", {
-      month: "long"
-    }).format(date);
+  month.textContent = new Intl.DateTimeFormat("nl-NL", { month: "long" }).format(date);
 
   dateBlock.append(number, month);
 
@@ -273,18 +415,14 @@ function createDayElement(dateKey, events) {
 
   const weekday = document.createElement("div");
   weekday.className = "agenda-weekday";
-  weekday.textContent =
-    new Intl.DateTimeFormat("nl-NL", {
-      weekday: "long"
-    }).format(date);
+  weekday.textContent = new Intl.DateTimeFormat("nl-NL", { weekday: "long" }).format(date);
 
   const fullDate = document.createElement("div");
   fullDate.className = "agenda-full-date";
-  fullDate.textContent =
-    new Intl.DateTimeFormat("nl-NL", {
-      day: "numeric",
-      month: "long"
-    }).format(date);
+  fullDate.textContent = new Intl.DateTimeFormat("nl-NL", {
+    day: "numeric",
+    month: "long"
+  }).format(date);
 
   titleBlock.append(weekday, fullDate);
   header.append(dateBlock, titleBlock);
@@ -315,7 +453,6 @@ function createEventElement(event) {
   const title = document.createElement("div");
   title.className = "agenda-event-title";
   title.textContent = event.title;
-
   main.appendChild(title);
 
   if (event.location) {
@@ -334,20 +471,14 @@ function createEventElement(event) {
   }
 
   article.append(dot, time, main);
-
   return article;
 }
 
 function formatTime(event) {
-  if (event.isAllDay) {
-    return "Hele dag";
-  }
+  if (event.isAllDay) return "Hele dag";
 
   const startText = formatClock(event.start);
-
-  if (!event.end) {
-    return startText;
-  }
+  if (!event.end) return startText;
 
   return `${startText} – ${formatClock(event.end)}`;
 }
@@ -366,11 +497,7 @@ function startOfDay(date) {
 }
 
 function getDateKey(date) {
-  return `${date.getFullYear()}-${String(
-    date.getMonth() + 1
-  ).padStart(2, "0")}-${String(
-    date.getDate()
-  ).padStart(2, "0")}`;
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
 function parseDateKey(key) {
@@ -378,22 +505,24 @@ function parseDateKey(key) {
   return new Date(year, month - 1, day);
 }
 
-function cleanText(value) {
-  if (value === null || value === undefined) {
-    return "";
-  }
+function dateTimeKey(date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+    String(date.getHours()).padStart(2, "0"),
+    String(date.getMinutes()).padStart(2, "0"),
+    String(date.getSeconds()).padStart(2, "0")
+  ].join("");
+}
 
-  return String(value)
-    .replace(/\n/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function cleanText(value) {
+  if (value === null || value === undefined) return "";
+  return String(value).replace(/\n/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function setStatus(text, type) {
   statusElement.textContent = text;
   statusElement.className = "agenda-status";
-
-  if (type) {
-    statusElement.classList.add(type);
-  }
+  if (type) statusElement.classList.add(type);
 }
