@@ -65,7 +65,7 @@
 
 .agenda-frame-new{
   width:100%;
-  height:225px;
+  height:285px;
   overflow:hidden;
   background:#fff;
   border:0;
@@ -76,7 +76,7 @@
 .agenda-frame-new iframe{
   display:block;
   width:100%;
-  height:225px;
+  height:285px;
   border:0;
 }
 
@@ -95,7 +95,7 @@
 .week-card{
   position:relative;
   min-width:0;
-  min-height:430px;
+  min-height:320px;
   overflow:hidden;
   border-radius:24px;
   background:#111;
@@ -108,7 +108,7 @@
 .week-video-card iframe{
   display:block;
   width:100%;
-  height:423px;
+  height:320px;
   border:0;
 }
 
@@ -239,12 +239,49 @@
 }
 
 .omejan-wrap{
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+  height:170px!important;
+  overflow:hidden!important;
+}
+
+.omejan-wrap .embed-frame{
+  display:block!important;
+  width:100%!important;
+  height:170px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+
+.image-sections .content-wide,
+.image-sections-grid,
+.photos-card{
   margin-bottom:0!important;
   padding-bottom:0!important;
 }
 
-.omejan-wrap .embed-frame{
+.image-sections{
+  padding-bottom:0!important;
   margin-bottom:0!important;
+}
+
+.novitas-15-banner{
+  margin:0!important;
+  padding:0!important;
+  line-height:0!important;
+}
+
+.novitas-15-banner img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  margin:0!important;
+}
+
+.image-sections + .media-section{
+  margin-top:0!important;
 }
 
 /* Responsive */
@@ -259,6 +296,7 @@
 }
 
 @media(max-width:900px){
+  .omejan-wrap,.omejan-wrap .embed-frame{height:210px!important;}
   .novitas-agenda-header{
     padding:24px;
     align-items:flex-start;
@@ -296,6 +334,7 @@
 }
 
 @media(max-width:600px){
+  .omejan-wrap,.omejan-wrap .embed-frame{height:220px!important;}
   .novitas-agenda-header{
     padding:21px 18px;
     border-radius:15px 15px 0 0;

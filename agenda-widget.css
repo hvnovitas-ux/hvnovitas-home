@@ -18,7 +18,7 @@ html,body{
 
 .agenda-widget{
   width:100%;
-  height:225px!important;
+  height:285px!important;
   margin:0;
   background:#fff;
   overflow:hidden!important;
@@ -49,7 +49,7 @@ html,body{
 
 .agenda-day{
   min-width:250px!important;
-  height:205px;
+  height:270px;
   margin:0!important;
   border:0!important;
   border-right:1px solid #e5e5e5!important;
@@ -121,7 +121,7 @@ html,body{
   grid-template-columns:8px 102px minmax(0,1fr)!important;
   gap:8px!important;
   align-items:center!important;
-  min-height:44px!important;
+  min-height:49px!important;
   padding:8px 10px!important;
   border-bottom:1px solid #eee!important;
 }
