@@ -977,7 +977,7 @@ p {
 .embed-frame {
   width: 100%;
 
-  height: 480px;
+  height: 650px;
 
   display: block;
 
@@ -988,7 +988,7 @@ p {
 
 .highlights-wrap,
 .omejan-wrap {
-  min-height: 480px;
+  min-height: 650px;
 }
 
 .omejan-wrap .embed-frame {
