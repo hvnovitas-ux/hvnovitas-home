@@ -377,8 +377,9 @@
 
     .novitas-quiz-banner {
       position: relative;
-      flex: 1 1 auto;
-      min-height: 300px;
+      flex: 0 0 400px;
+      height: 400px;
+      min-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -493,12 +494,16 @@
       }
 
       .novitas-quiz-banner {
-        min-height: 300px;
+        flex: 0 0 400px;
+        height: 400px;
+        min-height: 400px;
       }
     }
 
     @media (max-width: 600px) {
       .novitas-quiz-banner {
+        flex: 0 0 310px;
+        height: 310px;
         min-height: 310px;
         padding: 25px 18px;
       }
