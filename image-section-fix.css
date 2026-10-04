@@ -1,73 +1,57 @@
 
-/* =========================================================
-   HV NOVITAS - FOTO/HIGHLIGHTS SECTIE DEFINITIEF
-   Geen interne scrollbars + geen witte ruimte onder foto's
-========================================================= */
-
+/* HV NOVITAS - HIGHLIGHTS + FOTO UITLIJNING DEFINITIEF */
 .image-sections{
   padding-top:20px!important;
   padding-bottom:0!important;
-  background:#fff!important;
 }
-
 .image-sections-grid{
   display:grid!important;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
   gap:18px!important;
   align-items:start!important;
 }
-
 .image-section-card{
   min-width:0!important;
   overflow:hidden!important;
-  background:#fff!important;
-  border-radius:18px!important;
-  box-shadow:var(--shadow-soft)!important;
+  margin:0!important;
+  padding:0!important;
 }
-
-.image-section-card::before{
-  content:""!important;
-  display:block!important;
-  height:5px!important;
-  background:linear-gradient(90deg,var(--orange),#ff9b4d)!important;
-}
-
 .highlights-wrap{
-  min-height:0!important;
-  height:650px!important;
+  height:760px!important;
+  min-height:760px!important;
   overflow:hidden!important;
 }
-
 .highlights-wrap .embed-frame{
   display:block!important;
   width:100%!important;
-  height:650px!important;
+  height:760px!important;
+  min-height:760px!important;
   border:0!important;
-  overflow:hidden!important;
-  background:#fff!important;
-}
-
-.photos-card{
+  margin:0!important;
   padding:0!important;
 }
-
-.omejan-wrap{
-  min-height:0!important;
-  height:440px!important;
+.photos-card{
+  padding:0!important;
   overflow:hidden!important;
-  background:#111!important;
 }
-
+.omejan-wrap{
+  height:440px!important;
+  min-height:440px!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:0!important;
+}
 .omejan-wrap .embed-frame{
   display:block!important;
   width:100%!important;
   height:440px!important;
+  min-height:440px!important;
   border:0!important;
-  overflow:hidden!important;
-  background:#111!important;
+  margin:0!important;
+  padding:0!important;
 }
-
 .novitas-15-banner{
+  display:block!important;
   width:100%!important;
   margin:0!important;
   padding:0!important;
@@ -75,43 +59,15 @@
   background:#000!important;
   overflow:hidden!important;
 }
-
 .novitas-15-banner img{
   display:block!important;
   width:100%!important;
   height:auto!important;
   margin:0!important;
   padding:0!important;
-  border:0!important;
 }
-
 @media(max-width:900px){
-  .image-sections-grid{
-    grid-template-columns:1fr!important;
-  }
-  .highlights-wrap,
-  .highlights-wrap .embed-frame{
-    height:620px!important;
-  }
-  .omejan-wrap,
-  .omejan-wrap .embed-frame{
-    height:360px!important;
-  }
-}
-
-@media(max-width:600px){
-  .image-sections{
-    padding-top:12px!important;
-  }
-  .image-sections-grid{
-    gap:12px!important;
-  }
-  .highlights-wrap,
-  .highlights-wrap .embed-frame{
-    height:560px!important;
-  }
-  .omejan-wrap,
-  .omejan-wrap .embed-frame{
-    height:300px!important;
-  }
+ .image-sections-grid{grid-template-columns:1fr!important}
+ .highlights-wrap,.highlights-wrap .embed-frame{height:700px!important;min-height:700px!important}
+ .omejan-wrap,.omejan-wrap .embed-frame{height:360px!important;min-height:360px!important}
 }
