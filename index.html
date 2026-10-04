@@ -372,21 +372,19 @@
       flex-direction: column;
       gap: 14px;
       width: 100%;
-      min-height: 619px;
     }
 
     .novitas-quiz-banner {
       position: relative;
-      flex: 0 0 325px;
-      height: 325px;
-      min-height: 325px;
-flex: 1 1 auto;
-      min-height: 300px;
+      
+      flex: 0 0 390px;
+      height: 390px;
+      min-height: 390px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: 28px 22px;
+      padding: 24px 22px;
       border-radius: 18px;
       color: #ffffff;
       text-decoration: none;
@@ -399,6 +397,7 @@ flex: 1 1 auto;
       box-shadow:
         0 14px 30px rgba(0,0,0,.20),
         inset 0 0 0 1px rgba(255,255,255,.04);
+    
     }
 
     .novitas-quiz-banner::before,
@@ -496,20 +495,30 @@ flex: 1 1 auto;
       }
 
       .novitas-quiz-banner {
-        flex: 0 0 325px;
-        height: 325px;
-        min-height: 325px;
-}
+        min-height: 300px;
+      }
     }
 
     @media (max-width: 600px) {
       .novitas-quiz-banner {
+        flex: 0 0 310px;
+        height: 310px;
         min-height: 310px;
         padding: 25px 18px;
       }
 
       .novitas-quiz-banner h3 {
         font-size: 2.25rem;
+      }
+    }
+
+
+    /* =====================================================
+       QUICK LINKS - 7 KNOPPEN
+       ===================================================== */
+    @media (min-width: 901px) {
+      .quick-links a:nth-child(7) {
+        grid-column: 2;
       }
     }
 
@@ -729,27 +738,11 @@ flex: 1 1 auto;
           </a>
 
           <a
-            href="https://sites.google.com/site/hvnovitas/toernooien?authuser=0"
-            target="_blank"
-            rel="noopener"
-          >
-            Toernooien
-          </a>
-
-          <a
             href="https://hvnovitas-ux.github.io/hvnovitas-beheer/vrienden-van-novitas.html"
             target="_blank"
             rel="noopener"
           >
             Vrienden van Novitas
-          </a>
-
-          <a
-            href="https://sites.google.com/site/hvnovitas/10-jaar-geleden?authuser=0"
-            target="_blank"
-            rel="noopener"
-          >
-            10 jaar geleden
           </a>
 
           <a
