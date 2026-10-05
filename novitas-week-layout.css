@@ -10,7 +10,7 @@
 .week-grid{
   display:grid!important;
   grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr)!important;
-  grid-auto-rows:390px!important;
+  grid-auto-rows:466px!important;
   gap:24px!important;
   align-items:stretch!important;
 }
@@ -20,9 +20,9 @@
   position:relative!important;
   display:block!important;
   width:100%!important;
-  height:390px!important;
-  min-height:390px!important;
-  max-height:390px!important;
+  height:466px!important;
+  min-height:466px!important;
+  max-height:466px!important;
   min-width:0!important;
   margin:0!important;
   padding:0!important;
@@ -49,9 +49,9 @@
 .week-video-card iframe{
   display:block!important;
   width:100%!important;
-  height:390px!important;
-  min-height:390px!important;
-  max-height:390px!important;
+  height:466px!important;
+  min-height:466px!important;
+  max-height:466px!important;
   margin:0!important;
   padding:0!important;
   border:0!important;
@@ -264,7 +264,7 @@
 @media(max-width:1100px){
   .week-grid{
     grid-template-columns:1fr 1fr!important;
-    grid-auto-rows:390px!important;
+    grid-auto-rows:466px!important;
   }
 
   .week-quiz-card{
@@ -273,9 +273,9 @@
 
   .week-sponsor-card iframe,
   .week-video-card iframe{
-    height:390px!important;
-    min-height:390px!important;
-    max-height:390px!important;
+    height:466px!important;
+    min-height:466px!important;
+    max-height:466px!important;
   }
 }
 
@@ -344,4 +344,36 @@
   .week-quiz-card::after{
     font-size:62px;
   }
+}
+
+
+/* =========================================================
+   VOLLEDIG KADER - SPONSOR + VIDEO + QUIZ
+   Alle drie gebruiken exact dezelfde kaart-hoogte.
+========================================================= */
+
+.week-sponsor-card,
+.week-video-card,
+.week-quiz-card{
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+}
+
+.week-sponsor-card iframe,
+.week-video-card iframe{
+  height:100%!important;
+  min-height:100%!important;
+  max-height:none!important;
+}
+
+.week-quiz-card,
+.quiz-content{
+  height:100%!important;
+}
+
+/* Geen extra ruimte onder de ingesloten kaarten */
+.week-sponsor-card,
+.week-video-card{
+  background:#111!important;
 }
