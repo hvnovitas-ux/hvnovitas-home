@@ -377,3 +377,23 @@
 .week-video-card{
   background:#111!important;
 }
+
+
+/* Laatste Home-afwerking: kaarthoogte gelijk, footer niet afsnijden */
+.week-sponsor-card,
+.week-video-card,
+.week-quiz-card{
+  height:466px!important;
+  min-height:466px!important;
+  max-height:466px!important;
+  overflow:hidden!important;
+}
+
+.week-video-card iframe,
+.week-sponsor-card iframe{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  border:0!important;
+}
