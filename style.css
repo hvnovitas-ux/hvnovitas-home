@@ -1874,8 +1874,9 @@ img,
   flex: 1 1 auto;
   min-width: 0;
   min-height: 42px;
-  padding: 5px 2px 9px;
-  color: #ff8733;
+  padding: 5px 4px 9px;
+  color: #fffaf2;
+  -webkit-text-stroke: .45px rgba(105, 35, 0, .95);
   font-size: clamp(15px, 2.35vw, 24px);
   font-weight: 900;
   line-height: 1.18;
@@ -1883,9 +1884,11 @@ img,
   text-transform: uppercase;
   overflow-wrap: anywhere;
   text-shadow:
-    0 0 3px rgba(255, 130, 45, .98),
-    0 0 10px rgba(255, 91, 0, .78),
-    0 0 22px rgba(255, 68, 0, .38);
+    0 1px 1px rgba(65, 19, 0, .98),
+    0 0 3px rgba(83, 27, 0, .95),
+    0 0 8px rgba(0, 0, 0, .72),
+    0 0 14px rgba(255, 112, 20, .95),
+    0 0 26px rgba(255, 68, 0, .72);
 }
 
 .novitas-news-neon:empty {
@@ -1900,7 +1903,7 @@ img,
   width: min(68%, 330px);
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #ff4f00, #ff9b3d 68%, rgba(255, 238, 216, .9), transparent);
+  background: linear-gradient(90deg, #fff4e6, #ff9b3d 68%, rgba(255, 238, 216, .96), transparent);
   box-shadow: 0 0 4px rgba(255, 96, 0, .95), 0 0 12px rgba(255, 70, 0, .7);
   pointer-events: none;
 }
