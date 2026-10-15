@@ -29,6 +29,41 @@
 .quiz-kicker,.quiz-content h2,.quiz-content p,.quiz-subtitle,.quiz-stats,.quiz-button{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media(max-width:900px){.novitas-agenda-header{padding:24px;align-items:flex-start;flex-direction:column}.agenda-button{width:100%}.agenda-frame-new,.agenda-frame-new iframe{height:390px}.week-grid{grid-template-columns:1fr}.week-card,.week-sponsor-card iframe,.week-video-card iframe{min-height:320px;height:320px}.quiz-content{padding:28px}}
 @media(max-width:600px){.agenda-section{padding-top:30px}.novitas-agenda-header{padding:22px 20px;border-radius:15px 15px 0 0}.novitas-agenda-header h2{font-size:2.6rem}.agenda-frame-new,.agenda-frame-new iframe{height:430px}.agenda-frame-new{border-radius:0 0 15px 15px}.week-section{padding-bottom:34px}.week-grid{gap:14px}.week-card,.week-sponsor-card iframe,.week-video-card iframe{min-height:300px;height:300px}.quiz-content{padding:24px}.quiz-content h2{font-size:2.25rem}}
+
+/* Novitas neon divider: glowing orange line between news and sponsors */
+.novitas-neon-divider{
+  position:relative;
+  isolation:isolate;
+  width:min(560px,78%);
+  height:26px;
+  margin:-2px auto 8px;
+  pointer-events:none;
+}
+.novitas-neon-divider::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:50%;
+  height:2px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,76,0,.48) 12%,#ff5b00 30%,#ff9a3d 43%,#fff2d8 50%,#ff9a3d 57%,#ff5b00 70%,rgba(255,76,0,.48) 88%,transparent 100%);
+  box-shadow:0 0 4px rgba(255,97,0,.95),0 0 10px rgba(255,95,0,.8),0 0 22px rgba(255,78,0,.48);
+}
+.novitas-neon-divider::after{
+  content:"";
+  position:absolute;
+  left:15%;right:15%;top:50%;
+  height:13px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,rgba(255,91,0,.6),transparent);
+  filter:blur(8px);
+  opacity:.9;
+}
+@media(max-width:600px){
+  .novitas-neon-divider{width:84%;height:20px;margin:0 auto 6px}
+  .novitas-neon-divider::before{box-shadow:0 0 3px rgba(255,97,0,.95),0 0 8px rgba(255,95,0,.72),0 0 16px rgba(255,78,0,.4)}
+}
 </style>
 <link rel="stylesheet" href="/novitas-week-layout.css?v=20261005-1">
 
@@ -87,6 +122,8 @@
 <div class="news-more-wrap"><a class="news-more" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/news.html" target="_blank" rel="noopener">Meer nieuws →</a></div>
 </div>
 </section>
+
+<div class="novitas-neon-divider" aria-hidden="true"></div>
 
 <section class="section sponsors-section">
 <div class="content-wide">
