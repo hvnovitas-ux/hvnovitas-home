@@ -1858,3 +1858,66 @@ img,
     font-size: .92rem;
   }
 }
+
+/* =========================================================
+   NOVITAS NEON — in het zwarte vlak links van Meer nieuws
+   ========================================================= */
+.news-more-wrap {
+  align-items: center;
+  gap: clamp(18px, 3vw, 38px);
+}
+
+.novitas-news-neon {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  min-width: 36px;
+  height: 2px;
+  margin-right: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 77, 0, .02) 0%,
+    rgba(255, 77, 0, .3) 15%,
+    #ff5b00 38%,
+    #ff9a3d 72%,
+    #fff0db 96%,
+    #ff7200 100%
+  );
+  box-shadow:
+    0 0 3px rgba(255, 106, 0, .95),
+    0 0 8px rgba(255, 87, 0, .78),
+    0 0 19px rgba(255, 75, 0, .42);
+}
+
+.novitas-news-neon::after {
+  content: "";
+  position: absolute;
+  inset: -5px 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 83, 0, .18) 15%,
+    rgba(255, 101, 0, .7) 65%,
+    rgba(255, 239, 215, .78) 95%,
+    transparent 100%
+  );
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .news-more-wrap {
+    gap: 16px;
+  }
+
+  .novitas-news-neon {
+    min-width: 24px;
+    box-shadow:
+      0 0 3px rgba(255, 106, 0, .9),
+      0 0 7px rgba(255, 87, 0, .65),
+      0 0 13px rgba(255, 75, 0, .35);
+  }
+}
+
