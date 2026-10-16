@@ -1923,3 +1923,32 @@ img,
     width: min(38%, 160px);
   }
 }
+
+
+/* ACHTERGROND HV NOVITAS — actiefoto achter de bestaande panelen.
+   De witte inhoudsvakken, knoppen en teksten blijven ongewijzigd. */
+body {
+  background-color: #17191d;
+  background-image:
+    linear-gradient(rgba(12, 15, 20, .42), rgba(12, 15, 20, .42)),
+    url("/images/novitas-handbal-background.webp");
+  background-position: center center, center center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-attachment: fixed, fixed;
+}
+
+/* Alleen de buitenste sectie-achtergronden transparant maken.
+   De bestaande witte kaarten en inhoudsvakken behouden hun eigen achtergrond. */
+.intro,
+.image-sections,
+.agenda-section,
+.week-section {
+  background: transparent !important;
+}
+
+@media (max-width: 650px) {
+  body {
+    background-attachment: scroll, scroll;
+  }
+}
