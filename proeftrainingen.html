@@ -43,6 +43,21 @@
     .trial-form-heading p{margin:0;color:rgba(255,255,255,.8)}
     .trial-form-body{padding:clamp(10px,2vw,22px)}
     .trial-form-frame{width:100%;height:1250px;border:0;display:block;background:#fff;border-radius:10px}
+    .trial-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .trial-fields label{display:flex;flex-direction:column;gap:8px;color:#242424;font-weight:800;font-size:.94rem}
+    .trial-fields input,.trial-fields select,.trial-fields textarea{width:100%;min-height:48px;border:1px solid #d7d9dd;border-radius:10px;padding:12px 13px;background:#fff;color:#222;font:inherit;font-weight:400;outline:none}
+    .trial-fields input:focus,.trial-fields select:focus,.trial-fields textarea:focus{border-color:#ff6a00;box-shadow:0 0 0 3px rgba(255,106,0,.14)}
+    .trial-fields textarea{resize:vertical;min-height:110px}
+    .trial-full{grid-column:1/-1}
+    .trial-consent{display:flex;gap:11px;align-items:flex-start;margin:22px 0;color:#444;line-height:1.55;font-size:.94rem}
+    .trial-consent input{width:18px;height:18px;flex:0 0 auto;margin-top:3px;accent-color:#ff6a00}
+    .trial-submit-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+    .trial-submit-row button{border:0;cursor:pointer}
+    .trial-submit-row button:disabled{opacity:.65;cursor:wait}
+    .trial-required{color:#666;font-size:.85rem}
+    .trial-message{display:none;margin-top:20px;padding:15px 17px;border-radius:10px;line-height:1.5}
+    .trial-message.success{display:block;background:#edf8f0;border:1px solid #b8e2c3;color:#185c2b}
+    .trial-message.error{display:block;background:#fff0ed;border:1px solid #f1c0b8;color:#8a2718}
     .trial-form-fallback{text-align:center;margin:0;padding:0 22px 28px;color:#63676d}
     .trial-form-fallback a{color:#a94300;font-weight:800}
     .trial-note{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;margin-top:22px;background:#fff;border-left:5px solid var(--orange);border-radius:12px;color:#555;box-shadow:0 6px 18px rgba(24,25,27,.04)}
@@ -61,7 +76,7 @@
       .trial-step-number{grid-row:span 2;margin:0}
       .trial-step h3{align-self:end}
       .trial-step p{grid-column:2}
-      .trial-form-frame{height:1450px}
+      .trial-form-frame{height:1450px}.trial-fields{grid-template-columns:1fr}.trial-full{grid-column:auto}
     }
     @media(max-width:480px){
       .trial-topbar .content-wide{min-height:66px}
@@ -129,16 +144,31 @@
           <p>Vul hieronder het bestaande aanmeldformulier in. Je aanvraag blijft binnenkomen via het huidige Google Form.</p>
         </div>
         <div class="trial-form-body">
-          <iframe
-            class="trial-form-frame"
-            src="https://docs.google.com/forms/d/1Naoxd0nUkjq9F0AQxLanIGKehbu98ApGIFrrVLhocy0/viewform?embedded=true"
-            title="Aanmeldformulier proeftraining HV Novitas"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="camera; microphone; geolocation">
-          </iframe>
+          <form id="trialForm" class="trial-form">
+            <div class="trial-fields">
+              <label>Voornaam *<input name="voornaam" autocomplete="given-name" required maxlength="80"></label>
+              <label>Achternaam *<input name="achternaam" autocomplete="family-name" required maxlength="100"></label>
+              <label>Geboortedatum *<input name="geboortedatum" type="date" required></label>
+              <label>E-mailadres *<input name="email" type="email" autocomplete="email" required maxlength="180"></label>
+              <label>Telefoonnummer *<input name="telefoon" type="tel" autocomplete="tel" required maxlength="40"></label>
+              <label>Voor wie is de proeftraining? *
+                <select name="doelgroep" required>
+                  <option value="">Kies een leeftijdsgroep</option>
+                  <option value="Jeugd">Jeugd</option><option value="Volwassene">Volwassene</option>
+                </select>
+              </label>
+              <label class="trial-full">Naam ouder/verzorger (bij aanmelding onder 18 jaar)<input name="ouderNaam" maxlength="120"></label>
+              <label class="trial-full">Waar heb je eventueel al gehandbald? <input name="ervaring" maxlength="180" placeholder="Bijvoorbeeld: nog nooit, of naam vereniging"></label>
+              <label class="trial-full">Opmerking of vraag<textarea name="opmerking" rows="4" maxlength="1000" placeholder="Vertel ons gerust iets meer (optioneel)"></textarea></label>
+            </div>
+            <label class="trial-consent"><input type="checkbox" name="privacyAkkoord" required> Ik geef toestemming dat HV Novitas mijn gegevens gebruikt om contact met mij op te nemen over een proeftraining. *</label>
+            <div class="trial-submit-row">
+              <button type="submit" class="trial-cta">VERSTUUR AANMELDING <span aria-hidden="true">→</span></button>
+              <span class="trial-required">* Verplichte velden</span>
+            </div>
+            <div id="trialMessage" class="trial-message" role="status" aria-live="polite"></div>
+          </form>
         </div>
-        <p class="trial-form-fallback">Laadt het formulier niet goed? <a href="https://docs.google.com/forms/d/1Naoxd0nUkjq9F0AQxLanIGKehbu98ApGIFrrVLhocy0/viewform" target="_blank" rel="noopener noreferrer">Open het aanmeldformulier in een nieuw tabblad</a>.</p>
       </section>
 
       <aside class="trial-note">
@@ -155,5 +185,109 @@
       <a href="mailto:info@hvnovitas.nl">info@hvnovitas.nl</a>
     </div>
   </footer>
+<script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+    import emailjs from "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/+esm";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDWYYS09i4YN9tnCmAzeiicD9T4YZ3a6HE",
+      authDomain: "hv-novitas-beheer.firebaseapp.com",
+      databaseURL: "https://hv-novitas-beheer-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "hv-novitas-beheer",
+      storageBucket: "hv-novitas-beheer.appspot.com",
+      messagingSenderId: "71716605241",
+      appId: "1:71716605241:web:b7e87d680b7499421a6ce8"
+    };
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    emailjs.init({ publicKey: "midvAouM3afDkcK9B" });
+
+    const form = document.getElementById("trialForm");
+    const message = document.getElementById("trialMessage");
+    const submitButton = form.querySelector('button[type="submit"]');
+    const birthDate = form.elements.geboortedatum;
+    birthDate.max = new Date().toISOString().slice(0,10);
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "trial-message " + type;
+      message.scrollIntoView({behavior:"smooth", block:"nearest"});
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const birth = new Date(data.geboortedatum + "T12:00:00");
+      const today = new Date();
+      let age = today.getFullYear() - birth.getFullYear();
+      if (today.getMonth() < birth.getMonth() || (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) age--;
+      if (age < 18 && !data.ouderNaam.trim()) {
+        showMessage("Vul bij een aanmelding voor iemand jonger dan 18 jaar ook de naam van de ouder/verzorger in.", "error");
+        form.elements.ouderNaam.focus();
+        return;
+      }
+      if (!data.privacyAkkoord) {
+        showMessage("Geef toestemming zodat we contact kunnen opnemen over de proeftraining.", "error");
+        return;
+      }
+      const record = {
+        voornaam: data.voornaam.trim(),
+        achternaam: data.achternaam.trim(),
+        geboortedatum: data.geboortedatum,
+        email: data.email.trim(),
+        telefoon: data.telefoon.trim(),
+        doelgroep: data.doelgroep,
+        ouderNaam: (data.ouderNaam || "").trim(),
+        ervaring: (data.ervaring || "").trim(),
+        opmerking: (data.opmerking || "").trim(),
+        privacyAkkoord: true,
+        status: "Nieuw",
+        gelezen: false,
+        createdAt: Date.now(),
+        bron: "website-proeftrainingen"
+      };
+      submitButton.disabled = true;
+      submitButton.textContent = "BEZIG MET VERZENDEN…";
+      try {
+        await push(ref(db, "proeftrainingen_nieuw"), record);
+        const templateParams = {
+          soort_aanmelding: "Proeftraining",
+          voornaam: record.voornaam,
+          achternaam: record.achternaam,
+          naam: record.voornaam + " " + record.achternaam,
+          geboortedatum: record.geboortedatum,
+          email: record.email,
+          telefoon: record.telefoon,
+          doelgroep: record.doelgroep,
+          ouderNaam: record.ouderNaam || "Niet opgegeven",
+          ervaring: record.ervaring || "Niet opgegeven",
+          opmerking: record.opmerking || "Geen opmerkingen",
+          datum: new Date().toLocaleString("nl-NL"),
+          reply_to: record.email,
+          ontvanger: record.email
+        };
+        const results = await Promise.allSettled([
+          emailjs.send("service_eoomltq", "template_6nfavzp", templateParams),
+          emailjs.send("service_eoomltq", "template_lbh3c67", templateParams)
+        ]);
+        const emailsOk = results.every(result => result.status === "fulfilled");
+        form.reset();
+        showMessage(
+          emailsOk
+            ? "Bedankt! Je aanmelding is ontvangen. We hebben ook geprobeerd de bevestigingsmail en de melding aan de club te versturen."
+            : "Je aanmelding is opgeslagen. De e-mailbevestiging kon niet volledig worden verstuurd; de club kan je aanvraag wel in het beheer bekijken.",
+          "success"
+        );
+      } catch (error) {
+        console.error("Proeftraining aanmelden mislukt:", error);
+        showMessage("Verzenden is niet gelukt. Controleer je internetverbinding en probeer het opnieuw. Is het probleem er nog? Mail dan naar info@hvnovitas.nl.", "error");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'VERSTUUR AANMELDING <span aria-hidden="true">→</span>';
+      }
+    });
+  </script>
 </body>
 </html>
