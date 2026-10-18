@@ -1,159 +1,123 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wil je kennismaken met handbal bij HV Novitas in Hulst? Geef je belangstelling voor een proeftraining door via onze eigen aanmeldpagina.">
-  <meta name="theme-color" content="#ff6a00">
-  <title>Proeftraining handbal | HV Novitas Hulst</title>
-  <link rel="canonical" href="https://www.hvnovitas.nl/proeftrainingen.html">
-  <link rel="stylesheet" href="/style.css?v=20261018-proeftraining">
-  <style>
-    .trial-topbar{background:#111;color:#fff;border-bottom:4px solid var(--orange)}
-    .trial-topbar .content-wide{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .trial-brand{color:#fff;font-size:1.1rem;line-height:1.15;font-weight:900;letter-spacing:.05em;text-decoration:none}
-    .trial-brand span{display:block;color:var(--orange);font-size:.7rem;letter-spacing:.16em;margin-top:5px}
-    .trial-home{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;background:var(--orange);border-radius:999px;color:#fff;text-decoration:none;font-weight:800;font-size:.9rem;transition:transform .16s ease,filter .16s ease}
-    .trial-home:hover{transform:translateY(-2px);filter:brightness(1.08)}
-    .trial-hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:linear-gradient(112deg,#ff7900 0%,#ed5c00 42%,#262626 42.5%,#111 100%);padding:clamp(42px,6vw,76px) 0}
-    .trial-hero:after{content:"";position:absolute;z-index:-1;width:480px;height:480px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-140px;top:-210px;box-shadow:0 0 0 42px rgba(255,255,255,.025),0 0 0 84px rgba(255,255,255,.02)}
-    .trial-hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.75fr);align-items:center;gap:clamp(26px,5vw,64px)}
-    .trial-kicker{margin:0 0 12px;font-size:.78rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#fff}
-    .trial-hero h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.95;letter-spacing:-.045em;margin:0 0 20px;color:#fff;font-weight:900}
-    .trial-hero h1 span{display:block;color:#111;text-shadow:0 1px 0 rgba(255,255,255,.14)}
-    .trial-hero-copy{font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.65;max-width:620px;margin:0 0 24px;color:rgba(255,255,255,.94)}
-    .trial-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#111;color:#fff;padding:15px 22px;border-radius:999px;text-decoration:none;font-weight:900;box-shadow:0 8px 0 rgba(0,0,0,.18);transition:transform .16s ease,background .16s ease}
-    .trial-cta:hover{transform:translateY(-2px);background:#292929}
-    .trial-image-wrap{position:relative;background:#fff;padding:8px;border-radius:20px;box-shadow:0 20px 42px rgba(0,0,0,.3);transform:rotate(1deg)}
-    .trial-image-wrap img{width:100%;max-height:440px;object-fit:contain;object-position:center;border-radius:13px}
-    .trial-image-caption{position:absolute;left:-14px;bottom:20px;background:#111;color:#fff;border-left:5px solid var(--orange);padding:12px 16px;font-size:.85rem;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,.2);transform:rotate(-2deg)}
-    .trial-main{background:#f6f6f6;padding:clamp(36px,5vw,64px) 0 72px}
-    .trial-intro{text-align:center;max-width:820px;margin:0 auto 30px}
-    .trial-intro h2{margin-bottom:12px}
-    .trial-intro p{color:#5e6268;font-size:1.05rem;line-height:1.7}
-    .trial-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:30px 0 42px}
-    .trial-step{background:#fff;border:1px solid #e9e9e9;border-radius:16px;padding:22px;box-shadow:0 10px 24px rgba(24,25,27,.045)}
-    .trial-step-number{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:#fff0e6;color:#c94f00;font-weight:900;font-size:1.2rem;margin-bottom:15px}
-    .trial-step h3{margin:0 0 8px;font-size:1.12rem}
-    .trial-step p{margin:0;color:#63676d;font-size:.95rem;line-height:1.6}
-    .trial-form-card{background:#fff;border:1px solid #e7e7e7;border-radius:20px;overflow:hidden;box-shadow:0 16px 42px rgba(24,25,27,.09)}
-    .trial-form-heading{padding:clamp(22px,4vw,36px);background:#111;color:#fff;border-bottom:5px solid var(--orange)}
-    .trial-form-heading .section-label{color:#ff8b3d;margin-bottom:5px}
-    .trial-form-heading h2{font-size:clamp(1.8rem,3.5vw,2.7rem);margin:0 0 8px;color:#fff}
-    .trial-form-heading p{margin:0;color:rgba(255,255,255,.8)}
-    .trial-form-body{padding:clamp(10px,2vw,22px)}
-    .trial-form-frame{width:100%;height:1250px;border:0;display:block;background:#fff;border-radius:10px}
-    .trial-form-fallback{text-align:center;margin:0;padding:0 22px 28px;color:#63676d}
-    .trial-form-fallback a{color:#a94300;font-weight:800}
-    .trial-note{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;margin-top:22px;background:#fff;border-left:5px solid var(--orange);border-radius:12px;color:#555;box-shadow:0 6px 18px rgba(24,25,27,.04)}
-    .trial-note strong{color:#222}
-    .trial-footer{padding:28px 0;background:#111;color:#eee;border-top:4px solid var(--orange)}
-    .trial-footer .content-wide{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-    .trial-footer a{color:#fff;text-decoration:none;font-weight:800}
-    .trial-footer a:hover{text-decoration:underline}
-    @media(max-width:800px){
-      .trial-hero-grid{grid-template-columns:1fr;text-align:center}
-      .trial-hero-copy{margin-left:auto;margin-right:auto}
-      .trial-image-wrap{width:min(100%,430px);margin:0 auto}
-      .trial-image-caption{left:8px}
-      .trial-steps{grid-template-columns:1fr}
-      .trial-step{display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:14px;align-items:start}
-      .trial-step-number{grid-row:span 2;margin:0}
-      .trial-step h3{align-self:end}
-      .trial-step p{grid-column:2}
-      .trial-form-frame{height:1450px}
-    }
-    @media(max-width:480px){
-      .trial-topbar .content-wide{min-height:66px}
-      .trial-brand{font-size:1rem}
-      .trial-home{min-height:39px;padding:0 13px;font-size:.82rem}
-      .trial-hero h1{font-size:2.75rem}
-      .trial-form-frame{height:1600px}
-      .trial-image-caption{font-size:.76rem;padding:10px 12px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Meld je aan voor een vrijblijvende proeftraining handbal bij HV Novitas in Hulst.">
+<meta name="theme-color" content="#ff6a00">
+<title>Proeftraining handbal | HV Novitas Hulst</title>
+<link rel="canonical" href="https://www.hvnovitas.nl/proeftrainingen.html">
+<link rel="stylesheet" href="/style.css?v=20261018-proeftraining-native">
+<style>
+.trial-topbar{background:#111;color:#fff;border-bottom:4px solid var(--orange)}
+.trial-topbar .content-wide{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.trial-brand{color:#fff;font-size:1.05rem;line-height:1.15;font-weight:900;letter-spacing:.06em;text-decoration:none}
+.trial-brand span{display:block;color:var(--orange);font-size:.69rem;letter-spacing:.17em;margin-top:5px}
+.trial-home{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;background:var(--orange);border-radius:999px;color:#fff;text-decoration:none;font-weight:800;font-size:.88rem}
+.trial-hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:linear-gradient(112deg,#ff7900 0%,#ed5c00 44%,#202020 44.5%,#111 100%);padding:clamp(42px,6vw,76px) 0}
+.trial-hero:after{content:"";position:absolute;z-index:-1;width:480px;height:480px;border:1px solid #ffffff20;border-radius:50%;right:-140px;top:-210px;box-shadow:0 0 0 42px #ffffff08,0 0 0 84px #ffffff05}
+.trial-hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.8fr);align-items:center;gap:clamp(26px,5vw,64px)}
+.trial-kicker{margin:0 0 13px;font-size:.78rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.trial-hero h1{font-size:clamp(2.7rem,6.2vw,5.1rem);line-height:.92;letter-spacing:-.05em;margin:0 0 22px;color:#fff;font-weight:900}
+.trial-hero h1 span{display:block;color:#171717;text-shadow:0 1px #ffffff25}
+.trial-hero-copy{font-size:clamp(1rem,1.55vw,1.18rem);line-height:1.7;max-width:610px;margin:0 0 26px;color:#ffffffef}
+.trial-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#111;color:#fff;padding:15px 22px;border-radius:999px;text-decoration:none;font-weight:900;box-shadow:0 8px 0 #0003}
+.trial-image-wrap{position:relative;background:#fff;padding:8px;border-radius:20px;box-shadow:0 20px 42px #0005;transform:rotate(1deg)}
+.trial-image-wrap img{width:100%;max-height:430px;object-fit:contain;border-radius:13px}
+.trial-image-caption{position:absolute;left:-14px;bottom:20px;background:#111;color:#fff;border-left:5px solid var(--orange);padding:12px 16px;font-size:.83rem;font-weight:900;box-shadow:0 8px 20px #0003;transform:rotate(-2deg)}
+.trial-main{background:#f5f6f8;padding:clamp(38px,5vw,64px) 0 74px}
+.trial-intro{text-align:center;max-width:830px;margin:0 auto 28px}
+.trial-intro h2{margin-bottom:12px}
+.trial-intro p{color:#5e6268;font-size:1.03rem;line-height:1.75}
+.trial-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:30px 0 42px}
+.trial-benefit{background:#fff;border:1px solid #e9eaed;border-radius:15px;padding:21px;box-shadow:0 9px 22px #18191b09}
+.trial-benefit-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#fff0e6;color:#c94f00;font-size:1.25rem;margin-bottom:13px}
+.trial-benefit h3{margin:0 0 7px;font-size:1.08rem}
+.trial-benefit p{margin:0;color:#63676d;font-size:.93rem;line-height:1.6}
+.trial-form-shell{display:grid;grid-template-columns:minmax(235px,.72fr) minmax(0,1.5fr);align-items:stretch;background:#fff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;box-shadow:0 18px 45px #18191b17}
+.trial-form-aside{position:relative;overflow:hidden;padding:clamp(24px,4vw,38px);color:#fff;background:linear-gradient(155deg,#ff7900 0%,#ee5a00 42%,#171717 42.5%,#101010 100%)}
+.trial-form-aside:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #ffffff29;border-radius:50%;right:-140px;bottom:-90px;box-shadow:0 0 0 25px #ffffff06,0 0 0 50px #ffffff05;pointer-events:none}
+.trial-form-aside .aside-tag{display:inline-block;font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;border:1px solid #ffffff73;border-radius:999px;padding:7px 10px;margin-bottom:22px}
+.trial-form-aside h2{font-size:clamp(1.75rem,3vw,2.5rem);line-height:1.04;margin:0 0 14px;color:#fff}
+.trial-form-aside p{color:#ffffffdd;line-height:1.7;font-size:.95rem}
+.trial-form-aside ul{padding-left:18px;margin:24px 0 0;color:#fff}
+.trial-form-aside li{padding-left:3px;margin:10px 0;font-size:.91rem}
+.trial-form-content{padding:clamp(22px,4vw,40px)}
+.trial-form-content h2{font-size:clamp(1.65rem,3vw,2.25rem);margin:0 0 6px;line-height:1.1}
+.trial-form-lead{color:#6b7280;font-size:.93rem;margin:0 0 25px}
+.trial-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.trial-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.trial-field.full{grid-column:1/-1}
+.trial-field label{font-weight:800;font-size:.88rem;color:#292d32}
+.trial-field .required{color:#d94800}
+.trial-field .optional{font-weight:400;color:#777}
+.trial-field input,.trial-field select,.trial-field textarea{width:100%;min-height:48px;border:1.5px solid #d9dce1;border-radius:10px;background:#fff;padding:12px 13px;font:inherit;font-size:.97rem;color:#202124;transition:border-color .15s ease,box-shadow .15s ease}
+.trial-field textarea{min-height:105px;resize:vertical}
+.trial-field input:focus,.trial-field select:focus,.trial-field textarea:focus{outline:none;border-color:#ff6a00;box-shadow:0 0 0 3px #ff6a0024}
+.trial-field small{font-size:.79rem;color:#747b85;line-height:1.45}
+.trial-consent{grid-column:1/-1;display:flex;align-items:flex-start;gap:11px;padding:14px 15px;border:1px solid #ebecef;border-radius:11px;background:#fafafa;color:#535861;font-size:.86rem;line-height:1.55}
+.trial-consent input{width:18px;height:18px;flex:0 0 auto;margin-top:2px;accent-color:#ff6a00}
+.trial-consent a{color:#a94300;font-weight:800}
+.trial-honey{position:absolute!important;left:-9999px!important;opacity:0!important;width:1px!important;height:1px!important;pointer-events:none!important}
+.trial-submit{grid-column:1/-1;width:100%;min-height:54px;border:0;border-radius:11px;background:linear-gradient(110deg,#ff7900,#f15d00);color:#fff;font:inherit;font-weight:900;font-size:1rem;letter-spacing:.01em;box-shadow:0 6px 0 #b84300,0 12px 23px #c94f0029;cursor:pointer}
+.trial-submit:disabled{opacity:.65;cursor:wait}
+.trial-message{display:none;grid-column:1/-1;border-radius:10px;padding:14px 16px;line-height:1.55;font-size:.92rem}
+.trial-message.success{display:block;color:#14532d;background:#ecfdf3;border:1px solid #bbf7d0}
+.trial-message.warning{display:block;color:#854d0e;background:#fffbeb;border:1px solid #fde68a}
+.trial-message.error{display:block;color:#991b1b;background:#fef2f2;border:1px solid #fecaca}
+.trial-note{display:flex;gap:13px;align-items:flex-start;padding:18px 20px;margin-top:22px;background:#fff;border-left:5px solid var(--orange);border-radius:12px;color:#555;box-shadow:0 6px 18px #18191b0a}
+.trial-note strong{color:#222}.trial-note a{color:#a94300;font-weight:800}
+.trial-footer{padding:28px 0;background:#111;color:#eee;border-top:4px solid var(--orange)}
+.trial-footer .content-wide{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.trial-footer a{color:#fff;text-decoration:none;font-weight:800}
+@media(max-width:900px){.trial-hero-grid{grid-template-columns:1fr;text-align:center}.trial-hero-copy{margin-left:auto;margin-right:auto}.trial-image-wrap{width:min(100%,430px);margin:0 auto}.trial-image-caption{left:8px}.trial-benefits{grid-template-columns:1fr}.trial-form-shell{grid-template-columns:1fr}.trial-form-aside{padding:25px 26px}.trial-form-aside ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px}.trial-form-aside li{margin:5px 0}}
+@media(max-width:600px){.trial-topbar .content-wide{min-height:64px}.trial-brand{font-size:.95rem}.trial-home{min-height:39px;padding:0 13px;font-size:.8rem}.trial-hero h1{font-size:2.8rem}.trial-form-shell{border-radius:15px}.trial-form-content{padding:22px 17px}.trial-form{grid-template-columns:1fr;gap:15px}.trial-field.full,.trial-consent,.trial-submit,.trial-message{grid-column:1}.trial-form-aside ul{grid-template-columns:1fr}.trial-image-caption{font-size:.75rem;padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
 <body>
-  <header class="trial-topbar">
-    <div class="content-wide">
-      <a class="trial-brand" href="/" aria-label="HV Novitas home">HV NOVITAS<span>NO STRESS, ENJOY!</span></a>
-      <a class="trial-home" href="/">← Terug naar de website</a>
-    </div>
-  </header>
-
-  <section class="trial-hero">
-    <div class="content-wide trial-hero-grid">
-      <div>
-        <p class="trial-kicker">HANDBALCLUB HULST · ZEEUWS-VLAANDEREN</p>
-        <h1>PROBEER <span>HANDBAL!</span></h1>
-        <p class="trial-hero-copy">Benieuwd of handbal bij je past? Maak kennis met HV Novitas. Vul het formulier in om je belangstelling voor een proeftraining door te geven.</p>
-        <a class="trial-cta" href="#aanmelden">AANMELDEN VOOR EEN PROEFTRAINING <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="trial-image-wrap">
-        <img src="/images/proeftrainingen.png?v=20261018" alt="Proeftraining bij HV Novitas" fetchpriority="high">
-        <div class="trial-image-caption">🧡 SPORT · PLEZIER · TEAMGEVOEL</div>
-      </div>
+<header class="trial-topbar"><div class="content-wide">
+  <a class="trial-brand" href="/" aria-label="HV Novitas home">HV NOVITAS<span>NO STRESS, ENJOY!</span></a>
+  <a class="trial-home" href="/">← Terug naar de website</a>
+</div></header>
+<section class="trial-hero"><div class="content-wide trial-hero-grid">
+  <div>
+    <p class="trial-kicker">HANDBALCLUB HULST · ZEEUWS-VLAANDEREN</p>
+    <h1>PROBEER <span>HANDBAL!</span></h1>
+    <p class="trial-hero-copy">Snelheid, teamwork en plezier. Benieuwd of handbal bij je past? Maak kennis met HV Novitas en geef je op voor een proeftraining. Je hebt geen ervaring nodig.</p>
+    <a class="trial-cta" href="#aanmelden">MELD JE AAN <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="trial-image-wrap"><img src="/images/proeftrainingen.png?v=20261018" alt="Proeftraining bij HV Novitas" fetchpriority="high"><div class="trial-image-caption">🧡 SPORT · PLEZIER · TEAMGEVOEL</div></div>
+</div></section>
+<main class="trial-main"><div class="content-wide">
+  <section class="trial-intro"><p class="section-label">DOE MEE BIJ NOVITAS</p><h2>Nieuwe sport. Nieuwe vrienden.</h2><p>Vul het korte formulier in. We nemen contact met je op om de mogelijkheden voor een proeftraining te bespreken. Kinderen kunnen samen met een ouder of verzorger worden aangemeld.</p></section>
+  <section class="trial-benefits" aria-label="Waarom kennismaken met HV Novitas">
+    <article class="trial-benefit"><div class="trial-benefit-icon" aria-hidden="true">🤾</div><h3>Actief en uitdagend</h3><p>Leer passen, dribbelen, samenwerken en scoren in een snelle teamsport.</p></article>
+    <article class="trial-benefit"><div class="trial-benefit-icon" aria-hidden="true">🧡</div><h3>Plezier staat voorop</h3><p>Je hoeft nog niet te kunnen handballen. Je komt om de sport en het team te leren kennen.</p></article>
+    <article class="trial-benefit"><div class="trial-benefit-icon" aria-hidden="true">📍</div><h3>In Hulst</h3><p>Maak kennis met HV Novitas, de handbalvereniging van Hulst in Zeeuws-Vlaanderen.</p></article>
+  </section>
+  <section class="trial-form-shell" id="aanmelden">
+    <aside class="trial-form-aside"><span class="aside-tag">JE BENT WELKOM</span><h2>Zet de eerste stap naar het veld.</h2><p>Laat je gegevens achter. We sturen je een bevestiging per e-mail en nemen daarna contact met je op.</p><ul><li>Geen ervaring nodig</li><li>Voor jeugd en volwassenen</li><li>Vrijblijvend kennismaken</li><li>Persoonlijk contact vanuit de club</li></ul></aside>
+    <div class="trial-form-content">
+      <h2>Aanmelden voor een proeftraining</h2><p class="trial-form-lead">Vul hieronder je gegevens in. Velden met een * zijn verplicht.</p>
+      <form class="trial-form" id="trialForm" novalidate>
+        <div class="trial-field"><label for="voornaam">Voornaam <span class="required">*</span></label><input id="voornaam" name="voornaam" type="text" maxlength="80" autocomplete="given-name" required></div>
+        <div class="trial-field"><label for="achternaam">Achternaam <span class="required">*</span></label><input id="achternaam" name="achternaam" type="text" maxlength="100" autocomplete="family-name" required></div>
+        <div class="trial-field"><label for="geboortedatum">Geboortedatum <span class="required">*</span></label><input id="geboortedatum" name="geboortedatum" type="date" required><small>Zo bepalen we beter welke training past.</small></div>
+        <div class="trial-field"><label for="geslacht">Geslacht <span class="required">*</span></label><select id="geslacht" name="geslacht" required><option value="">Kies een optie</option><option value="Man">Man</option><option value="Vrouw">Vrouw</option><option value="Anders">Anders</option><option value="Zeg ik liever niet">Zeg ik liever niet</option></select></div>
+        <div class="trial-field full"><label for="email">E-mailadres voor contact <span class="required">*</span></label><input id="email" name="email" type="email" maxlength="254" autocomplete="email" required><small>Bij jeugdleden mag dit het e-mailadres van een ouder of verzorger zijn.</small></div>
+        <div class="trial-field full"><label for="telefoon">Telefoonnummer <span class="required">*</span></label><input id="telefoon" name="telefoon" type="tel" maxlength="40" autocomplete="tel" required><small>Bij jeugdleden graag het nummer waarop een ouder of verzorger bereikbaar is.</small></div>
+        <div class="trial-field full"><label for="opmerkingen">Opmerkingen <span class="optional">(optioneel)</span></label><textarea id="opmerkingen" name="opmerkingen" maxlength="1000" placeholder="Bijvoorbeeld eerdere handbalervaring of een vraag aan de trainers."></textarea></div>
+        <div class="trial-honey" aria-hidden="true"><label for="website">Laat dit veld leeg</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="trial-consent" for="privacyAkkoord"><input id="privacyAkkoord" name="privacyAkkoord" type="checkbox" required><span>Ik ga ermee akkoord dat HV Novitas mijn gegevens gebruikt om contact met mij op te nemen over deze proeftrainingaanvraag. Lees ook het <a href="https://hvnovitas-ux.github.io/hvnovitas-beheer/privacy-policy.html" target="_blank" rel="noopener noreferrer">privacybeleid</a>. <span class="required">*</span></span></label>
+        <div class="trial-message" id="trialMessage" role="status" aria-live="polite"></div>
+        <button class="trial-submit" id="trialSubmit" type="submit">VERSTUUR AANMELDING</button>
+      </form>
     </div>
   </section>
-
-  <main class="trial-main">
-    <div class="content-wide">
-      <section class="trial-intro">
-        <p class="section-label">DOE MEE BIJ NOVITAS</p>
-        <h2>Nieuwe sport, nieuwe vrienden.</h2>
-        <p>Handbal is snel, actief en vooral leuk om samen te doen. Via het formulier kun je laten weten dat je een proeftraining wilt proberen. De club kan daarna contact opnemen over de mogelijkheden.</p>
-      </section>
-
-      <section class="trial-steps" aria-label="Zo meld je je aan">
-        <article class="trial-step">
-          <div class="trial-step-number">1</div>
-          <h3>Vul het formulier in</h3>
-          <p>Geef je gegevens door via het aanmeldformulier hieronder.</p>
-        </article>
-        <article class="trial-step">
-          <div class="trial-step-number">2</div>
-          <h3>We bespreken de mogelijkheden</h3>
-          <p>De club bekijkt je aanvraag en stemt de mogelijkheden voor een proeftraining met je af.</p>
-        </article>
-        <article class="trial-step">
-          <div class="trial-step-number">3</div>
-          <h3>Ontdek handbal</h3>
-          <p>Maak kennis met de sport, de training en het teamgevoel bij HV Novitas.</p>
-        </article>
-      </section>
-
-      <section class="trial-form-card" id="aanmelden">
-        <div class="trial-form-heading">
-          <p class="section-label">JE BENT WELKOM</p>
-          <h2>Aanmelden voor een proeftraining</h2>
-          <p>Vul hieronder het bestaande aanmeldformulier in. Je aanvraag blijft binnenkomen via het huidige Google Form.</p>
-        </div>
-        <div class="trial-form-body">
-          <iframe
-            class="trial-form-frame"
-            src="https://docs.google.com/forms/d/1Naoxd0nUkjq9F0AQxLanIGKehbu98ApGIFrrVLhocy0/viewform?embedded=true"
-            title="Aanmeldformulier proeftraining HV Novitas"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="camera; microphone; geolocation">
-          </iframe>
-        </div>
-        <p class="trial-form-fallback">Laadt het formulier niet goed? <a href="https://docs.google.com/forms/d/1Naoxd0nUkjq9F0AQxLanIGKehbu98ApGIFrrVLhocy0/viewform" target="_blank" rel="noopener noreferrer">Open het aanmeldformulier in een nieuw tabblad</a>.</p>
-      </section>
-
-      <aside class="trial-note">
-        <span aria-hidden="true">ℹ️</span>
-        <div><strong>Vragen vooraf?</strong><br>Mail naar <a href="mailto:info@hvnovitas.nl">info@hvnovitas.nl</a>. We helpen je graag verder.</div>
-      </aside>
-    </div>
-  </main>
-
-  <footer class="trial-footer">
-    <div class="content-wide">
-      <a href="/">HV Novitas</a>
-      <span>Handbalclub Hulst – Zeeuws-Vlaanderen</span>
-      <a href="mailto:info@hvnovitas.nl">info@hvnovitas.nl</a>
-    </div>
-  </footer>
+  <aside class="trial-note"><span aria-hidden="true">ℹ️</span><div><strong>Vragen vooraf?</strong><br>Mail naar <a href="mailto:info@hvnovitas.nl">info@hvnovitas.nl</a>. We helpen je graag verder.</div></aside>
+</div></main>
+<footer class="trial-footer"><div class="content-wide"><a href="/">HV Novitas</a><span>Handbalclub Hulst – Zeeuws-Vlaanderen</span><a href="mailto:info@hvnovitas.nl">info@hvnovitas.nl</a></div></footer>
+<script type="module" src="/proeftrainingen-form.js?v=20261018-1"></script>
 </body>
 </html>
