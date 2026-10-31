@@ -188,3 +188,15 @@
   .novitas-short-card { flex-basis: 152px; }
   .novitas-shorts-arrow { display: none; }
 }
+
+
+/* On-page Shorts player: bezoekers blijven op hvnovitas.nl */
+.novitas-short-card { width: auto; padding: 0; border: 0; font: inherit; text-align: left; cursor: pointer; }
+.novitas-shorts-modal { display: none; position: fixed; inset: 0; z-index: 99999; align-items: center; justify-content: center; padding: 22px; }
+.novitas-shorts-modal.is-open { display: flex; }
+.novitas-shorts-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.88); }
+.novitas-shorts-modal-panel { position: relative; z-index: 1; width: min(92vw, 440px); max-height: 92vh; padding: 42px 12px 12px; border: 1px solid rgba(255,121,0,.8); border-radius: 18px; background: #111; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+.novitas-shorts-modal-close { position: absolute; top: 5px; right: 8px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #ff7900; color: #111; font-size: 27px; line-height: 1; font-weight: 900; cursor: pointer; }
+.novitas-shorts-player { width: 100%; aspect-ratio: 9 / 16; max-height: calc(92vh - 58px); overflow: hidden; border-radius: 10px; background: #000; }
+.novitas-shorts-player iframe { display: block; width: 100%; height: 100%; min-height: 0; border: 0; }
+body.novitas-shorts-modal-open { overflow: hidden; }
