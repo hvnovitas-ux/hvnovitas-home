@@ -133,9 +133,8 @@
       track.append(card);
     });
 
-    setStatus(videos.length
-      ? videos.length + " Shorts uit de Novitas-playlist."
-      : "Er staan nog geen Shorts in deze playlist.", !videos.length);
+    // Geen statusregel onder de carrousel: de tekst voegt niets toe.
+    status.hidden = true;
     updateArrows();
   };
 
