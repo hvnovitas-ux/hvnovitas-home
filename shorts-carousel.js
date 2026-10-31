@@ -54,15 +54,57 @@
     }).filter(Boolean);
   };
 
+  // Open Shorts in an on-page player so visitors stay on hvnovitas.nl.
+  const openPlayer = (video) => {
+    let modal = document.getElementById("novitasShortsModal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "novitasShortsModal";
+      modal.className = "novitas-shorts-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-label", "Novitas Short bekijken");
+      modal.innerHTML = '<div class="novitas-shorts-modal-backdrop" data-close="true"></div><div class="novitas-shorts-modal-panel"><button class="novitas-shorts-modal-close" type="button" aria-label="Sluiten">×</button><div class="novitas-shorts-player"></div></div>';
+      document.body.append(modal);
+      modal.addEventListener("click", (event) => {
+        if (event.target.closest("[data-close]") || event.target.closest(".novitas-shorts-modal-close")) closePlayer();
+      });
+    }
+
+    const player = modal.querySelector(".novitas-shorts-player");
+    player.replaceChildren();
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(video.id) + "?autoplay=1&playsinline=1&rel=0";
+    iframe.title = video.title;
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    player.append(iframe);
+    modal.classList.add("is-open");
+    document.body.classList.add("novitas-shorts-modal-open");
+    modal.querySelector(".novitas-shorts-modal-close").focus();
+  };
+
+  const closePlayer = () => {
+    const modal = document.getElementById("novitasShortsModal");
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.querySelector(".novitas-shorts-player")?.replaceChildren();
+    document.body.classList.remove("novitas-shorts-modal-open");
+  };
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closePlayer();
+  });
+
   const renderCards = (videos) => {
     track.replaceChildren();
     videos.forEach((video) => {
-      const card = document.createElement("a");
+      const card = document.createElement("button");
+      card.type = "button";
       card.className = "novitas-short-card";
-      card.href = "https://www.youtube.com/shorts/" + encodeURIComponent(video.id);
-      card.target = "_blank";
-      card.rel = "noopener noreferrer";
-      card.setAttribute("aria-label", video.title + " – bekijk op YouTube");
+      card.setAttribute("aria-label", video.title + " – bekijk op deze website");
+      card.addEventListener("click", () => openPlayer(video));
 
       const image = document.createElement("img");
       image.src = video.thumbnail;
