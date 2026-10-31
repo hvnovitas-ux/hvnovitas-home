@@ -14,6 +14,7 @@
 <meta name="description" content="HV Novitas – handbal, plezier en clubgevoel in Zeeuws-Vlaanderen.">
 <title>HV Novitas</title>
 <link rel="stylesheet" href="/style.css?v=20261015-neon-subtle-6">
+<link rel="stylesheet" href="/shorts-carousel.css?v=20261031-1">
 <style>
 /* Nieuwe rustige agenda-indeling */
 .agenda-section{padding:42px 0 18px;background:#fff}
@@ -97,6 +98,27 @@
 <div class="news-frame-wrap"><iframe src="https://hvnovitas-ux.github.io/hvnovitas-beheer/news-home.html" title="Laatste nieuws HV Novitas" loading="lazy" scrolling="no"></iframe></div>
 <div class="news-more-wrap"><span id="homepageAnnouncement" class="novitas-news-neon" aria-live="polite"></span><a class="news-more" href="https://hvnovitas-ux.github.io/hvnovitas-beheer/news.html" target="_blank" rel="noopener">Verder lezen →</a></div>
 </div>
+</section>
+
+
+
+<section class="section novitas-shorts-section" aria-labelledby="novitas-shorts-title">
+  <div class="content-wide">
+    <div class="novitas-shorts-heading">
+      <div>
+        <p class="section-label">KIJK MEE</p>
+        <h2 id="novitas-shorts-title">Novitas Shorts</h2>
+        <p>Korte video's, acties en momenten van HV Novitas.</p>
+      </div>
+      <a class="novitas-shorts-playlist-link" href="https://www.youtube.com/playlist?list=PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h" target="_blank" rel="noopener noreferrer">Bekijk alle Shorts →</a>
+    </div>
+    <div class="novitas-shorts-rail">
+      <button class="novitas-shorts-arrow prev" id="novitasShortsPrev" type="button" aria-label="Vorige Shorts">‹</button>
+      <div class="novitas-shorts-track" id="novitasShortsTrack" aria-label="Horizontale carrousel met Novitas Shorts" tabindex="0"></div>
+      <button class="novitas-shorts-arrow next" id="novitasShortsNext" type="button" aria-label="Volgende Shorts">›</button>
+    </div>
+    <p class="novitas-shorts-status" id="novitasShortsStatus" aria-live="polite">Novitas Shorts worden geladen…</p>
+  </div>
 </section>
 
 <section class="section sponsors-section">
@@ -190,5 +212,6 @@
 </footer>
 <script type="module" src="https://hvnovitas-ux.github.io/hvnovitas-beheer/homepage-neon.js?v=20261015-neon-subtle-6"></script>
 <script src="script.js"></script>
+<script src="/shorts-carousel.js?v=20261031-1" defer></script>
 </body>
 </html>
