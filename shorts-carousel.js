@@ -14,9 +14,10 @@
   const status = document.getElementById("novitasShortsStatus");
   const previous = document.getElementById("novitasShortsPrev");
   const next = document.getElementById("novitasShortsNext");
-  if (!track || !status) return;
+  if (!track) return;
 
   const setStatus = (message, withLink = false) => {
+    if (!status) return;
     status.textContent = message;
     if (withLink) {
       const link = document.createElement("a");
@@ -134,7 +135,7 @@
     });
 
     // Geen statusregel onder de carrousel: de tekst voegt niets toe.
-    status.hidden = true;
+    if (status) status.hidden = true;
     updateArrows();
   };
 
