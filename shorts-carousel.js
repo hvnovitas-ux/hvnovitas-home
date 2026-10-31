@@ -5,8 +5,8 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v1";
-  const CACHE_TTL = 30 * 60 * 1000;
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v2";
+  const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
 
