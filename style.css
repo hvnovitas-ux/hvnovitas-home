@@ -1934,3 +1934,27 @@ body {
   background-image: none !important;
   background-attachment: scroll !important;
 }
+
+
+/* Verwijder de decoratieve arena-achtergrond rondom de website */
+html,
+body {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+}
+
+#page-background,
+.page-background,
+.site-background,
+.background-arena,
+.arena-background {
+  display: none !important;
+  background: #ffffff !important;
+  background-image: none !important;
+}
