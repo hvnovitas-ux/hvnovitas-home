@@ -1925,27 +1925,70 @@ img,
 }
 
 
+
 /* =========================================================
-   HANDBALSEIZOEN — Novitas arena-sfeer
-   Achtergrondlaag; bestaande inhoud en kaarten blijven intact.
+   HANDBALSEIZOEN — alleen de lege zijvlakken
+   De inhoud in het midden blijft ongewijzigd.
    ========================================================= */
-html {
-  background: #080706;
-}
+html,
 body {
   background-color: #080706;
-  background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 105, 0, .28) 0%, transparent 42%),
-    radial-gradient(ellipse at 0% 38%, rgba(255, 92, 0, .20) 0%, transparent 34%),
-    radial-gradient(ellipse at 100% 62%, rgba(255, 125, 0, .17) 0%, transparent 35%),
-    linear-gradient(180deg, #080706 0%, #17110c 38%, #080808 100%);
+}
+body {
+  background-image: url('/assets/handbal-arena.svg');
+  background-size: cover;
+  background-position: center top;
   background-attachment: fixed;
 }
+
+/* Witte pagina-onderdelen: behoud het witte midden, arena aan de zijkanten. */
+.intro,
+.event-banner-section,
+.image-sections,
+.agenda-section {
+  background-color: #fff;
+  background-image:
+    linear-gradient(to right,
+      transparent 0,
+      transparent max(0px, calc(50% - 600px)),
+      #fff max(0px, calc(50% - 600px)),
+      #fff min(100%, calc(50% + 600px)),
+      transparent min(100%, calc(50% + 600px))),
+    url('/assets/handbal-arena.svg');
+  background-size: 100% 100%, cover;
+  background-position: center, center;
+  background-attachment: scroll, fixed;
+}
+
+/* Donkere pagina-onderdelen: behoud het donkere midden, arena aan de zijkanten. */
+#nieuws,
+.sponsors-section,
+.media-section {
+  background-color: #171717;
+  background-image:
+    linear-gradient(to right,
+      transparent 0,
+      transparent max(0px, calc(50% - 600px)),
+      #171717 max(0px, calc(50% - 600px)),
+      #171717 min(100%, calc(50% + 600px)),
+      transparent min(100%, calc(50% + 600px))),
+    url('/assets/handbal-arena.svg');
+  background-size: 100% 100%, cover;
+  background-position: center, center;
+  background-attachment: scroll, fixed;
+}
+
 @media (max-width: 700px) {
   body {
     background-attachment: scroll;
-    background-image:
-      radial-gradient(ellipse at 50% 0%, rgba(255, 105, 0, .22) 0%, transparent 38%),
-      linear-gradient(180deg, #100b07 0%, #080808 100%);
+  }
+  .intro,
+  .event-banner-section,
+  .image-sections,
+  .agenda-section,
+  #nieuws,
+  .sponsors-section,
+  .media-section {
+    background-image: none;
   }
 }
