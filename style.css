@@ -1923,3 +1923,29 @@ img,
     width: min(38%, 160px);
   }
 }
+
+
+/* =========================================================
+   HANDBALSEIZOEN — Novitas arena-sfeer
+   Achtergrondlaag; bestaande inhoud en kaarten blijven intact.
+   ========================================================= */
+html {
+  background: #080706;
+}
+body {
+  background-color: #080706;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 105, 0, .28) 0%, transparent 42%),
+    radial-gradient(ellipse at 0% 38%, rgba(255, 92, 0, .20) 0%, transparent 34%),
+    radial-gradient(ellipse at 100% 62%, rgba(255, 125, 0, .17) 0%, transparent 35%),
+    linear-gradient(180deg, #080706 0%, #17110c 38%, #080808 100%);
+  background-attachment: fixed;
+}
+@media (max-width: 700px) {
+  body {
+    background-attachment: scroll;
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(255, 105, 0, .22) 0%, transparent 38%),
+      linear-gradient(180deg, #100b07 0%, #080808 100%);
+  }
+}
