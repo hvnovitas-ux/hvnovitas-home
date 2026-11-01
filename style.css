@@ -1926,3 +1926,11 @@ img,
 
 
 
+
+/* Achtergrond website terug naar wit */
+html,
+body {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  background-attachment: scroll !important;
+}
