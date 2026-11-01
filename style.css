@@ -1958,3 +1958,40 @@ body::after {
   background: #ffffff !important;
   background-image: none !important;
 }
+
+
+/* Definitief: decoratieve arena-/basketbalveld-achtergrond verwijderen */
+html,
+html::before,
+html::after,
+body,
+body::before,
+body::after {
+  background: #ffffff !important;
+  background-image: none !important;
+  background-color: #ffffff !important;
+  background-attachment: scroll !important;
+}
+
+html::before,
+html::after,
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Verberg eventuele losse decoratieve achtergrondlagen, niet de pagina-inhoud */
+[class*="arena-background"],
+[class*="basket-background"],
+[class*="court-background"],
+[class*="page-background"],
+[class*="site-background"],
+[id*="arena-background"],
+[id*="basket-background"],
+[id*="court-background"],
+[id*="page-background"],
+[id*="site-background"] {
+  background: #ffffff !important;
+  background-image: none !important;
+}
