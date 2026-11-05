@@ -1,4 +1,4 @@
-import { db } from "https://hvnovitas-ux.github.io/hvnovitas-beheer/firebase.js";
+import { db } from "/firebase.js";
 import { ref, push } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 import emailjs from "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/+esm";
 
