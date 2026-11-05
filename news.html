@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HV Novitas Nieuws</title>
+
+<style>
+
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f4f6f8;
+}
+
+.topbar {
+    background: #222;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.news-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.news-item img {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+small {
+    color: gray;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+🧡 HV NOVITAS NIEUWS
+</div>
+
+<div class="container">
+
+    <!-- 🔥 hier komt alles uit Firebase -->
+    <div id="newsList"></div>
+
+</div>
+
+<!-- FIREBASE -->
+<script type="module" src="/firebase.js"></script>
+
+<!-- 🔥 BELANGRIJK: DIT IS DE JUISTE -->
+<script type="module" src="/news.js"></script>
+
+</body>
+</html>
