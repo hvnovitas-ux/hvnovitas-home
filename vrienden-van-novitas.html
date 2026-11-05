@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vrienden van HV Novitas – samen steunen we onze handbalclub.">
+<title>Vrienden van HV Novitas</title>
+<style>
+:root{
+  --orange:#ff6900;
+  --orange2:#ff8a26;
+  --dark:#111820;
+  --dark2:#1b2733;
+  --cream:#fffaf4;
+  --white:#fff;
+  --text:#20252b;
+  --muted:#68717a;
+  --line:#ece3d9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(255,105,0,.08),transparent 22%),
+    linear-gradient(180deg,#fff 0%,#fffaf6 48%,#f6f1eb 100%);
+}
+a{text-decoration:none}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 20px;
+  color:#fff;
+  background:linear-gradient(90deg,#ff6500,#f45b00);
+  box-shadow:0 4px 18px rgba(0,0,0,.12);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#fff;
+}
+.brand-mark{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:var(--orange);
+  background:#fff;
+  font-weight:900;
+  font-size:18px;
+}
+.brand strong{
+  display:block;
+  font-size:15px;
+  line-height:1;
+}
+.brand span{
+  display:block;
+  margin-top:4px;
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  opacity:.82;
+}
+.top-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:39px;
+  padding:0 16px;
+  border-radius:999px;
+  color:#171717;
+  background:#fff;
+  font-size:12px;
+  font-weight:900;
+}
+
+.page{
+  width:min(1120px,calc(100% - 22px));
+  margin:18px auto 38px;
+}
+
+/* Hero: meer sportclub, minder bedrijf */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:34px 32px 28px;
+  border-radius:24px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(255,132,54,.25),transparent 25%),
+    linear-gradient(135deg,#111a22 0%,#162331 60%,#202b35 100%);
+  box-shadow:0 13px 30px rgba(0,0,0,.14);
+}
+.hero:before,
+.hero:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:10px solid rgba(255,105,0,.16);
+  pointer-events:none;
+}
+.hero:before{
+  width:210px;
+  height:210px;
+  right:-78px;
+  top:-80px;
+}
+.hero:after{
+  width:110px;
+  height:110px;
+  left:-56px;
+  bottom:-58px;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:820px;
+}
+.kicker{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(255,105,0,.17);
+  color:#ffae73;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.hero h1{
+  margin:13px 0 7px;
+  font-size:clamp(2.35rem,6vw,4.65rem);
+  line-height:.92;
+  letter-spacing:-.045em;
+  text-transform:uppercase;
+}
+.hero h1 span{color:var(--orange)}
+.hero p{
+  max-width:760px;
+  margin:13px 0 18px;
+  color:rgba(255,255,255,.82);
+  font-size:16px;
+  line-height:1.5;
+}
+.price-row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px 15px;
+}
+.price{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+}
+.price strong{
+  color:#fff;
+  font-size:38px;
+}
+.price span{
+  color:#ffab70;
+  font-size:13px;
+  font-weight:800;
+}
+.cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:45px;
+  padding:0 18px;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(180deg,#ff8428,#ee5900);
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 7px 17px rgba(255,105,0,.27);
+}
+.cta:hover{transform:translateY(-1px)}
+.hero-note{
+  margin-top:13px;
+  color:rgba(255,255,255,.58);
+  font-size:11px;
+}
+
+/* Warm info band */
+.intro-band{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.intro-box{
+  padding:16px 17px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 6px 18px rgba(0,0,0,.045);
+}
+.intro-box strong{
+  display:block;
+  margin-bottom:5px;
+  color:var(--orange);
+  font-size:12px;
+  text-transform:uppercase;
+}
+.intro-box span{
+  display:block;
+  color:#5e6670;
+  font-size:12px;
+  line-height:1.45;
+}
+
+/* Vrienden = hoofdzaak */
+.section{
+  margin-bottom:14px;
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 7px 22px rgba(0,0,0,.045);
+}
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
+}
+.section-kicker{
+  margin-bottom:6px;
+  color:var(--orange);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.section h2{
+  margin:0;
+  font-size:29px;
+  line-height:1.05;
+}
+.section-head p{
+  max-width:510px;
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+  text-align:right;
+}
+
+.friends-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.friend{
+  position:relative;
+  overflow:hidden;
+  padding:20px;
+  min-height:165px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#ff7c1c 0%,#f45a00 68%,#dc4d00 100%);
+  box-shadow:0 9px 22px rgba(237,91,0,.18);
+}
+.friend:after{
+  content:"";
+  position:absolute;
+  width:105px;
+  height:105px;
+  right:-32px;
+  bottom:-38px;
+  border:8px solid rgba(255,255,255,.13);
+  border-radius:50%;
+}
+.friend-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+}
+.friend-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  border-radius:14px;
+  color:var(--orange);
+  background:#fff;
+  font-size:13px;
+  font-weight:900;
+}
+.friend small{
+  color:rgba(255,255,255,.7);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.friend strong{
+  position:relative;
+  z-index:2;
+  display:block;
+  color:#fff;
+  font-size:21px;
+  line-height:1.12;
+}
+.friend p{
+  position:relative;
+  z-index:2;
+  margin:8px 0 0;
+  color:rgba(255,255,255,.7);
+  font-size:11px;
+}
+
+/* Geen zakelijke 'benefits', maar clubtaal */
+.club-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.club-card{
+  position:relative;
+  padding:18px;
+  border-radius:16px;
+  background:#fff8f1;
+  border:1px solid #f2dfcc;
+}
+.club-card .num{
+  position:absolute;
+  right:13px;
+  top:11px;
+  color:#ffbf91;
+  font-size:24px;
+  font-weight:900;
+}
+.club-card strong{
+  display:block;
+  margin-bottom:6px;
+  color:#252a30;
+  font-size:14px;
+}
+.club-card p{
+  margin:0;
+  color:#6a727a;
+  font-size:12px;
+  line-height:1.45;
+}
+
+/* CTA meer als cluboproep */
+.final{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:24px 26px;
+  border-radius:20px;
+  color:#fff;
+  background:linear-gradient(120deg,#111a22,#1b2732);
+}
+.final:before{
+  content:"";
+  position:absolute;
+  right:-50px;
+  top:-70px;
+  width:180px;
+  height:180px;
+  border:14px solid rgba(255,105,0,.15);
+  border-radius:50%;
+}
+.final-copy{position:relative;z-index:2}
+.final .section-kicker{margin-bottom:5px}
+.final h2{
+  margin:0 0 5px;
+  color:#fff;
+  font-size:28px;
+}
+.final p{
+  margin:0;
+  color:rgba(255,255,255,.68);
+  font-size:13px;
+}
+.final .cta{position:relative;z-index:2;white-space:nowrap}
+
+.back{
+  display:inline-flex;
+  margin:14px 2px 0;
+  color:#6a737b;
+  font-size:12px;
+  font-weight:800;
+}
+.footer{
+  padding:15px 0 0;
+  color:#8b9298;
+  text-align:center;
+  font-size:11px;
+}
+
+@media(max-width:780px){
+  .topbar{
+    align-items:flex-start;
+  }
+  .hero{padding:27px 20px 23px}
+  .hero h1{font-size:3rem}
+  .intro-band,
+  .friends-grid,
+  .club-grid{grid-template-columns:1fr}
+  .section{padding:19px}
+  .section-head{
+    display:block;
+  }
+  .section-head p{
+    margin-top:7px;
+    text-align:left;
+  }
+  .final{
+    display:block;
+    padding:22px 20px;
+  }
+  .final .cta{
+    width:100%;
+    margin-top:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="brand" href="/">
+    <div class="brand-mark">N</div>
+    <div>
+      <strong>HV NOVITAS</strong>
+      <span>Vrienden van Novitas</span>
+    </div>
+  </a>
+  <a class="top-button" href="#aanmelden">WORD VRIEND →</a>
+</header>
+
+<main class="page">
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="kicker">🧡 Samen voor Novitas</div>
+      <h1>Vrienden <span>van Novitas</span></h1>
+      <p>
+        HV Novitas is meer dan handbal. Het is de club, de teams, de jeugd,
+        de vrijwilligers en iedereen die onze vereniging een warm hart toedraagt.
+      </p>
+
+      <div class="price-row">
+        <div class="price">
+          <strong>€15</strong>
+          <span>per jaar</span>
+        </div>
+        <a class="cta"
+           href="https://docs.google.com/forms/d/1GxjGbpjfkIELaozy3dFrTOR7bzpL_47FMceB2vzcMvo/viewform"
+           target="_blank" rel="noopener">WORD VRIEND →</a>
+      </div>
+
+      <div class="hero-note">Een kleine bijdrage, een mooi gebaar voor onze club.</div>
+    </div>
+  </section>
+
+  <section class="intro-band">
+    <div class="intro-box">
+      <strong>€15 per jaar</strong>
+      <span>Voor iedereen die HV Novitas wil steunen.</span>
+    </div>
+    <div class="intro-box">
+      <strong>Onze club</strong>
+      <span>Van jeugd tot senioren: samen vormen we Novitas.</span>
+    </div>
+    <div class="intro-box">
+      <strong>Samen sterker</strong>
+      <span>Iedere Vriend draagt bij aan de kracht van de vereniging.</span>
+    </div>
+  </section>
+
+  <section class="section" id="vrienden">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Ze zijn er al 🧡</div>
+        <h2>Onze Vrienden</h2>
+      </div>
+      <p><span id="vriendenCount">Onze Vrienden</span> zijn momenteel aangemeld bij HV Novitas.</p>
+    </div>
+
+    <div id="vriendenList" class="friends-grid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Extra verbonden</div>
+        <h2>Uitnodigingen voor activiteiten</h2>
+      </div>
+      <p>Vrienden van Novitas ontvangen ook uitnodigingen voor activiteiten die HV Novitas organiseert.</p>
+    </div>
+
+    <div class="club-grid">
+      <article class="club-card">
+        <div class="num">★</div>
+        <strong>Uitnodigingen</strong>
+        <p>Als Vriend van Novitas ontvang je ook uitnodigingen voor activiteiten die door HV Novitas worden georganiseerd.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Waarom meedoen?</div>
+        <h2>Voor de club die we samen maken</h2>
+      </div>
+      <p>Vriend worden draait vooral om betrokkenheid en steun voor HV Novitas.</p>
+    </div>
+
+    <div class="club-grid">
+      <article class="club-card">
+        <div class="num">01</div>
+        <strong>Je steunt Novitas</strong>
+        <p>Met €15 per jaar geef je onze vereniging een extra steuntje in de rug.</p>
+      </article>
+
+      <article class="club-card">
+        <div class="num">02</div>
+        <strong>Je hoort erbij</strong>
+        <p>Je laat zien dat je HV Novitas en onze mensen een warm hart toedraagt.</p>
+      </article>
+
+      <article class="club-card">
+        <div class="num">03</div>
+        <strong>Samen maken we de club</strong>
+        <p>Spelers, trainers, ouders, vrijwilligers en Vrienden: samen is Novitas.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="final" id="aanmelden">
+    <div class="final-copy">
+      <div class="section-kicker">Doe ook mee</div>
+      <h2>Word Vriend van Novitas</h2>
+      <p>Voor €15 per jaar kun je je via het bestaande formulier aanmelden.</p>
+      <a class="back" href="/">← Terug naar HV Novitas</a>
+    </div>
+
+    <a class="cta"
+       href="https://docs.google.com/forms/d/1GxjGbpjfkIELaozy3dFrTOR7bzpL_47FMceB2vzcMvo/viewform"
+       target="_blank" rel="noopener">AANMELDEN →</a>
+  </section>
+
+  <footer class="footer">
+    HV Novitas · Vrienden van Novitas
+  </footer>
+
+</main>
+<script type="module" src="/vrienden-view.js"></script>
+</body>
+</html>
