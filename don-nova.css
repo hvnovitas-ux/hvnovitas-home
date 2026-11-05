@@ -1,0 +1,169 @@
+*{box-sizing:border-box}
+:root{
+  --orange:#ff6a00;
+  --orange2:#ff8a28;
+  --dark:#111111;
+  --text:#181818;
+  --shadow:0 18px 42px rgba(0,0,0,.14)
+}
+html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff}
+body{overflow-x:hidden}
+img{max-width:100%}
+a{text-decoration:none}
+
+.dn-hero{background:linear-gradient(180deg,#0b0b0b,#151515);padding:0}
+.dn-hero-inner{width:min(1180px,calc(100% - 40px));margin:0 auto}
+.dn-hero-link{display:block;line-height:0}
+.dn-hero-image{display:block;width:100%;height:auto;border-radius:0 0 20px 20px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+
+.dn-section{padding:52px 0}
+.dn-light{background:#fff}
+.dn-dark{background:radial-gradient(circle at 12% 22%,rgba(255,106,0,.13),transparent 26%),linear-gradient(135deg,#101010 0%,#1c1c1c 58%,#090909 100%);color:#fff}
+.dn-strip-section{padding:28px 0;background:#f7f7f7}
+.dn-wide{width:min(1180px,calc(100% - 40px));margin:0 auto}
+
+.dn-video-text{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:42px;align-items:center}
+.dn-video{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:18px;background:#0c0c0c;box-shadow:var(--shadow)}
+.dn-video iframe{display:block;width:100%;height:100%;border:0}
+
+/* Horizontale YouTube-videocarrousel boven 'Waarom kiezen voor HV Novitas?' */
+.dn-playlist-section{padding:32px 0 38px;background:#fff}
+.dn-playlist-heading{margin:0 0 18px}
+.dn-playlist-heading .dn-label{margin-bottom:8px}
+.dn-playlist-heading h2{margin:0;color:#171717;font-size:clamp(1.8rem,3vw,2.45rem);line-height:1.05}
+.dn-playlist-rail{position:relative}
+.dn-playlist-track{display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 13px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#c94f00 #eee;-webkit-overflow-scrolling:touch}
+.dn-playlist-track::-webkit-scrollbar{height:7px}
+.dn-playlist-track::-webkit-scrollbar-track{background:#eee;border-radius:20px}
+.dn-playlist-track::-webkit-scrollbar-thumb{background:#c94f00;border-radius:20px}
+.dn-playlist-card{display:flex;flex:0 0 clamp(245px,30vw,350px);flex-direction:column;gap:10px;min-width:0;padding:0;border:0;background:transparent;color:#181818;text-align:left;cursor:pointer;scroll-snap-align:start}
+.dn-playlist-thumb{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:13px;background:#171717;box-shadow:0 6px 18px rgba(0,0,0,.15);isolation:isolate}
+.dn-playlist-thumb img{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
+.dn-playlist-card:hover .dn-playlist-thumb img{transform:scale(1.045)}
+.dn-playlist-card:focus-visible{outline:3px solid #ff7900;outline-offset:4px;border-radius:14px}
+.dn-playlist-tag{position:absolute;top:10px;left:10px;padding:5px 8px;border-radius:6px;background:rgba(20,20,20,.86);color:#fff;font-size:.7rem;font-weight:900;letter-spacing:.04em}
+.dn-playlist-play{position:absolute;top:50%;left:50%;display:grid;width:48px;height:48px;place-items:center;padding-left:3px;border-radius:50%;background:rgba(20,20,20,.82);color:#fff;font-size:18px;transform:translate(-50%,-50%)}
+.dn-playlist-title{display:-webkit-box;overflow:hidden;padding:0 3px;color:#181818;font-size:1rem;font-weight:800;line-height:1.35;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.dn-playlist-arrow{position:absolute;top:42%;z-index:2;display:grid;width:42px;height:42px;place-items:center;border:0;border-radius:50%;background:#292929;color:#fff;font-size:25px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.22);transform:translateY(-50%)}
+.dn-playlist-arrow:hover{background:var(--orange)}
+.dn-playlist-arrow:disabled{opacity:.3;cursor:default}
+.dn-playlist-arrow.prev{left:-15px}
+.dn-playlist-arrow.next{right:-15px}
+.dn-playlist-status{margin:10px 0 0;color:#777;font-size:.86rem}
+.dn-playlist-status a{color:#c94f00;font-weight:800}
+.dn-playlist-modal{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:22px}
+.dn-playlist-modal.is-open{display:flex}
+.dn-playlist-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.88)}
+.dn-playlist-modal-panel{position:relative;z-index:1;width:min(92vw,980px);padding:48px 12px 12px;border:1px solid rgba(255,121,0,.8);border-radius:18px;background:#111;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.dn-playlist-modal-close{position:absolute;top:7px;right:9px;width:36px;height:36px;border:0;border-radius:50%;background:#ff7900;color:#111;font-size:27px;line-height:1;font-weight:900;cursor:pointer}
+.dn-playlist-player{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:#000}
+.dn-playlist-player iframe{display:block;width:100%;height:100%;border:0}
+body.dn-playlist-modal-open{overflow:hidden}
+.dn-video-loading{width:100%;height:100%;display:grid;place-items:center;padding:20px;text-align:center;background:linear-gradient(145deg,#151515,#242424);color:#aaa;font-weight:700}
+
+.dn-copy{min-width:0}
+.dn-label{display:inline-block;margin-bottom:12px;color:var(--orange);font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.dn-copy h2{margin:0 0 18px;font-size:clamp(2rem,3.3vw,3.2rem);line-height:1.02;letter-spacing:-.035em}
+.dn-copy p{margin:0;font-size:1.08rem;line-height:1.7}
+.dn-dark .dn-copy p{color:#ececec}
+.dn-dark .dn-copy h2{color:#fff}
+
+.dn-strip-wrap{border-radius:18px;overflow:hidden;background:#fff;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.08)}
+.dn-strip-wrap img{display:block;width:100%;height:auto}
+
+.dn-bottom-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:42px;align-items:start}
+
+/* Nieuwe Don Nova-foto: de oude proeftraining-box is verwijderd.
+   De bronafbeelding staat in de images-map van hvnovitas-home en bevat
+   links de mascotte; via deze crop wordt alleen dat linkerdeel getoond. */
+.dn-photo{width:100%;align-self:stretch;min-width:0}
+.dn-photo-crop{width:100%;aspect-ratio:1.54 / 1;border-radius:18px;overflow:hidden;background-image:url("/images/Energieke%20handbalmascotte%20naast%20verenigingsbelofte.png");background-repeat:no-repeat;background-position:left center;background-size:214% auto;box-shadow:var(--shadow);background-color:#111}
+
+.dn-reasons{padding:10px 0}
+.dn-reasons h2{margin:0 0 22px;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.05}
+.dn-reasons ul{list-style:none;padding:0;margin:0;display:grid;gap:15px}
+.dn-reasons li{position:relative;padding-left:34px;font-size:1.05rem;line-height:1.45}
+.dn-reasons li:before{content:"🤾";position:absolute;left:0;top:0}
+
+.dn-footer{color:#fff;background:#111;border-top:5px solid var(--orange);padding:24px 0}
+.dn-footer-inner{width:min(1180px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.dn-footer a{color:#fff}
+.dn-footer a:hover{text-decoration:underline}
+
+@media(max-width:900px){
+  .dn-video-text,.dn-bottom-grid{grid-template-columns:1fr;gap:26px}
+  .dn-photo-crop{aspect-ratio:1.54 / 1}
+}
+@media(max-width:600px){
+  .dn-hero-inner,.dn-wide,.dn-footer-inner{width:calc(100% - 28px)}
+  .dn-hero-image{border-radius:0 0 14px 14px}
+  .dn-section{padding:36px 0}
+  .dn-strip-section{padding:20px 0}
+  .dn-copy p{font-size:1rem}
+  .dn-copy h2{font-size:2rem}
+  .dn-reasons h2{font-size:1.9rem}
+}
+
+
+/* Intro: video iets hoger met de Bureau VOZ-banner er direct onder */
+.dn-intro-section{padding-top:38px}
+.dn-intro-section .dn-video-text{align-items:start}
+.dn-video-column{display:flex;min-width:0;flex-direction:column;gap:9px}
+.dn-bureau-voz-banner{display:block;width:100%;overflow:hidden;border-radius:12px;line-height:0;box-shadow:0 10px 24px rgba(0,0,0,.16)}
+.dn-bureau-voz-banner img{display:block;width:100%;height:auto}
+@media(max-width:900px){
+  .dn-intro-section{padding-top:30px}
+}
+
+/* Extra CMS-blok boven de Don Nova-strip: tekst links, bescheiden foto rechts */
+.dn-feature-section{
+  padding:34px 0;
+  background:#f7f7f7;
+}
+.dn-feature-grid{
+  display:grid;
+  /* Foto iets breder dan de tekstkolom en minstens zo breed als de eerste video erboven. */
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  gap:34px;
+  align-items:center;
+}
+.dn-feature-copy{min-width:0}
+.dn-feature-copy h2{
+  margin:0 0 12px;
+  color:#171717;
+  font-size:clamp(1.5rem,2.4vw,2.1rem);
+  line-height:1.12;
+}
+.dn-feature-copy p{
+  margin:0;
+  color:#4d4d4d;
+  font-size:1.02rem;
+  line-height:1.7;
+  white-space:pre-line;
+}
+.dn-feature-photo-wrap{
+  width:100%;
+  max-width:none;
+  margin:0;
+  justify-self:stretch;
+  aspect-ratio:16 / 9;
+  overflow:hidden;
+  border-radius:16px;
+  background:#e9e9e9;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+}
+.dn-feature-photo-wrap img{
+  display:block;
+  width:100%;
+  height:100%;
+  aspect-ratio:16 / 9;
+  object-fit:cover;
+}
+.dn-feature-grid:not(.has-photo){grid-template-columns:minmax(0,1fr)}
+.dn-feature-grid:not(.has-photo) .dn-feature-photo-wrap{display:none}
+@media(max-width:700px){
+  .dn-feature-section{padding:27px 0}
+  .dn-feature-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  .dn-feature-photo-wrap{width:100%;max-width:none;justify-self:stretch;aspect-ratio:16/9}
+  .dn-feature-photo-wrap img{height:100%;aspect-ratio:16/9}
+}
