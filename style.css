@@ -2141,3 +2141,49 @@ body::after {
     object-fit: contain;
   }
 }
+
+
+/* KiKa: volledige campagnebanner naast de socialmediaknoppen */
+.hero-socials {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(9px, 1vw, 15px);
+}
+.hero-kika-banner {
+  display: block;
+  flex: 0 1 clamp(170px, 21vw, 270px);
+  width: clamp(170px, 21vw, 270px);
+  max-width: 42%;
+  height: auto;
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  align-self: center;
+  margin-left: clamp(4px, 1vw, 14px);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.22);
+}
+@media (min-width: 901px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+  }
+  .hero-announcement { max-width: 520px; }
+  .hero-announcement iframe { width: 100%; aspect-ratio: 1.65 / 1; }
+}
+@media (max-width: 900px) {
+  .hero-kika-banner {
+    flex-basis: min(260px, 48%);
+    width: min(260px, 48%);
+    max-width: 48%;
+    margin-left: 4px;
+  }
+}
+@media (max-width: 560px) {
+  .hero-socials { justify-content: center; }
+  .hero-kika-banner {
+    flex-basis: min(300px, 100%);
+    width: min(300px, 100%);
+    max-width: 100%;
+    margin: 8px auto 0;
+  }
+}
