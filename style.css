@@ -1998,5 +1998,4 @@ body::after {
 
 
 /* KiKa-banner onder de homepage-aankondiging */
-.hero-kika-banner{display:block;width:100%;line-height:0;border-radius:14px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.24)}
-.hero-kika-banner img{display:block;width:100%;height:auto;max-height:145px;object-fit:contain}
+.hero-kika-banner{display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.24)}
