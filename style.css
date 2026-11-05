@@ -2088,3 +2088,56 @@ body::after {
   .hero-announcement iframe { border-radius: 10px; }
   .hero-kika-banner { border-radius: 10px; }
 }
+
+
+/* COMPACTE HOOFDBANNER — aankondiging en KiKa samen minder hoog */
+@media (min-width: 901px) {
+  .hero {
+    min-height: clamp(360px, 29vw, 460px) !important;
+  }
+  .hero-inner {
+    width: min(1400px, calc(100% - 48px));
+    grid-template-columns: minmax(0, 1fr) minmax(0, 390px);
+    gap: clamp(24px, 3.5vw, 56px);
+    padding: 24px 0;
+  }
+  .hero-announcement {
+    width: 100%;
+    max-width: 390px;
+    gap: 9px;
+  }
+  .hero-announcement iframe {
+    width: 100%;
+    aspect-ratio: 1.65 / 1;
+  }
+  .hero-kika-banner {
+    width: 86%;
+    max-width: 335px;
+    max-height: 100px;
+    height: auto;
+    aspect-ratio: 3 / 1;
+    align-self: center;
+    object-fit: contain;
+  }
+}
+@media (max-width: 900px) {
+  .hero-inner {
+    width: min(620px, calc(100% - 32px));
+    gap: 16px;
+    padding: 22px 0 28px;
+  }
+  .hero-announcement {
+    max-width: 480px;
+    margin-inline: auto;
+    gap: 8px;
+  }
+  .hero-kika-banner {
+    width: 86%;
+    max-width: 410px;
+    max-height: 120px;
+    height: auto;
+    aspect-ratio: 3 / 1;
+    align-self: center;
+    object-fit: contain;
+  }
+}
