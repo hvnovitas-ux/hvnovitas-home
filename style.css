@@ -1997,4 +1997,4 @@ body::after {
 
 
 /* KiKa-banner onder de homepage-aankondiging */
-.hero-kika-banner{display:block;width:100%;height:auto;aspect-ratio:3 / 1;max-height:none;object-fit:contain;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.24)}
+.hero-kika-banner{display:block;align-self:stretch;width:100%;max-width:100%;height:auto;aspect-ratio:3 / 1;max-height:none;object-fit:contain;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.24);pointer-events:none;cursor:default;user-select:none}
