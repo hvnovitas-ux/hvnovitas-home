@@ -230,7 +230,7 @@
       fallback.className = "novitas-shorts-fallback";
 
       const iframe = document.createElement("iframe");
-      iframe.src = "https://www.youtube-nocookie.com/embed/videoseries?list=" + encodeURIComponent(PLAYLIST_ID);
+      iframe.src = "https://www.youtube.com/embed/videoseries?list=" + encodeURIComponent(PLAYLIST_ID);
       iframe.title = "HV Novitas Shorts – YouTube-playlist";
       iframe.loading = "lazy";
       iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
