@@ -40,7 +40,10 @@
 
     const entries = Array.from(xml.getElementsByTagName("entry"));
     return entries.map((entry) => {
-      const videoIdNode = entry.getElementsByTagNameNS(YT_NAMESPACE, "videoId")[0];
+      const videoIdNode =
+        entry.getElementsByTagNameNS(YT_NAMESPACE, "videoId")[0] ||
+        entry.getElementsByTagName("yt:videoId")[0] ||
+        entry.getElementsByTagName("videoId")[0];
       const videoId = videoIdNode ? videoIdNode.textContent.trim() : "";
       if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) return null;
 
@@ -155,47 +158,39 @@
   window.addEventListener("resize", updateArrows);
 
   const fetchVideos = async () => {
-    const rss2jsonUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(FEED_URL);
-    const attempts = [
-      async () => {
-        const response = await fetch(rss2jsonUrl, { cache: "no-store" });
-        if (!response.ok) throw new Error("RSS-converter niet bereikbaar");
-        const data = await response.json();
-        if (data.status !== "ok" || !Array.isArray(data.items)) throw new Error("RSS-converter gaf geen video's terug");
-        return data.items.map((item) => {
-          const source = [item.link, item.guid, item.id].filter(Boolean).join(" ");
-          const match = source.match(/(?:v=|youtu\.be\/|shorts\/)([a-zA-Z0-9_-]{11})/);
-          if (!match) return null;
-          return {
-            id: match[1],
-            title: item.title || "Bekijk deze Novitas Short",
-            thumbnail: item.thumbnail || (item.enclosure && item.enclosure.link) || "https://i.ytimg.com/vi/" + match[1] + "/hqdefault.jpg"
-          };
-        }).filter(Boolean);
-      },
-      async () => {
-        const response = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL), { cache: "no-store" });
-        if (!response.ok) throw new Error("Alternatieve feedproxy niet bereikbaar");
-        return parseFeed(await response.text());
-      },
-      async () => {
-        const response = await fetch("https://corsproxy.io/?url=" + encodeURIComponent(FEED_URL), { cache: "no-store" });
-        if (!response.ok) throw new Error("Tweede feedproxy niet bereikbaar");
-        return parseFeed(await response.text());
-      },
-      async () => {
-        const response = await fetch("https://proxy.cors.dev/" + FEED_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("Feedproxy niet bereikbaar");
-        return parseFeed(await response.text());
+    // YouTube's playlist Atom feed is fetched through cors.dev first.
+    // rss2json currently returns a Cloudflare 403 challenge in browsers.
+    const fetchAndParse = (url, label) => async () => {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(url, {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        if (!response.ok) {
+          const proxyError = response.headers.get("X-Cors-Error");
+          throw new Error(label + " antwoordde " + response.status + (proxyError ? " (" + proxyError + ")" : ""));
+        }
+
+        const videos = parseFeed(await response.text());
+        if (!videos.length) throw new Error(label + " gaf geen video's terug");
+        return videos;
+      } finally {
+        window.clearTimeout(timeout);
       }
+    };
+
+    const attempts = [
+      fetchAndParse("https://proxy.cors.dev/" + FEED_URL, "YouTube-feed"),
+      fetchAndParse("https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL), "Reserve-feed 1"),
+      fetchAndParse("https://corsproxy.io/?url=" + encodeURIComponent(FEED_URL), "Reserve-feed 2")
     ];
 
     let lastError;
     for (const attempt of attempts) {
       try {
-        const videos = await attempt();
-        if (videos.length) return videos;
-        throw new Error("Deze feedroute leverde geen Shorts op");
+        return await attempt();
       } catch (error) {
         lastError = error;
         console.warn("HV Novitas Shorts-feedroute mislukt:", error);
