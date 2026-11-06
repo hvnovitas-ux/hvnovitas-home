@@ -5,13 +5,12 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v4";
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v5";
   const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
 
   const track = document.getElementById("novitasShortsTrack");
-  const fallback = document.getElementById("novitasShortsFallback");
   const status = document.getElementById("novitasShortsStatus");
   const previous = document.getElementById("novitasShortsPrev");
   const next = document.getElementById("novitasShortsNext");
@@ -41,10 +40,7 @@
 
     const entries = Array.from(xml.getElementsByTagName("entry"));
     return entries.map((entry) => {
-      const videoIdNode =
-        entry.getElementsByTagNameNS(YT_NAMESPACE, "videoId")[0] ||
-        entry.getElementsByTagName("yt:videoId")[0] ||
-        entry.getElementsByTagName("videoId")[0];
+      const videoIdNode = entry.getElementsByTagNameNS(YT_NAMESPACE, "videoId")[0];
       const videoId = videoIdNode ? videoIdNode.textContent.trim() : "";
       if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) return null;
 
@@ -138,13 +134,6 @@
       track.append(card);
     });
 
-    // Alleen de carrousel tonen zodra er echt kaarten zijn opgebouwd.
-    const section = track.closest(".novitas-shorts-section");
-    if (section) section.classList.add("has-short-cards");
-    if (fallback) fallback.hidden = true;
-    if (previous) previous.style.display = "";
-    if (next) next.style.display = "";
-
     // Geen statusregel onder de carrousel: de tekst voegt niets toe.
     if (status) status.hidden = true;
     updateArrows();
@@ -165,52 +154,10 @@
   track.addEventListener("scroll", updateArrows, { passive: true });
   window.addEventListener("resize", updateArrows);
 
-  const fetchVideos = async () => {
-    // YouTube's playlist Atom feed is fetched through cors.dev first.
-    // rss2json currently returns a Cloudflare 403 challenge in browsers.
-    const fetchAndParse = (url, label) => async () => {
-      const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 15000);
-      try {
-        const response = await fetch(url, {
-          cache: "no-store",
-          signal: controller.signal
-        });
-        if (!response.ok) {
-          const proxyError = response.headers.get("X-Cors-Error");
-          throw new Error(label + " antwoordde " + response.status + (proxyError ? " (" + proxyError + ")" : ""));
-        }
-
-        const videos = parseFeed(await response.text());
-        if (!videos.length) throw new Error(label + " gaf geen video's terug");
-        return videos;
-      } finally {
-        window.clearTimeout(timeout);
-      }
-    };
-
-    const attempts = [
-      fetchAndParse("https://proxy.cors.dev/" + FEED_URL, "YouTube-feed"),
-      fetchAndParse("https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL), "Reserve-feed 1"),
-      fetchAndParse("https://corsproxy.io/?url=" + encodeURIComponent(FEED_URL), "Reserve-feed 2")
-    ];
-
-    let lastError;
-    for (const attempt of attempts) {
-      try {
-        return await attempt();
-      } catch (error) {
-        lastError = error;
-        console.warn("HV Novitas Shorts-feedroute mislukt:", error);
-      }
-    }
-    throw lastError || new Error("Geen Shorts-feed beschikbaar");
-  };
-
   const load = async () => {
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
-      if (cached && Date.now() - cached.savedAt < CACHE_TTL && Array.isArray(cached.videos) && cached.videos.length) {
+      if (cached && Date.now() - cached.savedAt < CACHE_TTL && Array.isArray(cached.videos)) {
         renderCards(cached.videos);
         return;
       }
@@ -220,7 +167,16 @@
 
     setStatus("Novitas Shorts worden geladen…");
     try {
-      const videos = await fetchVideos();
+      // YouTube's playlist Atom-feed is read via a simple CORS proxy for this static site.
+      const response = await fetch("https://proxy.cors.dev/" + FEED_URL, {
+        method: "GET",
+        headers: { "Accept": "application/atom+xml, application/xml, text/xml" },
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error("De Shorts-feed is tijdelijk niet bereikbaar.");
+      const videos = parseFeed(await response.text());
+      if (!videos.length) throw new Error("De playlist bevat momenteel geen uitleesbare video's.");
+
       renderCards(videos);
       try {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), videos }));
@@ -228,15 +184,8 @@
         // The carousel remains usable if browser storage is disabled.
       }
     } catch (error) {
-      // The playlist iframe is already present in index.html. Keep it visible
-      // when the feed or carousel cannot be loaded.
-      console.warn("HV Novitas Shorts-feed niet beschikbaar; vaste YouTube-playlist blijft zichtbaar:", error);
-      if (fallback) fallback.hidden = false;
-      if (previous) previous.style.display = "none";
-      if (next) next.style.display = "none";
-      if (status) status.hidden = true;
-      const section = track.closest(".novitas-shorts-section");
-      if (section) section.classList.remove("has-short-cards");
+      setStatus("De Shorts konden nu niet automatisch worden geladen.", true);
+      console.warn("HV Novitas Shorts:", error);
     }
   };
 
