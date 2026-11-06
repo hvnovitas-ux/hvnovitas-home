@@ -5,7 +5,7 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v2";
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v3";
   const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
@@ -154,10 +154,60 @@
   track.addEventListener("scroll", updateArrows, { passive: true });
   window.addEventListener("resize", updateArrows);
 
+  const fetchVideos = async () => {
+    const rss2jsonUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(FEED_URL);
+    const attempts = [
+      async () => {
+        const response = await fetch(rss2jsonUrl, { cache: "no-store" });
+        if (!response.ok) throw new Error("RSS-converter niet bereikbaar");
+        const data = await response.json();
+        if (data.status !== "ok" || !Array.isArray(data.items)) throw new Error("RSS-converter gaf geen video's terug");
+        return data.items.map((item) => {
+          const source = [item.link, item.guid, item.id].filter(Boolean).join(" ");
+          const match = source.match(/(?:v=|youtu\\.be\\/|shorts\\/)([a-zA-Z0-9_-]{11})/);
+          if (!match) return null;
+          return {
+            id: match[1],
+            title: item.title || "Bekijk deze Novitas Short",
+            thumbnail: item.thumbnail || (item.enclosure && item.enclosure.link) || "https://i.ytimg.com/vi/" + match[1] + "/hqdefault.jpg"
+          };
+        }).filter(Boolean);
+      },
+      async () => {
+        const response = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL), { cache: "no-store" });
+        if (!response.ok) throw new Error("Alternatieve feedproxy niet bereikbaar");
+        return parseFeed(await response.text());
+      },
+      async () => {
+        const response = await fetch("https://corsproxy.io/?url=" + encodeURIComponent(FEED_URL), { cache: "no-store" });
+        if (!response.ok) throw new Error("Tweede feedproxy niet bereikbaar");
+        return parseFeed(await response.text());
+      },
+      async () => {
+        const response = await fetch("https://proxy.cors.dev/" + FEED_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error("Feedproxy niet bereikbaar");
+        return parseFeed(await response.text());
+      }
+    ];
+
+    let lastError;
+    for (const attempt of attempts) {
+      try {
+        const videos = await attempt();
+        if (videos.length) return videos;
+        throw new Error("Deze feedroute leverde geen Shorts op");
+      } catch (error) {
+        lastError = error;
+        console.warn("HV Novitas Shorts-feedroute mislukt:", error);
+      }
+    }
+    throw lastError || new Error("Geen Shorts-feed beschikbaar");
+  };
+
   const load = async () => {
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
-      if (cached && Date.now() - cached.savedAt < CACHE_TTL && Array.isArray(cached.videos)) {
+      if (cached && Date.now() - cached.savedAt < CACHE_TTL && Array.isArray(cached.videos) && cached.videos.length) {
         renderCards(cached.videos);
         return;
       }
@@ -167,16 +217,7 @@
 
     setStatus("Novitas Shorts worden geladen…");
     try {
-      // YouTube's playlist Atom-feed is read via a simple CORS proxy for this static site.
-      const response = await fetch("https://proxy.cors.dev/" + FEED_URL, {
-        method: "GET",
-        headers: { "Accept": "application/atom+xml, application/xml, text/xml" },
-        cache: "no-store"
-      });
-      if (!response.ok) throw new Error("De Shorts-feed is tijdelijk niet bereikbaar.");
-      const videos = parseFeed(await response.text());
-      if (!videos.length) throw new Error("De playlist bevat momenteel geen uitleesbare video's.");
-
+      const videos = await fetchVideos();
       renderCards(videos);
       try {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), videos }));
@@ -185,7 +226,9 @@
       }
     } catch (error) {
       setStatus("De Shorts konden nu niet automatisch worden geladen.", true);
-      console.warn("HV Novitas Shorts:", error);
+      const section = track.closest(".novitas-shorts-section");
+      if (section) section.hidden = true;
+      console.warn("HV Novitas Shorts konden niet worden geladen:", error);
     }
   };
 
