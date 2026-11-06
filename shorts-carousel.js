@@ -11,6 +11,7 @@
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
 
   const track = document.getElementById("novitasShortsTrack");
+  const fallback = document.getElementById("novitasShortsFallback");
   const status = document.getElementById("novitasShortsStatus");
   const previous = document.getElementById("novitasShortsPrev");
   const next = document.getElementById("novitasShortsNext");
@@ -137,6 +138,13 @@
       track.append(card);
     });
 
+    // Alleen de carrousel tonen zodra er echt kaarten zijn opgebouwd.
+    const section = track.closest(".novitas-shorts-section");
+    if (section) section.classList.add("has-short-cards");
+    if (fallback) fallback.hidden = true;
+    if (previous) previous.style.display = "";
+    if (next) next.style.display = "";
+
     // Geen statusregel onder de carrousel: de tekst voegt niets toe.
     if (status) status.hidden = true;
     updateArrows();
@@ -220,38 +228,15 @@
         // The carousel remains usable if browser storage is disabled.
       }
     } catch (error) {
-      console.warn("HV Novitas Shorts-feed niet beschikbaar; YouTube-playlist wordt rechtstreeks getoond:", error);
-
-      // Fallback: official YouTube playlist player. This keeps the section useful
-      // even when a feed proxy or YouTube's RSS endpoint is temporarily unavailable.
-      track.replaceChildren();
-
-      const fallback = document.createElement("div");
-      fallback.className = "novitas-shorts-fallback";
-
-      const iframe = document.createElement("iframe");
-      iframe.src = "https://www.youtube.com/embed/videoseries?list=" + encodeURIComponent(PLAYLIST_ID);
-      iframe.title = "HV Novitas Shorts – YouTube-playlist";
-      iframe.loading = "lazy";
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      iframe.allowFullscreen = true;
-      iframe.referrerPolicy = "strict-origin-when-cross-origin";
-
-      const link = document.createElement("a");
-      link.href = PLAYLIST_URL;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Bekijk de volledige Shorts-playlist op YouTube";
-
-      fallback.append(iframe, link);
-      track.append(fallback);
-
+      // The playlist iframe is already present in index.html. Keep it visible
+      // when the feed or carousel cannot be loaded.
+      console.warn("HV Novitas Shorts-feed niet beschikbaar; vaste YouTube-playlist blijft zichtbaar:", error);
+      if (fallback) fallback.hidden = false;
       if (previous) previous.style.display = "none";
       if (next) next.style.display = "none";
-
-      const section = track.closest(".novitas-shorts-section");
-      if (section) section.style.display = "";
       if (status) status.hidden = true;
+      const section = track.closest(".novitas-shorts-section");
+      if (section) section.classList.remove("has-short-cards");
     }
   };
 
