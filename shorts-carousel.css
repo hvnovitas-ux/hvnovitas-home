@@ -206,6 +206,7 @@ body.novitas-shorts-modal-open { overflow: hidden; }
   margin: 0 auto;
   overflow: hidden;
   aspect-ratio: 16 / 9;
+  min-height: 250px;
   border-radius: 14px;
   background: #111;
   box-shadow: 0 8px 24px rgba(0,0,0,.16);
