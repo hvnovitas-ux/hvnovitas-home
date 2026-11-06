@@ -2187,3 +2187,13 @@ body::after {
     margin: 8px auto 0;
   }
 }
+
+/* KiKa-campagnebanner iets groter, zonder de vaste hoogte van de hero te wijzigen */
+@media (min-width: 901px) {
+  .hero-kika-banner {
+    flex-basis: clamp(185px, 23vw, 295px);
+    width: clamp(185px, 23vw, 295px);
+    max-width: 45%;
+    max-height: 100px;
+  }
+}
