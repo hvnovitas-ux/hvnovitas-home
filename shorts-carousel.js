@@ -5,7 +5,7 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v6";
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v7";
   const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
@@ -158,25 +158,76 @@
   window.addEventListener("resize", updateArrows);
 
   const fetchVideos = async () => {
-    const routes = [
+    const errors = [];
+
+    // First use public Invidious playlist APIs. They return JSON directly and
+    // do not depend on YouTube's intermittently failing Atom/RSS endpoint.
+    const instances = [
+      "https://inv.nadeko.net",
+      "https://invidious.tiekoetter.com",
+      "https://invidious.nerdvpn.de",
+      "https://yt.chocolatemoo53.com"
+    ];
+
+    for (const instance of instances) {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 10000);
+      try {
+        const response = await fetch(
+          instance + "/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
+          {
+            method: "GET",
+            cache: "no-store",
+            credentials: "omit",
+            headers: { "Accept": "application/json" },
+            signal: controller.signal
+          }
+        );
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        const data = await response.json();
+        if (!data || !Array.isArray(data.videos)) {
+          throw new Error("API antwoord bevat geen video's");
+        }
+
+        const videos = data.videos.map((item) => {
+          const id = item.videoId || item.video_id;
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+
+          const thumbnails = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
+          const thumbnail =
+            (thumbnails.find((image) => image.quality === "medium") || thumbnails[0] || {}).url ||
+            "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+
+          return {
+            id,
+            title: item.title || "Bekijk deze Novitas Short",
+            thumbnail
+          };
+        }).filter(Boolean);
+
+        if (videos.length) return videos;
+        throw new Error("Playlist bevat geen zichtbare video's");
+      } catch (error) {
+        errors.push(new URL(instance).hostname + ": " + (error.message || "ophalen mislukt"));
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    }
+
+    // Final fallback: YouTube's official Atom feed through public CORS proxies.
+    const feedRoutes = [
       {
-        name: "AllOrigins",
+        name: "YouTube Atom via AllOrigins",
         url: "https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL)
       },
       {
-        name: "Corsproxy",
-        url: "https://corsproxy.io/?url=" + encodeURIComponent(FEED_URL)
-      },
-      {
-        name: "cors.dev",
+        name: "YouTube Atom via cors.dev",
         url: "https://proxy.cors.dev/" + FEED_URL
       }
     ];
 
-    const errors = [];
-    let emptyFeed = false;
-
-    for (const route of routes) {
+    for (const route of feedRoutes) {
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 12000);
       try {
@@ -186,29 +237,19 @@
           credentials: "omit",
           signal: controller.signal
         });
+        if (!response.ok) throw new Error("HTTP " + response.status);
 
-        if (!response.ok) {
-          const reason = response.headers.get("X-Cors-Error");
-          throw new Error(route.name + ": HTTP " + response.status + (reason ? " (" + reason + ")" : ""));
-        }
-
-        const xmlText = await response.text();
-        const videos = parseFeed(xmlText);
+        const videos = parseFeed(await response.text());
         if (videos.length) return videos;
-
-        emptyFeed = true;
-        errors.push(route.name + ": feed bevat geen video-items");
+        throw new Error("feed bevat geen video-items");
       } catch (error) {
-        errors.push(error && error.message ? error.message : route.name + ": ophalen mislukt");
+        errors.push(route.name + ": " + (error.message || "ophalen mislukt"));
       } finally {
         window.clearTimeout(timeout);
       }
     }
 
-    if (emptyFeed) {
-      throw new Error("YouTube geeft geen video's uit deze playlist terug. Controleer of de playlist openbaar is en nog video's bevat. " + errors.join(" | "));
-    }
-    throw new Error("De YouTube-feed is via geen van de ophaalroutes bereikbaar. " + errors.join(" | "));
+    throw new Error("De Novitas-playlist kan momenteel niet worden uitgelezen. " + errors.join(" | "));
   };
 
   const load = async () => {
