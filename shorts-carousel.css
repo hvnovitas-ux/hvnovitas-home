@@ -229,3 +229,8 @@ body.novitas-shorts-modal-open { overflow: hidden; }
   font-weight: 800;
   text-decoration: none;
 }
+
+
+/* Static playlist is always available; carousel arrows appear only after cards load. */
+.novitas-shorts-section:not(.has-short-cards) .novitas-shorts-arrow { display: none; }
+.novitas-shorts-fallback[hidden] { display: none !important; }
