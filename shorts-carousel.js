@@ -5,7 +5,7 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v3";
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v4";
   const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
@@ -220,10 +220,38 @@
         // The carousel remains usable if browser storage is disabled.
       }
     } catch (error) {
-      setStatus("De Shorts konden nu niet automatisch worden geladen.", true);
+      console.warn("HV Novitas Shorts-feed niet beschikbaar; YouTube-playlist wordt rechtstreeks getoond:", error);
+
+      // Fallback: official YouTube playlist player. This keeps the section useful
+      // even when a feed proxy or YouTube's RSS endpoint is temporarily unavailable.
+      track.replaceChildren();
+
+      const fallback = document.createElement("div");
+      fallback.className = "novitas-shorts-fallback";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/videoseries?list=" + encodeURIComponent(PLAYLIST_ID);
+      iframe.title = "HV Novitas Shorts – YouTube-playlist";
+      iframe.loading = "lazy";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
+      const link = document.createElement("a");
+      link.href = PLAYLIST_URL;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Bekijk de volledige Shorts-playlist op YouTube";
+
+      fallback.append(iframe, link);
+      track.append(fallback);
+
+      if (previous) previous.style.display = "none";
+      if (next) next.style.display = "none";
+
       const section = track.closest(".novitas-shorts-section");
-      if (section) section.hidden = true;
-      console.warn("HV Novitas Shorts konden niet worden geladen:", error);
+      if (section) section.style.display = "";
+      if (status) status.hidden = true;
     }
   };
 
