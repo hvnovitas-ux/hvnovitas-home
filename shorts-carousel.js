@@ -160,70 +160,123 @@
   const fetchVideos = async () => {
     const errors = [];
 
-    // First use public Invidious playlist APIs. They return JSON directly and
-    // do not depend on YouTube's intermittently failing Atom/RSS endpoint.
-    const instances = [
-      "https://inv.nadeko.net",
-      "https://invidious.tiekoetter.com",
-      "https://invidious.nerdvpn.de",
-      "https://yt.chocolatemoo53.com"
-    ];
-
-    for (const instance of instances) {
-      const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 10000);
-      try {
-        const response = await fetch(
-          instance + "/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
-          {
-            method: "GET",
-            cache: "no-store",
-            credentials: "omit",
-            headers: { "Accept": "application/json" },
-            signal: controller.signal
-          }
-        );
-        if (!response.ok) throw new Error("HTTP " + response.status);
-
-        const data = await response.json();
-        if (!data || !Array.isArray(data.videos)) {
-          throw new Error("API antwoord bevat geen video's");
-        }
-
-        const videos = data.videos.map((item) => {
+    // Public Piped and Invidious playlist APIs. All requests are read-only,
+    // use the one configured playlist, and run in parallel so a dead mirror
+    // cannot hold up the page.
+    const apiSources = [
+      {
+        name: "Piped NL",
+        url: "https://pipedapi.ducks.party/playlists/" + encodeURIComponent(PLAYLIST_ID),
+        parse: (data) => (data.relatedStreams || []).map((item) => {
+          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      },
+      {
+        name: "Piped DE",
+        url: "https://pipedapi.adminforge.de/playlists/" + encodeURIComponent(PLAYLIST_ID),
+        parse: (data) => (data.relatedStreams || []).map((item) => {
+          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      },
+      {
+        name: "Piped",
+        url: "https://api.piped.yt/playlists/" + encodeURIComponent(PLAYLIST_ID),
+        parse: (data) => (data.relatedStreams || []).map((item) => {
+          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      },
+      {
+        name: "Piped official",
+        url: "https://pipedapi.kavin.rocks/playlists/" + encodeURIComponent(PLAYLIST_ID),
+        parse: (data) => (data.relatedStreams || []).map((item) => {
+          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      },
+      {
+        name: "Invidious NL",
+        url: "https://inv.nadeko.net/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
+        parse: (data) => (data.videos || []).map((item) => {
           const id = item.videoId || item.video_id;
           if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          const thumbs = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
+          const thumbnail = (thumbs.find((image) => image.quality === "medium") || thumbs[0] || {}).url;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      },
+      {
+        name: "Invidious DE",
+        url: "https://invidious.tiekoetter.com/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
+        parse: (data) => (data.videos || []).map((item) => {
+          const id = item.videoId || item.video_id;
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          const thumbs = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
+          const thumbnail = (thumbs.find((image) => image.quality === "medium") || thumbs[0] || {}).url;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      },
+      {
+        name: "Invidious",
+        url: "https://invidious.nerdvpn.de/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
+        parse: (data) => (data.videos || []).map((item) => {
+          const id = item.videoId || item.video_id;
+          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+          const thumbs = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
+          const thumbnail = (thumbs.find((image) => image.quality === "medium") || thumbs[0] || {}).url;
+          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
+        }).filter(Boolean)
+      }
+    ];
 
-          const thumbnails = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
-          const thumbnail =
-            (thumbnails.find((image) => image.quality === "medium") || thumbnails[0] || {}).url ||
-            "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
-
-          return {
-            id,
-            title: item.title || "Bekijk deze Novitas Short",
-            thumbnail
-          };
-        }).filter(Boolean);
-
-        if (videos.length) return videos;
-        throw new Error("Playlist bevat geen zichtbare video's");
+    const controllers = [];
+    const apiRequests = apiSources.map(async (source) => {
+      const controller = new AbortController();
+      controllers.push(controller);
+      const timeout = window.setTimeout(() => controller.abort(), 10000);
+      try {
+        const response = await fetch(source.url, {
+          method: "GET",
+          cache: "no-store",
+          credentials: "omit",
+          headers: { "Accept": "application/json" },
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        const data = await response.json();
+        const videos = source.parse(data);
+        if (!videos.length) throw new Error("playlist leverde geen video's op");
+        return videos;
       } catch (error) {
-        errors.push(new URL(instance).hostname + ": " + (error.message || "ophalen mislukt"));
+        errors.push(source.name + ": " + (error.message || "ophalen mislukt"));
+        throw error;
       } finally {
         window.clearTimeout(timeout);
       }
+    });
+
+    try {
+      const videos = await Promise.any(apiRequests);
+      controllers.forEach((controller) => controller.abort());
+      return videos;
+    } catch (_) {
+      // If every JSON source fails, try the official YouTube Atom feed below.
     }
 
-    // Final fallback: YouTube's official Atom feed through public CORS proxies.
     const feedRoutes = [
-      {
-        name: "YouTube Atom via AllOrigins",
-        url: "https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL)
-      },
       {
         name: "YouTube Atom via cors.dev",
         url: "https://proxy.cors.dev/" + FEED_URL
+      },
+      {
+        name: "YouTube Atom via AllOrigins",
+        url: "https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL)
       }
     ];
 
@@ -235,10 +288,10 @@
           method: "GET",
           cache: "no-store",
           credentials: "omit",
+          headers: { "Accept": "application/atom+xml, application/xml, text/xml" },
           signal: controller.signal
         });
         if (!response.ok) throw new Error("HTTP " + response.status);
-
         const videos = parseFeed(await response.text());
         if (videos.length) return videos;
         throw new Error("feed bevat geen video-items");
