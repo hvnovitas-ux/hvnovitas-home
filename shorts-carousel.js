@@ -5,7 +5,7 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v7";
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v9";
   const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
@@ -160,80 +160,32 @@
   const fetchVideos = async () => {
     const errors = [];
 
-    // Public Piped and Invidious playlist APIs. All requests are read-only,
-    // use the one configured playlist, and run in parallel so a dead mirror
-    // cannot hold up the page.
-    const apiSources = [
-      {
-        name: "Piped NL",
-        url: "https://pipedapi.ducks.party/playlists/" + encodeURIComponent(PLAYLIST_ID),
-        parse: (data) => (data.relatedStreams || []).map((item) => {
-          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      },
-      {
-        name: "Piped DE",
-        url: "https://pipedapi.adminforge.de/playlists/" + encodeURIComponent(PLAYLIST_ID),
-        parse: (data) => (data.relatedStreams || []).map((item) => {
-          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      },
-      {
-        name: "Piped",
-        url: "https://api.piped.yt/playlists/" + encodeURIComponent(PLAYLIST_ID),
-        parse: (data) => (data.relatedStreams || []).map((item) => {
-          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      },
-      {
-        name: "Piped official",
-        url: "https://pipedapi.kavin.rocks/playlists/" + encodeURIComponent(PLAYLIST_ID),
-        parse: (data) => (data.relatedStreams || []).map((item) => {
-          const id = item.videoId || (item.url || "").match(/[?&]v=([a-zA-Z0-9_-]{11})/)?.[1];
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: item.thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      },
-      {
-        name: "Invidious NL",
-        url: "https://inv.nadeko.net/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
-        parse: (data) => (data.videos || []).map((item) => {
-          const id = item.videoId || item.video_id;
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          const thumbs = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
-          const thumbnail = (thumbs.find((image) => image.quality === "medium") || thumbs[0] || {}).url;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      },
-      {
-        name: "Invidious DE",
-        url: "https://invidious.tiekoetter.com/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
-        parse: (data) => (data.videos || []).map((item) => {
-          const id = item.videoId || item.video_id;
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          const thumbs = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
-          const thumbnail = (thumbs.find((image) => image.quality === "medium") || thumbs[0] || {}).url;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      },
-      {
-        name: "Invidious",
-        url: "https://invidious.nerdvpn.de/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
-        parse: (data) => (data.videos || []).map((item) => {
-          const id = item.videoId || item.video_id;
-          if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
-          const thumbs = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
-          const thumbnail = (thumbs.find((image) => image.quality === "medium") || thumbs[0] || {}).url;
-          return { id, title: item.title || "Bekijk deze Novitas Short", thumbnail: thumbnail || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg" };
-        }).filter(Boolean)
-      }
+    // Officially listed public Invidious instances. The playlist endpoint
+    // returns a JSON object containing a "videos" array and each item's videoId.
+    const parseInvidious = (data) => (data.videos || []).map((item) => {
+      const id = item.videoId || item.video_id;
+      if (!/^[a-zA-Z0-9_-]{11}$/.test(id || "")) return null;
+      const thumbnails = Array.isArray(item.videoThumbnails) ? item.videoThumbnails : [];
+      const thumb = thumbnails.find((image) => image.quality === "medium") || thumbnails[0];
+      return {
+        id,
+        title: item.title || "Bekijk deze Novitas Short",
+        thumbnail: (thumb && thumb.url) || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"
+      };
+    }).filter(Boolean);
+
+    const instances = [
+      "https://invidious.nerdvpn.de",
+      "https://yt.chocolatemoo53.com",
+      "https://invidious.tiekoetter.com",
+      "https://inv.nadeko.net"
     ];
+
+    const apiSources = instances.map((instance) => ({
+      name: new URL(instance).hostname,
+      url: instance + "/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
+      parse: parseInvidious
+    }));
 
     const controllers = [];
     const apiRequests = apiSources.map(async (source) => {
