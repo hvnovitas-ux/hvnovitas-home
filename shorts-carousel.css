@@ -202,7 +202,7 @@ body.novitas-shorts-modal-open { overflow: hidden; }
 .novitas-shorts-fallback {
   display: flex;
   flex-direction: column;
-  flex: 0 0 min(100%, 760px);
+  width: min(100%, 760px);
   margin: 0 auto;
   overflow: hidden;
   aspect-ratio: 16 / 9;
