@@ -164,7 +164,7 @@
         if (data.status !== "ok" || !Array.isArray(data.items)) throw new Error("RSS-converter gaf geen video's terug");
         return data.items.map((item) => {
           const source = [item.link, item.guid, item.id].filter(Boolean).join(" ");
-          const match = source.match(/(?:v=|youtu\\.be\\/|shorts\\/)([a-zA-Z0-9_-]{11})/);
+          const match = source.match(/(?:v=|youtu\.be\/|shorts\/)([a-zA-Z0-9_-]{11})/);
           if (!match) return null;
           return {
             id: match[1],
