@@ -5,7 +5,7 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v9";
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v10";
   const CACHE_TTL = 5 * 60 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
@@ -53,7 +53,7 @@
       return {
         id: videoId,
         title,
-        thumbnail: thumbnail || "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg"
+        thumbnail: "https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"
       };
     }).filter(Boolean);
   };
@@ -115,9 +115,17 @@
       image.alt = "";
       image.loading = "lazy";
       image.referrerPolicy = "strict-origin-when-cross-origin";
+      const fallbackThumbnails = [
+        "https://i.ytimg.com/vi/" + video.id + "/sddefault.jpg",
+        "https://i.ytimg.com/vi/" + video.id + "/hqdefault.jpg"
+      ];
+      let fallbackIndex = 0;
       image.onerror = () => {
-        image.onerror = null;
-        image.src = "https://i.ytimg.com/vi/" + video.id + "/hqdefault.jpg";
+        if (fallbackIndex >= fallbackThumbnails.length) {
+          image.onerror = null;
+          return;
+        }
+        image.src = fallbackThumbnails[fallbackIndex++];
       };
 
       const tag = document.createElement("span");
@@ -170,7 +178,7 @@
       return {
         id,
         title: item.title || "Bekijk deze Novitas Short",
-        thumbnail: (thumb && thumb.url) || "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"
+        thumbnail: "https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg"
       };
     }).filter(Boolean);
 
