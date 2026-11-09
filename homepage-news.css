@@ -4,12 +4,12 @@
 .homepage-latest-news { width:100%; padding:22px; background:#fff; border-top:7px solid #ff6a00; border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,.08); }
 .homepage-latest-label { margin-bottom:8px; color:#ff6a00; font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
 .homepage-latest-news h2 { margin:0 0 14px; color:#222; font-size:25px; line-height:1.2; }
-.homepage-latest-content { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px); gap:20px; align-items:start; }
+.homepage-latest-content { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,250px); gap:18px; align-items:start; }
 .homepage-latest-copy { min-width:0; }
 .homepage-latest-text { margin:0 0 12px; color:#444; font-size:16px; line-height:1.6; white-space:pre-line; }
 .homepage-latest-date { color:#777; font-size:13px; }
-.homepage-latest-ad { min-width:0; width:100%; max-width:300px; min-height:0; display:flex; justify-content:center; align-items:flex-start; overflow:hidden; }
-.homepage-latest-ad .adsbygoogle { display:block; width:100%; max-width:300px; min-width:0; }
+.homepage-latest-ad { min-width:0; width:100%; max-width:250px; min-height:0; display:flex; justify-content:center; align-items:flex-start; overflow:hidden; }
+.homepage-latest-ad .adsbygoogle { display:block; width:100%; max-width:250px; min-width:0; }
 .homepage-latest-image { display:block; width:100%; max-height:320px; object-fit:cover; border-radius:10px; margin-top:18px; }
 .homepage-more-news { margin-top:15px; text-align:center; }
 .homepage-more-news a { display:inline-block; color:#ff6a00; font-size:15px; font-weight:700; text-decoration:none; }
