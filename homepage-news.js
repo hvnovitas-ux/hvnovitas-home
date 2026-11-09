@@ -53,9 +53,6 @@ if (container) {
         </div>
         ${latest.imageUrl ? `<img class="homepage-latest-image" src="${escapeHTML(latest.imageUrl)}" alt="${escapeHTML(latest.title || "Nieuws")}" loading="lazy">` : ""}
       </article>
-      <div class="homepage-more-news">
-        <a href="/news.html" target="_blank" rel="noopener noreferrer">→ Voor meer nieuws, klik hier</a>
-      </div>
     `;
 
     try {
