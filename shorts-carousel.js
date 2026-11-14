@@ -197,7 +197,7 @@
 
     const apiRequests = apiSources.map(async (source) => {
       const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 8000);
+      const timeout = window.setTimeout(() => controller.abort(), 4500);
       try {
         const response = await fetch(source.url, {
           method: "GET",
