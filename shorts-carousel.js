@@ -5,8 +5,8 @@
   const PLAYLIST_ID = "PLnMKEW1hQu3_0Y74VgCDIzbJ5H93vaB0h";
   const PLAYLIST_URL = "https://www.youtube.com/playlist?list=" + PLAYLIST_ID;
   const FEED_URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST_ID;
-  const CACHE_KEY = "hvnovitas-shorts-playlist-v10";
-  const CACHE_TTL = 5 * 60 * 1000;
+  const CACHE_KEY = "hvnovitas-shorts-playlist-v11";
+  const CACHE_TTL = 30 * 1000;
   const YT_NAMESPACE = "http://www.youtube.com/xml/schemas/2015";
   const MEDIA_NAMESPACE = "http://search.yahoo.com/mrss/";
 
@@ -191,15 +191,13 @@
 
     const apiSources = instances.map((instance) => ({
       name: new URL(instance).hostname,
-      url: instance + "/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1",
+      url: instance + "/api/v1/playlists/" + encodeURIComponent(PLAYLIST_ID) + "?page=1&_=" + Date.now(),
       parse: parseInvidious
     }));
 
-    const controllers = [];
     const apiRequests = apiSources.map(async (source) => {
       const controller = new AbortController();
-      controllers.push(controller);
-      const timeout = window.setTimeout(() => controller.abort(), 10000);
+      const timeout = window.setTimeout(() => controller.abort(), 8000);
       try {
         const response = await fetch(source.url, {
           method: "GET",
@@ -212,7 +210,7 @@
         const data = await response.json();
         const videos = source.parse(data);
         if (!videos.length) throw new Error("playlist leverde geen video's op");
-        return videos;
+        return { name: source.name, videos };
       } catch (error) {
         errors.push(source.name + ": " + (error.message || "ophalen mislukt"));
         throw error;
@@ -221,12 +219,28 @@
       }
     });
 
-    try {
-      const videos = await Promise.any(apiRequests);
-      controllers.forEach((controller) => controller.abort());
-      return videos;
-    } catch (_) {
-      // If every JSON source fails, try the official YouTube Atom feed below.
+    // Vergelijk de volledige video-volgorde van alle bereikbare bronnen.
+    // Zo wint niet automatisch een snelle, maar mogelijk verouderde server.
+    const results = await Promise.allSettled(apiRequests);
+    const successful = results
+      .filter((result) => result.status === "fulfilled")
+      .map((result) => result.value);
+
+    if (successful.length) {
+      const groups = new Map();
+      successful.forEach((result) => {
+        const signature = result.videos.map((video) => video.id).join(",");
+        if (!groups.has(signature)) groups.set(signature, []);
+        groups.get(signature).push(result);
+      });
+
+      const bestGroup = Array.from(groups.values()).sort((a, b) => {
+        if (b.length !== a.length) return b.length - a.length;
+        return instances.findIndex((url) => new URL(url).hostname === a[0].name) -
+          instances.findIndex((url) => new URL(url).hostname === b[0].name);
+      })[0];
+
+      return bestGroup[0].videos;
     }
 
     const feedRoutes = [
