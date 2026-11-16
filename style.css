@@ -1083,6 +1083,32 @@ p {
     17px;
 }
 
+.forever-sponsor-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.forever-sponsor-row > img,
+.forever-sponsor-row .bureau-voz-banner,
+.forever-sponsor-row .bureau-voz-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+}
+
+.forever-sponsor-row > img {
+  border-radius: 12px;
+}
+
+.forever-sponsor-row .bureau-voz-banner {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
 .forever-video-column {
   min-width: 0;
 
