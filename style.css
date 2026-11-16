@@ -1084,29 +1084,27 @@ p {
 }
 
 .forever-sponsor-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
   width: 100%;
-}
-
-.forever-sponsor-row > img,
-.forever-sponsor-row .bureau-voz-banner,
-.forever-sponsor-row .bureau-voz-banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-width: 0;
 }
 
 .forever-sponsor-row > img {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: 12px;
 }
 
-.forever-sponsor-row .bureau-voz-banner {
+.forever-video-column > .bureau-voz-banner {
+  display: block;
+  width: 100%;
   overflow: hidden;
   border-radius: 12px;
+}
+
+.forever-video-column > .bureau-voz-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .forever-video-column {
