@@ -2228,3 +2228,77 @@ body::after {
     max-height: 100px;
   }
 }
+
+
+/* =========================================================
+   SPONSORSTROOK OP DE OVERGANG NAAR DE SHOP
+   ========================================================= */
+
+.sponsor-transition-section {
+  position: relative;
+  z-index: 2;
+  margin-top: -34px;
+  padding: 0 0 26px;
+  background: #ffffff;
+}
+
+.sponsor-transition-inner {
+  position: relative;
+  top: -30px;
+  margin-bottom: -30px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: center;
+}
+
+.sponsor-transition-inner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 100vw;
+  height: 5px;
+  transform: translate(-50%, -50%);
+  background: var(--orange);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+}
+
+.transition-sponsor-card {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  border: 3px solid var(--orange);
+  border-radius: 18px;
+  background: #090909;
+  box-shadow: 0 14px 28px rgba(0,0,0,.24);
+}
+
+.transition-sponsor-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 700px) {
+  .sponsor-transition-section {
+    margin-top: -20px;
+    padding-bottom: 18px;
+  }
+
+  .sponsor-transition-inner {
+    top: -18px;
+    margin-bottom: -18px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .sponsor-transition-inner::before {
+    height: 4px;
+  }
+
+  .transition-sponsor-card {
+    border-radius: 13px;
+  }
+}
