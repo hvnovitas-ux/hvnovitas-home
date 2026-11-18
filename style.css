@@ -2302,3 +2302,19 @@ body::after {
     border-radius: 13px;
   }
 }
+
+
+/* Forceer twee sponsorbanners naast elkaar op de overgang naar de shop */
+.sponsor-transition-inner {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  width: 100%;
+}
+.sponsor-transition-inner > .transition-sponsor-card {
+  width: 100%;
+  min-width: 0;
+}
+@media (max-width: 360px) {
+  .sponsor-transition-inner { gap: 6px !important; }
+}
