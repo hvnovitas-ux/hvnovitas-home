@@ -2309,7 +2309,11 @@ body::after {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 18px !important;
-  width: 100%;
+  width: min(1180px, calc(100% - 40px)) !important;
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
 }
 .sponsor-transition-inner > .transition-sponsor-card {
   width: 100%;
