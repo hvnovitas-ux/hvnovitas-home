@@ -2244,7 +2244,7 @@ body::after {
 
 .sponsor-transition-inner {
   position: relative;
-  top: -30px;
+  top: 10px;
   margin-bottom: -30px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2288,7 +2288,7 @@ body::after {
   }
 
   .sponsor-transition-inner {
-    top: -18px;
+    top: 10px;
     margin-bottom: -18px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
