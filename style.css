@@ -1024,7 +1024,14 @@ p {
 
   gap: 28px;
 
-  align-items: center;
+  align-items: start;
+}
+
+.forever-left-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .forever-text {
@@ -1117,12 +1124,7 @@ p {
   gap: 7px;
 }
 
-/* Video + Gold Dry iets lager voor een mooiere uitlijning */
-@media (min-width: 901px) {
-  .forever-video-column {
-    transform: translateY(18px);
-  }
-}
+/* De twee kolommen starten op dezelfde hoogte. */
 
 .forever-video-box {
   width: 100%;
@@ -1148,6 +1150,9 @@ p {
 }
 
 .gold-dry-banner {
+  display: block;
+  width: 100%;
+  overflow: hidden;
   border-radius: 12px;
 
   box-shadow:
@@ -1155,7 +1160,9 @@ p {
 }
 
 .gold-dry-banner img {
+  display: block;
   width: 100%;
+  height: auto;
 }
 
 
