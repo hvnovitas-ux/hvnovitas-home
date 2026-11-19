@@ -2536,3 +2536,32 @@ body::after {
   .quick-links a { min-height: 62px; padding: 10px 18px 10px 10px; gap: 8px; font-size: .86rem; }
   .quick-links a svg { flex-basis: 22px; width: 22px; height: 22px; }
 }
+
+
+/* Compacte overgang tussen evenementenbanner en welkomsttekst */
+.event-banner-section {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #fff !important;
+  line-height: 0;
+  border-bottom: 2px solid rgba(255,121,0,.42);
+  box-shadow: 0 5px 12px rgba(255,121,0,.07);
+}
+
+.event-banner-section iframe {
+  height: 100px !important;
+  display: block;
+}
+
+.event-banner-section + main .section.intro {
+  padding-top: 18px !important;
+}
+
+@media (max-width: 600px) {
+  .event-banner-section iframe {
+    height: 110px !important;
+  }
+  .event-banner-section + main .section.intro {
+    padding-top: 14px !important;
+  }
+}
