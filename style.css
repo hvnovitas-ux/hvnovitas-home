@@ -2459,3 +2459,80 @@ body::after {
     margin-right: 16px;
   }
 }
+
+
+/* HV NOVITAS INTRO — afgeronde clubpresentatie */
+.intro .content-narrow {
+  position: relative;
+  isolation: isolate;
+  width: min(1280px, calc(100% - 64px));
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 42px 44px 38px;
+  overflow: hidden;
+  border: 1px solid rgba(255,121,0,.2);
+  border-left: 6px solid #ff7900;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 96% 10%, rgba(255,121,0,.08), transparent 32%), linear-gradient(135deg, #fff 0%, #fff 74%, #fff8f1 100%);
+  box-shadow: 0 14px 36px rgba(0,0,0,.08);
+}
+.intro .content-narrow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -24px;
+  top: -32px;
+  width: 160px;
+  height: 160px;
+  opacity: .12;
+  background: repeating-linear-gradient(135deg, transparent 0 17px, #ff7900 18px 23px, transparent 24px 40px);
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+.intro .novitas-welcome-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 11px 20px 11px 24px;
+  border: 2px solid #ff7900;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(110deg, #080808, #242424 78%, #080808);
+  box-shadow: 0 4px 0 #963c00, 0 8px 16px rgba(0,0,0,.13);
+  font-size: .95rem;
+  letter-spacing: 1.8px;
+  line-height: 1.2;
+}
+.intro .novitas-welcome-label strong { color: #ff7900; }
+.intro .content-narrow > h2 { max-width: 1100px; margin: 0 0 16px; letter-spacing: -.035em; }
+.intro .content-narrow > h3 { margin-top: 26px; padding-left: 16px; border-left: 5px solid #ff7900; }
+.quick-links { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 13px; margin-top: 30px; }
+.quick-links a {
+  display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
+  gap: 12px; min-height: 76px; padding: 12px 25px 12px 16px;
+  border: 2px solid #ff7900; border-radius: 14px; color: #fff;
+  background: linear-gradient(115deg, #080808 0%, #242424 55%, #080808 100%);
+  box-shadow: 0 4px 0 #8e3900, 0 9px 17px rgba(0,0,0,.15);
+  text-align: left; font-size: .98rem; line-height: 1.2;
+}
+.quick-links a svg {
+  display: block; flex: 0 0 28px; width: 28px; height: 28px;
+  fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.quick-links a span { position: relative; z-index: 1; }
+.quick-links a::before { right: 8px; opacity: .85; }
+.quick-links a::after { inset: 0; height: auto; border-radius: inherit; }
+.quick-links a:hover { transform: translateY(-3px); }
+@media (max-width: 1100px) { .quick-links { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 900px) {
+  .intro .content-narrow { width: calc(100% - 36px); padding: 30px 26px; }
+  .quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .intro .content-narrow { width: calc(100% - 20px); padding: 24px 18px; border-radius: 15px; }
+  .intro .novitas-welcome-label { font-size: .8rem; letter-spacing: 1px; }
+  .quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .quick-links a { min-height: 62px; padding: 10px 18px 10px 10px; gap: 8px; font-size: .86rem; }
+  .quick-links a svg { flex-basis: 22px; width: 22px; height: 22px; }
+}
