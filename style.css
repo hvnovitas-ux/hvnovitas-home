@@ -2549,7 +2549,7 @@ body::after {
 }
 
 .event-banner-section iframe {
-  height: 100px !important;
+  height: 190px !important;
   display: block;
 }
 
@@ -2559,7 +2559,7 @@ body::after {
 
 @media (max-width: 600px) {
   .event-banner-section iframe {
-    height: 110px !important;
+    height: 190px !important;
   }
   .event-banner-section + main .section.intro {
     padding-top: 14px !important;
