@@ -105,12 +105,9 @@ body.dn-playlist-modal-open{overflow:hidden}
 }
 
 
-/* Intro: video iets hoger met de Bureau VOZ-banner er direct onder */
+/* Intro: video netjes uitgelijnd naast de introductietekst */
 .dn-intro-section{padding-top:38px}
 .dn-intro-section .dn-video-text{align-items:start}
-.dn-video-column{display:flex;min-width:0;flex-direction:column;gap:9px}
-.dn-bureau-voz-banner{display:block;width:100%;overflow:hidden;border-radius:12px;line-height:0;box-shadow:0 10px 24px rgba(0,0,0,.16)}
-.dn-bureau-voz-banner img{display:block;width:100%;height:auto}
 @media(max-width:900px){
   .dn-intro-section{padding-top:30px}
 }
