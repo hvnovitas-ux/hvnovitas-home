@@ -104,9 +104,9 @@
         <p id="introText">Handbal hoeft niet te eindigen bij je laatste competitiewedstrijd. Recreatief handbal biedt ruimte om op een ontspannen manier actief te blijven, samen te sporten en plezier te hebben.</p>
       </div>
       <div class="rec-reasons" id="reasonsGrid">
-        <article class="rec-reason"><span class="rec-reason-mark">01</span><h3>Blijf in beweging</h3><p>Handbal brengt je in beweging en daagt je uit om actief bezig te blijven.</p></article>
-        <article class="rec-reason"><span class="rec-reason-mark">02</span><h3>Blijf mensen ontmoeten</h3><p>Samen sporten betekent samen lachen, contact houden en ergens bij horen.</p></article>
-        <article class="rec-reason"><span class="rec-reason-mark">03</span><h3>Blijf handballen</h3><p>Geen competitieverplichting, maar wel de bal, het samenspel en het plezier.</p></article>
+        <article class="rec-reason"><span class="rec-reason-mark">01</span><h3 id="reason1Title">Blijf in beweging</h3><p id="reason1Text">Handbal brengt je in beweging en daagt je uit om actief bezig te blijven.</p></article>
+        <article class="rec-reason"><span class="rec-reason-mark">02</span><h3 id="reason2Title">Blijf mensen ontmoeten</h3><p id="reason2Text">Samen sporten betekent samen lachen, contact houden en ergens bij horen.</p></article>
+        <article class="rec-reason"><span class="rec-reason-mark">03</span><h3 id="reason3Title">Blijf handballen</h3><p id="reason3Text">Geen competitieverplichting, maar wel de bal, het samenspel en het plezier.</p></article>
       </div>
     </div>
   </section>
@@ -128,7 +128,7 @@
   <section class="rec-section" id="deskundigen">
     <div class="content-wide">
       <div class="rec-heading">
-        <p class="section-label">KENNIS EN ERVARING</p>
+        <p class="section-label" id="expertsKicker">KENNIS EN ERVARING</p>
         <h2 id="expertsTitle">Deskundigen aan het woord</h2>
         <p id="expertsIntro">Fysiotherapeuten, beweegdeskundigen en andere professionals delen hier hun kennis over bewegen, gezondheid en actief blijven.</p>
       </div>
@@ -153,7 +153,7 @@
   <section class="rec-section" id="in-beeld">
     <div class="content-wide">
       <div class="rec-heading">
-        <p class="section-label">KIJK MEE</p>
+        <p class="section-label" id="mediaKicker">KIJK MEE</p>
         <h2 id="mediaTitle">Recreatief handbal in beeld</h2>
         <p id="mediaIntro">Foto's en video's laten beter dan woorden zien wat we samen doen en hoeveel plezier handbal kan geven.</p>
       </div>
@@ -164,7 +164,7 @@
   <section class="rec-section rec-section--soft" id="ervaringen">
     <div class="content-wide">
       <div class="rec-heading">
-        <p class="section-label">VERHALEN UIT DE GROEP</p>
+        <p class="section-label" id="storiesKicker">VERHALEN UIT DE GROEP</p>
         <h2 id="storiesTitle">Handbalplezier opnieuw ontdekt</h2>
         <p id="storiesIntro">Iedereen heeft zijn eigen reden om te blijven of opnieuw te gaan handballen.</p>
       </div>
@@ -209,11 +209,11 @@
     const s = data.settings || {};
     [
       ["heroKicker","heroKicker"],["heroTitle","heroTitle"],["heroLead","heroLead"],["heroNoteTitle","heroNoteTitle"],["heroNoteText","heroNoteText"],
-      ["introKicker","introKicker"],["introTitle","introTitle"],["introText","introText"],
+      ["introKicker","introKicker"],["introTitle","introTitle"],["introText","introText"],["reason1Title","reason1Title"],["reason1Text","reason1Text"],["reason2Title","reason2Title"],["reason2Text","reason2Text"],["reason3Title","reason3Title"],["reason3Text","reason3Text"],
       ["healthKicker","healthKicker"],["healthTitle","healthTitle"],["healthIntro","healthIntro"],
-      ["expertsTitle","expertsTitle"],["expertsIntro","expertsIntro"],
+      ["expertsKicker","expertsKicker"],["expertsTitle","expertsTitle"],["expertsIntro","expertsIntro"],
       ["teamKicker","teamKicker"],["teamTitle","teamTitle"],["teamIntro","teamIntro"],
-      ["mediaTitle","mediaTitle"],["mediaIntro","mediaIntro"],["storiesTitle","storiesTitle"],["storiesIntro","storiesIntro"],
+      ["mediaKicker","mediaKicker"],["mediaTitle","mediaTitle"],["mediaIntro","mediaIntro"],["storiesKicker","storiesKicker"],["storiesTitle","storiesTitle"],["storiesIntro","storiesIntro"],
       ["ctaTitle","ctaTitle"],["ctaText","ctaText"],["ctaLinkText","ctaLinkText"]
     ].forEach(([key,id]) => setText(id, s[key]));
     setRichText("healthBody", s.healthBody);
