@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blijf handballen bij HV Novitas. Recreatief handbal voor oud-handballers en beginners: samen bewegen, ontmoeten en plezier maken.">
+  <meta name="theme-color" content="#111111">
+  <title>Recreatief handbal | HV Novitas</title>
+  <link rel="canonical" href="https://www.hvnovitas.nl/recreanten.html">
+  <link rel="stylesheet" href="/style.css?v=20261119-event-banner-full">
+  <style>
+    .rec-topbar{background:#111;color:#fff;border-bottom:4px solid var(--orange)}
+    .rec-topbar .content-wide{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .rec-brand{color:#fff;font-size:1.05rem;line-height:1.15;font-weight:900;letter-spacing:.06em;text-decoration:none}
+    .rec-brand span{display:block;color:var(--orange);font-size:.69rem;letter-spacing:.17em;margin-top:5px}
+    .rec-home{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;background:var(--orange);border-radius:999px;color:#fff;text-decoration:none;font-weight:800;font-size:.88rem}
+    .rec-hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:linear-gradient(112deg,#ff7900 0%,#ed5c00 43.5%,#202020 44%,#111 100%);padding:clamp(54px,7vw,88px) 0}
+    .rec-hero:before{content:"";position:absolute;z-index:-1;width:520px;height:520px;border:1px solid #ffffff25;border-radius:50%;right:-150px;top:-230px;box-shadow:0 0 0 42px #ffffff08,0 0 0 84px #ffffff05,0 0 0 126px #ffffff03}
+    .rec-hero:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(130deg,transparent 0 30%,#ffffff12 30.2% 31%,transparent 31.2%),linear-gradient(130deg,transparent 0 48%,#00000020 48.2% 49%,transparent 49.2%)}
+    .rec-hero-inner{width:min(1180px,calc(100% - 40px));margin:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(250px,.75fr);gap:clamp(28px,5vw,70px);align-items:center}
+    .rec-kicker{margin:0 0 14px;font-size:.76rem;font-weight:900;letter-spacing:.19em;text-transform:uppercase;color:#fff}
+    .rec-hero h1{font-size:clamp(2.8rem,6.5vw,5.8rem);line-height:.91;letter-spacing:-.055em;margin:0;color:#fff;font-weight:950}
+    .rec-hero h1 span{display:block;color:#171717}
+    .rec-hero-lead{max-width:650px;margin:23px 0 0;color:#fff;font-size:clamp(1.05rem,1.7vw,1.25rem);line-height:1.65}
+    .rec-hero-note{align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:28px;border:1px solid #ffffff40;border-radius:18px;background:#11111165;box-shadow:0 16px 36px #0003}
+    .rec-hero-note strong{font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.1;color:#fff}
+    .rec-hero-note p{margin:12px 0 0;color:#ffffffdf;line-height:1.65}
+    .rec-section{padding:clamp(42px,5vw,70px) 0}
+    .rec-section--soft{background:#f5f6f8}
+    .rec-heading{max-width:850px;margin:0 auto 30px;text-align:center}
+    .rec-heading .section-label{margin-bottom:9px}
+    .rec-heading h2{margin:0 0 13px;color:#171717;font-size:clamp(2rem,4vw,3.2rem);line-height:1.02}
+    .rec-heading p{margin:0;color:#5e6268;font-size:1.02rem;line-height:1.75}
+    .rec-reasons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
+    .rec-reason{background:#fff;border:1px solid #e8e9ec;border-radius:15px;padding:23px;box-shadow:0 9px 22px #18191b09}
+    .rec-reason-mark{display:grid;place-items:center;width:42px;height:42px;margin-bottom:14px;border-radius:12px;background:#fff0e6;color:#c94f00;font-size:1.1rem;font-weight:950}
+    .rec-reason h3{margin:0 0 8px;font-size:1.12rem;color:#202124}
+    .rec-reason p{margin:0;color:#62666d;line-height:1.65;font-size:.94rem}
+    .rec-copy-panel{max-width:930px;margin:0 auto;background:#fff;border:1px solid #e8e9ec;border-radius:18px;padding:clamp(23px,4vw,38px);box-shadow:0 12px 30px #18191b0a}
+    .rec-copy-panel p{color:#50545b;line-height:1.8;font-size:1rem}
+    .rec-copy-panel p:last-child{margin-bottom:0}
+    .rec-experts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .rec-expert{display:grid;grid-template-columns:130px minmax(0,1fr);gap:18px;align-items:start;background:#fff;border:1px solid #e8e9ec;border-radius:16px;padding:18px;box-shadow:0 8px 24px #18191b09}
+    .rec-expert img{width:130px;height:130px;object-fit:cover;border-radius:12px;background:#f0f0f0}
+    .rec-expert h3{margin:2px 0 4px;font-size:1.12rem;line-height:1.25}
+    .rec-expert .role{color:#c94f00;font-size:.82rem;font-weight:850;margin-bottom:8px}
+    .rec-expert p{margin:0 0 10px;color:#5d626a;font-size:.91rem;line-height:1.6}
+    .rec-readmore{display:inline-flex;align-items:center;gap:7px;color:#a94300;font-size:.85rem;font-weight:900;text-decoration:none}
+    .rec-readmore:hover{text-decoration:underline}
+    .rec-expert details{grid-column:1/-1;border-top:1px solid #eee;padding-top:12px;color:#50545b;line-height:1.7;font-size:.94rem}
+    .rec-expert details summary{cursor:pointer;color:#a94300;font-weight:900}
+    .rec-expert details[open] summary{margin-bottom:8px}
+    .rec-empty{grid-column:1/-1;padding:24px;border:1px dashed #d7d9de;border-radius:14px;color:#69717c;text-align:center;background:#ffffffb8}
+    .rec-media-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+    .rec-media-card{overflow:hidden;background:#fff;border:1px solid #e8e9ec;border-radius:15px;box-shadow:0 8px 24px #18191b0a}
+    .rec-media-card img,.rec-media-card iframe,.rec-media-card video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border:0;background:#171717}
+    .rec-media-copy{padding:16px 17px 18px}
+    .rec-media-copy h3{margin:0 0 6px;font-size:1.02rem}
+    .rec-media-copy p{margin:0;color:#62666d;font-size:.9rem;line-height:1.6}
+    .rec-stories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .rec-story{background:#fff;border:1px solid #e8e9ec;border-radius:16px;padding:24px;box-shadow:0 8px 24px #18191b09}
+    .rec-story blockquote{margin:0 0 13px;padding:0 0 0 16px;border-left:4px solid var(--orange);font-size:1.2rem;line-height:1.5;font-weight:850;color:#202124}
+    .rec-story h3{margin:0 0 7px;font-size:1rem}
+    .rec-story p{margin:0;color:#5e6268;line-height:1.7;font-size:.93rem}
+    .rec-cta{padding:clamp(38px,5vw,62px) 0;background:linear-gradient(110deg,#ff7900 0%,#ed5c00 44%,#202020 44.5%,#111 100%);color:#fff}
+    .rec-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:26px}
+    .rec-cta h2{margin:0 0 9px;color:#fff;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.05}
+    .rec-cta p{margin:0;color:#ffffffdf;line-height:1.65;max-width:690px}
+    .rec-cta a{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;background:#fff;color:#171717;text-decoration:none;font-weight:900}
+    .rec-footer{padding:25px 0;background:#111;color:#eee;border-top:4px solid var(--orange)}
+    .rec-footer .content-wide{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .rec-footer a{color:#fff;text-decoration:none;font-weight:800}
+    @media(max-width:850px){.rec-hero-inner{grid-template-columns:1fr}.rec-hero-note{max-width:620px}.rec-reasons{grid-template-columns:1fr}.rec-experts{grid-template-columns:1fr}.rec-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rec-cta-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:600px){.rec-topbar .content-wide{min-height:64px}.rec-brand{font-size:.95rem}.rec-home{min-height:39px;padding:0 13px;font-size:.8rem}.rec-hero-inner{width:calc(100% - 32px)}.rec-hero h1{font-size:2.85rem}.rec-hero-note{padding:22px}.rec-section{padding:40px 0}.rec-expert{grid-template-columns:88px minmax(0,1fr);gap:13px;padding:13px}.rec-expert img{width:88px;height:88px}.rec-media-grid,.rec-stories{grid-template-columns:1fr}.rec-cta-inner{width:calc(100% - 32px)}.rec-footer .content-wide{width:calc(100% - 32px)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<header class="rec-topbar"><div class="content-wide">
+  <a class="rec-brand" href="/" aria-label="HV Novitas home">HV NOVITAS<span>NO STRESS, ENJOY!</span></a>
+  <a class="rec-home" href="/">← Terug naar de website</a>
+</div></header>
+
+<section class="rec-hero">
+  <div class="rec-hero-inner">
+    <div>
+      <p class="rec-kicker" id="heroKicker">RECREATIEF HANDBAL BIJ HV NOVITAS</p>
+      <h1 id="heroTitle">WAAROM STOPPEN <span>MET WAT JE HET LIEFSTE DOET?</span></h1>
+      <p class="rec-hero-lead" id="heroLead">Je hoeft niet meer in competitie te spelen om te blijven handballen. Blijf bewegen, ontmoet anderen en houd plezier in de sport.</p>
+    </div>
+    <aside class="rec-hero-note">
+      <strong id="heroNoteTitle">Handbal blijft leuk!</strong>
+      <p id="heroNoteText">Bij HV Novitas kun je ook zonder wedstrijddruk blijven trainen. Oud-handballers en beginners zijn welkom.</p>
+    </aside>
+  </div>
+</section>
+
+<main>
+  <section class="rec-section">
+    <div class="content-wide">
+      <div class="rec-heading">
+        <p class="section-label" id="introKicker">MEER DAN WEDSTRIJDEN</p>
+        <h2 id="introTitle">Blijf bewegen met de sport die je graag doet</h2>
+        <p id="introText">Handbal hoeft niet te eindigen bij je laatste competitiewedstrijd. Recreatief handbal biedt ruimte om op een ontspannen manier actief te blijven, samen te sporten en plezier te hebben.</p>
+      </div>
+      <div class="rec-reasons" id="reasonsGrid">
+        <article class="rec-reason"><span class="rec-reason-mark">01</span><h3 id="reason1Title">Blijf in beweging</h3><p id="reason1Text">Handbal brengt je in beweging en daagt je uit om actief bezig te blijven.</p></article>
+        <article class="rec-reason"><span class="rec-reason-mark">02</span><h3 id="reason2Title">Blijf mensen ontmoeten</h3><p id="reason2Text">Samen sporten betekent samen lachen, contact houden en ergens bij horen.</p></article>
+        <article class="rec-reason"><span class="rec-reason-mark">03</span><h3 id="reason3Title">Blijf handballen</h3><p id="reason3Text">Geen competitieverplichting, maar wel de bal, het samenspel en het plezier.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rec-section rec-section--soft">
+    <div class="content-wide">
+      <div class="rec-heading">
+        <p class="section-label" id="healthKicker">GEZOND BEWEGEN</p>
+        <h2 id="healthTitle">Waarom blijven sporten belangrijk is</h2>
+        <p id="healthIntro">We willen op deze pagina betrouwbare informatie delen over bewegen en gezondheid. Daarom geven we deskundigen de ruimte om hun kennis en ervaring te delen.</p>
+      </div>
+      <div class="rec-copy-panel" id="healthBody">
+        <p>Bewegen is belangrijk in iedere levensfase. Hoe je verantwoord actief blijft, verschilt per persoon. Op deze pagina verzamelen we informatie en inzichten van deskundigen, zodat bezoekers zich goed kunnen informeren.</p>
+        <p>HV Novitas deelt vanuit de liefde voor handbal de uitnodiging om in beweging te blijven. Voor persoonlijk medisch advies kun je terecht bij je huisarts of een andere zorgprofessional.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rec-section" id="deskundigen">
+    <div class="content-wide">
+      <div class="rec-heading">
+        <p class="section-label" id="expertsKicker">KENNIS EN ERVARING</p>
+        <h2 id="expertsTitle">Deskundigen aan het woord</h2>
+        <p id="expertsIntro">Fysiotherapeuten, beweegdeskundigen en andere professionals delen hier hun kennis over bewegen, gezondheid en actief blijven.</p>
+      </div>
+      <div class="rec-experts" id="expertsGrid"><div class="rec-empty">De eerste deskundigenverhalen verschijnen hier binnenkort.</div></div>
+    </div>
+  </section>
+
+  <section class="rec-section rec-section--soft" id="ons-team">
+    <div class="content-wide">
+      <div class="rec-heading">
+        <p class="section-label" id="teamKicker">RECREANTEN BIJ NOVITAS</p>
+        <h2 id="teamTitle">Maar wat doen jullie dan?</h2>
+        <p id="teamIntro">Een heel begrijpelijke vraag. Daarom laten we graag zien hoe onze trainingen eruitzien.</p>
+      </div>
+      <div class="rec-copy-panel" id="teamBody">
+        <p>We trainen op een ontspannen manier met de handbal als uitgangspunt. Er is aandacht voor bewegen, balvaardigheid, samenspel en afronden op doel. Iedereen doet mee op zijn of haar eigen niveau.</p>
+        <p>Je hoeft geen oud-handballer te zijn en je hoeft niet aan wedstrijden mee te doen. Het gaat om actief bezig zijn en plezier hebben in handbal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rec-section" id="in-beeld">
+    <div class="content-wide">
+      <div class="rec-heading">
+        <p class="section-label" id="mediaKicker">KIJK MEE</p>
+        <h2 id="mediaTitle">Recreatief handbal in beeld</h2>
+        <p id="mediaIntro">Foto's en video's laten beter dan woorden zien wat we samen doen en hoeveel plezier handbal kan geven.</p>
+      </div>
+      <div class="rec-media-grid" id="mediaGrid"><div class="rec-empty">Foto's en video's van onze trainingen verschijnen hier binnenkort.</div></div>
+    </div>
+  </section>
+
+  <section class="rec-section rec-section--soft" id="ervaringen">
+    <div class="content-wide">
+      <div class="rec-heading">
+        <p class="section-label" id="storiesKicker">VERHALEN UIT DE GROEP</p>
+        <h2 id="storiesTitle">Handbalplezier opnieuw ontdekt</h2>
+        <p id="storiesIntro">Iedereen heeft zijn eigen reden om te blijven of opnieuw te gaan handballen.</p>
+      </div>
+      <div class="rec-stories" id="storiesGrid"><div class="rec-empty">De eerste ervaringen van onze recreanten verschijnen hier binnenkort.</div></div>
+    </div>
+  </section>
+
+  <section class="rec-cta">
+    <div class="content-wide rec-cta-inner">
+      <div><h2 id="ctaTitle">Zin om weer te gaan handballen?</h2><p id="ctaText">Wil je weten of recreatief handbal bij je past? Neem vrijblijvend contact op met HV Novitas. We vertellen je graag meer.</p></div>
+      <a id="ctaLink" href="mailto:info@hvnovitas.nl">Neem contact op <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="rec-footer"><div class="content-wide"><a href="/">HV Novitas</a><span>Handbal · Bewegen · Ontmoeten</span><a href="mailto:info@hvnovitas.nl">info@hvnovitas.nl</a></div></footer>
+
+<script type="module">
+  import { db } from "/firebase.js";
+  import { ref, onValue } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+  const root = ref(db, "recreantenPagina");
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[ch]));
+  const setText = (id, value) => { const el = document.getElementById(id); if (el && value !== undefined && value !== null && value !== "") el.textContent = value; };
+  const setRichText = (id, value) => {
+    const el = document.getElementById(id);
+    if (!el || !value) return;
+    el.innerHTML = String(value).split(/\n\s*\n/).map(p => "<p>" + esc(p).replace(/\n/g, "<br>") + "</p>").join("");
+  };
+  const sorted = obj => Object.entries(obj || {}).map(([id, item]) => ({ id, ...item })).filter(item => item.active !== false).sort((a,b) => Number(a.order || 0) - Number(b.order || 0) || Number(a.created || 0) - Number(b.created || 0));
+  const youtubeId = url => {
+    try {
+      const u = new URL(url);
+      if (u.hostname.includes("youtu.be")) return u.pathname.slice(1).split("/")[0];
+      if (u.hostname.includes("youtube.com")) return u.searchParams.get("v") || u.pathname.split("/").filter(Boolean).pop();
+    } catch {}
+    return "";
+  };
+
+  onValue(root, snapshot => {
+    const data = snapshot.val() || {};
+    const s = data.settings || {};
+    [
+      ["heroKicker","heroKicker"],["heroTitle","heroTitle"],["heroLead","heroLead"],["heroNoteTitle","heroNoteTitle"],["heroNoteText","heroNoteText"],
+      ["introKicker","introKicker"],["introTitle","introTitle"],["introText","introText"],["reason1Title","reason1Title"],["reason1Text","reason1Text"],["reason2Title","reason2Title"],["reason2Text","reason2Text"],["reason3Title","reason3Title"],["reason3Text","reason3Text"],
+      ["healthKicker","healthKicker"],["healthTitle","healthTitle"],["healthIntro","healthIntro"],
+      ["expertsKicker","expertsKicker"],["expertsTitle","expertsTitle"],["expertsIntro","expertsIntro"],
+      ["teamKicker","teamKicker"],["teamTitle","teamTitle"],["teamIntro","teamIntro"],
+      ["mediaKicker","mediaKicker"],["mediaTitle","mediaTitle"],["mediaIntro","mediaIntro"],["storiesKicker","storiesKicker"],["storiesTitle","storiesTitle"],["storiesIntro","storiesIntro"],
+      ["ctaTitle","ctaTitle"],["ctaText","ctaText"],["ctaLinkText","ctaLinkText"]
+    ].forEach(([key,id]) => setText(id, s[key]));
+    setRichText("healthBody", s.healthBody);
+    setRichText("teamBody", s.teamBody);
+    if (s.ctaLink) document.getElementById("ctaLink").href = s.ctaLink;
+    if (s.ctaLinkText) document.getElementById("ctaLink").textContent = s.ctaLinkText;
+
+    const experts = sorted(data.experts);
+    document.getElementById("expertsGrid").innerHTML = experts.length ? experts.map(item => `
+      <article class="rec-expert">
+        ${item.imageUrl ? `<img src="${esc(item.imageUrl)}" alt="${esc(item.name || item.title)}" loading="lazy">` : ""}
+        <div><h3>${esc(item.title || item.name || "Deskundige")}</h3><div class="role">${esc(item.role || "")}</div><p>${esc(item.intro || "")}</p></div>
+        ${item.detail ? `<details><summary>Lees verder</summary>${esc(item.detail).replace(/\n/g,"<br>")}</details>` : ""}
+      </article>`).join("") : '<div class="rec-empty">De eerste deskundigenverhalen verschijnen hier binnenkort.</div>';
+
+    const media = sorted(data.media);
+    document.getElementById("mediaGrid").innerHTML = media.length ? media.map(item => {
+      let visual = "";
+      if (item.type === "video") {
+        const id = youtubeId(item.videoUrl || "");
+        visual = id ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}" title="${esc(item.title || "Video HV Novitas")}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+          : (item.videoUrl ? `<video src="${esc(item.videoUrl)}" controls preload="metadata"></video>` : "");
+      } else if (item.imageUrl) visual = `<img src="${esc(item.imageUrl)}" alt="${esc(item.title || "Recreatief handbal bij HV Novitas")}" loading="lazy">`;
+      return `<article class="rec-media-card">${visual}<div class="rec-media-copy"><h3>${esc(item.title || "")}</h3><p>${esc(item.text || "")}</p></div></article>`;
+    }).join("") : '<div class="rec-empty">Foto\'s en video\'s van onze trainingen verschijnen hier binnenkort.</div>';
+
+    const stories = sorted(data.stories);
+    document.getElementById("storiesGrid").innerHTML = stories.length ? stories.map(item => `
+      <article class="rec-story">${item.quote ? `<blockquote>“${esc(item.quote)}”</blockquote>` : ""}<h3>${esc(item.title || item.name || "Ervaring van een recreant")}</h3><p>${esc(item.text || "")}</p></article>`).join("") : '<div class="rec-empty">De eerste ervaringen van onze recreanten verschijnen hier binnenkort.</div>';
+  });
+</script>
+</body>
+</html>
