@@ -19,8 +19,8 @@
     .rec-hero:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(130deg,transparent 0 30%,#ffffff12 30.2% 31%,transparent 31.2%),linear-gradient(130deg,transparent 0 48%,#00000020 48.2% 49%,transparent 49.2%)}
     .rec-hero-inner{width:min(1180px,calc(100% - 40px));margin:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(250px,.75fr);gap:clamp(28px,5vw,70px);align-items:center}
     .rec-kicker{margin:0 0 14px;font-size:.76rem;font-weight:900;letter-spacing:.19em;text-transform:uppercase;color:#fff}
-    .rec-hero h1{font-size:clamp(2.8rem,6.5vw,5.8rem);line-height:.91;letter-spacing:-.055em;margin:0;color:#fff;font-weight:950}
-    .rec-hero h1 span{display:block;color:#171717}
+    .rec-hero h1{font-size:clamp(2.8rem,6.5vw,5.8rem);line-height:.91;letter-spacing:-.055em;margin:0;color:#171717;font-weight:950}
+    .rec-hero h1 span{display:block;color:#fff}
     .rec-hero-lead{max-width:650px;margin:23px 0 0;color:#fff;font-size:clamp(1.05rem,1.7vw,1.25rem);line-height:1.65}
     .rec-hero-note{align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:28px;border:1px solid #ffffff40;border-radius:18px;background:#11111165;box-shadow:0 16px 36px #0003}
     .rec-hero-note strong{font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.1;color:#fff}
@@ -188,7 +188,23 @@
 
   const root = ref(db, "recreantenPagina");
   const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[ch]));
-  const setText = (id, value) => { const el = document.getElementById(id); if (el && value !== undefined && value !== null && value !== "") el.textContent = value; };
+  const setText = (id, value) => {
+     const el = document.getElementById(id);
+     if (!el || value === undefined || value === null || value === "") return;
+     if (id === "heroTitle") {
+       const title = String(value).trim();
+       const splitAt = title.toUpperCase().indexOf(" STOPPEN");
+       if (splitAt >= 0) {
+         const first = title.slice(0, splitAt + " STOPPEN".length);
+         const rest = title.slice(splitAt + " STOPPEN".length).trim();
+         el.innerHTML = esc(first) + (rest ? "<span>" + esc(rest) + "</span>" : "");
+       } else {
+         el.textContent = title;
+       }
+     } else {
+       el.textContent = value;
+     }
+   };
   const setRichText = (id, value) => {
     const el = document.getElementById(id);
     if (!el || !value) return;
