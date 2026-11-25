@@ -54,7 +54,7 @@
     .rec-media-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
     .rec-media-card{overflow:hidden;background:#fff;border:1px solid #e8e9ec;border-radius:15px;box-shadow:0 8px 24px #18191b0a}
     .rec-media-card img,.rec-media-card iframe,.rec-media-card video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border:0;background:#171717}
-    .rec-media-copy{padding:16px 17px 18px}
+    .rec-media-copy{padding:16px 17px 18px}.rec-video-link{margin:0;padding:10px 16px 0;font-size:.85rem}.rec-video-link a{color:#a94300;font-weight:850;text-decoration:none}.rec-video-link a:hover{text-decoration:underline}
     .rec-media-copy h3{margin:0 0 6px;font-size:1.02rem}
     .rec-media-copy p{margin:0;color:#62666d;font-size:.9rem;line-height:1.6}
     .rec-stories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
@@ -213,11 +213,22 @@
   const sorted = obj => Object.entries(obj || {}).map(([id, item]) => ({ id, ...item })).filter(item => item.active !== false).sort((a,b) => Number(a.order || 0) - Number(b.order || 0) || Number(a.created || 0) - Number(b.created || 0));
   const youtubeId = url => {
     try {
-      const u = new URL(url);
-      if (u.hostname.includes("youtu.be")) return u.pathname.slice(1).split("/")[0];
-      if (u.hostname.includes("youtube.com")) return u.searchParams.get("v") || u.pathname.split("/").filter(Boolean).pop();
-    } catch {}
-    return "";
+      const u = new URL(String(url).trim());
+      const host = u.hostname.replace(/^www\\./, "").toLowerCase();
+      let id = "";
+      if (host === "youtu.be") id = u.pathname.split("/").filter(Boolean)[0] || "";
+      else if (host === "youtube.com" || host === "m.youtube.com" || host === "youtube-nocookie.com") {
+        id = u.searchParams.get("v") || "";
+        if (!id) {
+          const parts = u.pathname.split("/").filter(Boolean);
+          const marker = parts.findIndex(part => ["embed", "shorts", "live"].includes(part));
+          if (marker >= 0) id = parts[marker + 1] || "";
+        }
+      }
+      return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : "";
+    } catch {
+      return "";
+    }
   };
 
   onValue(root, snapshot => {
@@ -250,7 +261,7 @@
       let visual = "";
       if (item.type === "video") {
         const id = youtubeId(item.videoUrl || "");
-        visual = id ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}" title="${esc(item.title || "Video HV Novitas")}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+        visual = id ? `<iframe src="https://www.youtube.com/embed/${esc(id)}" title="${esc(item.title || "Video HV Novitas")}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><p class="rec-video-link"><a href="https://www.youtube.com/watch?v=${esc(id)}" target="_blank" rel="noopener">Video rechtstreeks op YouTube bekijken</a></p>`
           : (item.videoUrl ? `<video src="${esc(item.videoUrl)}" controls preload="metadata"></video>` : "");
       } else if (item.imageUrl) visual = `<img src="${esc(item.imageUrl)}" alt="${esc(item.title || "Recreatief handbal bij HV Novitas")}" loading="lazy">`;
       return `<article class="rec-media-card">${visual}<div class="rec-media-copy"><h3>${esc(item.title || "")}</h3><p>${esc(item.text || "")}</p></div></article>`;
